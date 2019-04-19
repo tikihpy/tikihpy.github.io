@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sdk signup test</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+        <div>
+            <img v-bind:src="config.pic"/>
+        </div>
+        <div>
+            <p v-for="(item, index) in config.columns">
+                type: {{item.type}} &nbsp;|&nbsp;&nbsp;
+                name：{{item.name}} &nbsp;|&nbsp;&nbsp;
+                must：{{item.must}} &nbsp;|&nbsp;&nbsp;
+                multi_select {{item.multi_select}} &nbsp;|&nbsp;&nbsp;
+                allow_fill_by_self {{item.allow_fill_by_self}} &nbsp;|&nbsp;&nbsp;
+                remind {{item.remind}} &nbsp;|&nbsp;&nbsp;
+                send_sms {{item.send_sms}} &nbsp;|&nbsp;&nbsp;
+                startTime {{item.startTime}} &nbsp;|&nbsp;&nbsp;
+                ahead {{item.ahead}} &nbsp;|&nbsp;&nbsp;
+                <br>
+                <span v-if="item.options">
+                    选择: 
+                    <span v-for="(ques, quesi) in item['options']">
+                            <input type="checkbox" v-on:click="toggleSelect(event, ques, quesi, index)" value="quesi"/> {{ques}} |
+                    </span>
+                    <br/>
+                </span>
+                输入: <input v-model="columns[index].text"/>
+
+                <br><br><hr>
+            </p>
+
+            <input v-model="tel" placeholder="手机号">
+            验证码: <input v-model="code" placeholder="验证码"> <button type="button" v-on:click="sendSms"> 发送验证码</button>
+        </div>
+
+        <button type="button" v-on:click="submit">submit</button>
+    </div>
+    <script>window.FETCHER_SERVER_URL = "ws://fetcher.mudu.tv:8088";</script>
+    <script src="https://static.mudu.tv/fetcher/bundle.6d7aca164d2389e8bea6.js"></script>
+    <script src="/js/sdk.js?b13cef105b1aa0b9d8dd" ></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+    <script>
+        var app 
+        Mudu.Init(69541, function () {
+            app = new Vue({
+                el: '#app',
+                data: {
+                    msg: '暂无报名问卷信息',
+                    config: {},
+                    columns: []
+                },
+                created: function () {
+                    var config = Mudu.Room.Signup.GetConfig()
+                    console.log(config)
+                    if (config) {
+                        this.config = config
+                        this.msg = '报名名称: ' + config.name + '           , 报名desc：' + config.desc + '          , 开启状态: ' + config.status
+                        this.columns = config.columns.map(v => {
+                            return {
+                                name: v.name,
+                                type: v.type,
+                                text: '',
+                                selects: []
+                            }
+                        })
+                        this.code = ''
+                        this.tel = ''
+                    }
+                },
+                methods: {
+                    toggleSelect: function (event, ques, quesi, index) {
+                        console.log(ques, quesi, index)
+                        var qindex = this.columns[index].selects.indexOf(quesi)
+                        if (qindex >= 0) {
+                            this.columns[index].selects.split(qindex, 1)
+                        } else {
+                            this.columns[index].selects.push(quesi)
+                        }
+                        console.log(JSON.parse(JSON.stringify(this.columns)))
+                    },
+
+                    submit: function () {
+                        Mudu.Room.Signup.Submit({code: this.code, columns: this.columns}, function (res) {
+                            res = JSON.parse(res)
+                            console.log('submit', res)
+                        })
+                    },
+
+                    sendSms : function () {
+                        Mudu.Room.Signup.SendSms(this.tel, function (res) {
+                            res = JSON.parse(res)
+                            console.log('sendSms', res)
+                        })
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+</html>

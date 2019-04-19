@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sdk comment test</title>
+</head>
+<body>
+
+    <div id="app">
+        <div>
+            当前控制台ppt图片地址(GetUrl):            {{url}} <br>
+            当前控制台ppt所在页码 (GetCurrentPage):           {{currentPage}} <br>
+            当前ppt总页数 (GetTotalPage):             {{totalPage}} <br>
+            当前是否开启ppt (IsOpen):          {{isOpen}} <br>
+            当前控制台ppt名称 (GetName):           {{name}} <br>
+            当前控制台是否允许用户翻页 (GetAllowTurnPage):            {{allowTurnPage}} <br>
+        </div>
+
+        <hr>
+
+        <div>
+            <input v-model="page" type="number">
+            <input type="button" value="输入页码点击获取该页ppt url" @click="getImgUrl">
+        </div>
+    </div>
+    
+    <script>window.FETCHER_SERVER_URL = "ws://fetcher.mudu.tv:8088";</script>
+    <script src="https://static.mudu.tv/fetcher/bundle.6d7aca164d2389e8bea6.js"></script>
+    <script src="/js/sdk.js?5a9e5f6c23cb0940ed18" ></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+
+    <script>
+        var app
+
+        Mudu.Init(
+            168688,
+            function () {
+            app = new Vue({
+                el: '#app',
+
+                data: {
+                    url: Mudu.Room.PPT.GetUrl(),
+                    isOpen: Mudu.Room.PPT.IsOpen(),
+                    name: Mudu.Room.PPT.GetName(),
+                    allowTurnPage: Mudu.Room.PPT.GetAllowTurnPage(),
+                    currentPage: Mudu.Room.PPT.GetCurrentPage(),
+                    totalPage: Mudu.Room.PPT.GetTotalPage(),
+
+                    page: 1
+                },
+
+                created: function () {
+                    var self = this
+                    console.log('created')
+
+                    console.log(this.url, this.isOpen)
+                    
+
+                    Mudu.MsgBus.On('PPT.Changed', function (res) {
+                        res = JSON.parse(res)
+                        self.msgbusSet()
+                        
+                        console.log('PPT.Changed', res)
+                    })
+
+                    Mudu.MsgBus.On('PPT.Doc.delete', function () {
+                        console.log('PPT.Doc.delete')
+                    })
+
+                    Mudu.MsgBus.On('PPT.IsOpen', function (res) {
+                        res = JSON.parse(res)
+                        self.isOpen = Mudu.Room.PPT.IsOpen()
+                        console.log('PPT.IsOpen', res)
+                    })
+
+                    Mudu.MsgBus.On('PPT.AllowTurnPage', function (res) {
+                        res = JSON.parse(res)
+
+                        self.msgbusSet()
+                        self.allowTurnPage = Mudu.Room.PPT.GetAllowTurnPage()
+                        console.log('PPT.AllowTurnPage', res)
+                    })  
+                },
+
+                methods: {
+                    getImgUrl: function () {
+                        Mudu.Room.PPT.GetPageImgUrl(this.page, function (res) {
+                            console.log(res);
+                        })
+                    },
+
+                    msgbusSet: function () {
+                        this.url = Mudu.Room.PPT.GetUrl()
+                        this.currentPage = Mudu.Room.PPT.GetCurrentPage()
+                        this.totalPage = Mudu.Room.PPT.GetTotalPage()
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+</html>

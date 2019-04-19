@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>websdk player</title>
+    <style>
+        #player {
+            max-width: 100%;
+        }
+
+        #player video {
+            object-fit: cover !important;
+        }
+    </style>
+</head>
+<body>
+
+        <div id="player"></div>
+
+        <input type="button" id="rerender" value="重新new播放器">
+        <input type="button" id="remove" value="remove播放器">
+        <br>
+        <input type="button" id="x5Layer" value="">
+        <input type="button" id="x5Inline" value="">
+    
+    <script>window.FETCHER_SERVER_URL = "ws://fetcher.mudu.tv:8088";</script>
+    <script src="https://static.mudu.tv/fetcher/bundle.6d7aca164d2389e8bea6.js"></script>
+    <script src="/sdk.js"></script>
+    <!-- <script src="/js/sdk.js?968396ac5567d6df3d1d" ></script> -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/js-url/2.5.2/url.min.js"></script>
+
+    <script>
+        var x5Layer = !!+localStorage.getItem('x5Layer')
+        var x5Inline = !!+localStorage.getItem('x5Inline')
+
+        $('#x5Layer').val(x5Layer ? '关闭x5Layer' : '开启x5Layer')
+        $('#x5Inline').val(x5Inline ? '关闭x5Inline' : '开启x5Inline')
+
+        $('#x5Inline').on('click', function () {
+            localStorage.setItem('x5Inline', x5Inline ? 0 : 1)
+            location.reload()
+        })
+        $('#x5Layer').on('click', function () {
+            localStorage.setItem('x5Layer', x5Inline ? 0 : 1)
+            location.reload()
+        })
+        
+
+        Mudu.Init(10001974, function () {
+            console.log('created')
+            Mudu.Room.User.Assign('websdk观看', 'http://tv.ehub.net/img/headportrait.png', 'xhw1513144341755')
+            window.player = new Mudu.Player({
+                containerId: 'player',
+                isLive: false,
+                controls: true,
+                autoplay: true,
+                src: Mudu.Room.GetPlayList(),
+                x5Layer: x5Layer,
+                x5Inline: x5Inline,
+                stretching: 'fill',
+                width: 800,
+                height: 450,
+                src: 'http://vod.mudu.tv/media-join-slice/xgckovy8747kcegx7fdqov0cf.m3u8'
+            })
+            
+            var msgOnReady = function () {
+                Mudu.MsgBus.On('Player.Ready', function () {
+                    console.log('播放器初始化成功')
+                })
+
+                Mudu.MsgBus.On('User.WatchTime', function (data) {
+                    console.log('user.watchtime', data.duration, new Date)
+                })
+            }
+
+            msgOnReady()
+        })
+
+        document.getElementById('rerender').addEventListener('click', function () {
+            window.player = new Mudu.Player({
+                containerId: 'player',
+                type: 'live',
+                controls: true,
+                autoplay: true,
+                src: Mudu.Room.GetPlayAddr(),
+                src: 'http://vod.mudu.tv/watch/2019-04-15/ks6fzp_16.m3u8'
+            })
+        })
+
+        document.getElementById('remove').addEventListener('click', function () {
+            window.player.remove();
+        })
+        
+    </script>
+</body>
+</html>

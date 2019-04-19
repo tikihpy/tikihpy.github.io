@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>shopinglist</title>
+    <style>
+        body{
+            color: rgb(250, 250, 250);
+            background-color: black;
+        }
+        
+        .special{
+            font-style: italic;
+        }
+        
+        h2.special{
+            text-transform: uppercase;
+        }
+        
+        #purchases{
+            border: 2px solid white;
+            background-color: #333;
+            color: #ccc;
+            padding: 1em;
+        }
+
+        #purchases li {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<h1>What to buy?</h1>
+<p title = "a gentle reminder">Don't forget to buy this stuff.</p>
+<ul id = "purchases">
+    <li>A thin of beans</li>
+    <li class = "sale">Cheese</li>
+    <li class = "sale important">Milk</li>
+<p class="special">This paragraph has the special class</p>
+<h2 class="special">So does this headline</h2>
+</ul>
+
+<script>
+    alert(typeof document.getElementById('purchases'));
+</script>
+<script>
+    alert(document.getElementsByTagName('li').length);
+</script>
+<!-- <script>
+    var items=document.getElementsByTagName('*');
+for(var i=0;i < items.length;i++){
+    alert(typeof items[i]);
+};
+</script> -->
+<!-- <script>
+    var shopping=document.getElementById('purchases');
+    var items=shopping.getElementsByTagName('*');
+for(var i=0;i < items.length;i++){
+    alert(typeof items[i]);
+};
+</script> -->
+
+<!-- <script>
+        alert(document.getElementsByClassName('sale').length);
+</script> -->
+
+<!-- <script>
+        alert(document.getElementsByClassName('important sale').length);
+</script> -->
+
+<!-- <script>
+    var shopping=document.getElementById('purchases');
+    var items=shopping.getElementsByClassName('sale');
+    alert(items.length);
+</script> -->
+<script>
+var paras = document.getElementsByTagName('p');
+for(var i=0;i < paras.length;i++){
+    var title_text = paras[i].getAttribute('title');
+    if (title_text)//if(title_text)=if(title_text != null)
+    {
+        alert(title_text);
+    }
+}
+</script>
+
+
+<script>
+    var shopping = document.getElementById('purchases');
+    shopping.setAttribute("title","a list of goods");
+    alert(shopping.getAttribute('title'));
+</script>
+
+<script>
+        var paras = document.getElementsByTagName('p');
+        for(var i=0;i < paras.length;i++){
+            var title_text = paras[i].getAttribute('title');
+            if (title_text)//if(title_text)=if(title_text != null)
+            {
+                paras[i].setAttribute("title","brand new title text")
+                alert(paras[i].getAttribute("title"));
+            }
+        }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo</title>
+    <script src="//static.mudu.tv/es6-promise/es6-promise.auto.min.js"></script>
+    <script>
+         window.FETCHER_SERVER_URL = "ws://fetcher.mudu.tv:8088";
+    </script>
+    <script src="https://static.mudu.tv/fetcher/bundle.6d7aca164d2389e8bea6.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/sdk.js"></script>
+    <style>
+        video{
+        height:20000px !important;
+        }
+
+
+      * {
+            padding: 0;
+            margin: 0
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        .app {
+            width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .app .app_header {
+            width: 1200px;
+            height: 30px;
+            font-size: 24px;
+            text-align: center;
+            background: #666;
+            color: #ffffff;
+            letter-spacing: 10px;
+            padding: 10px 0;
+            margin-bottom: 10px;
+        }
+
+        .app #barrage {
+            width: 1200px;
+            height: 80px;
+            background: #e3e3e3;
+            margin: 10px 0;
+            position: relative;
+        }
+         .app .showarea {
+            width: 1200px;
+            height: 300px;
+        }
+
+        .app .showarea .player {
+            width: 600px;
+            height: 300px;
+            float: left;
+            overflow: hidden;
+        }
+
+        .app .showarea .comments {
+            width: 600px;
+            height: 300px;
+            float: left;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        .app .showarea .comments .comment_one {
+            width: 560px;
+            margin: 0 10px 5px 10px;
+            height: 40px;
+        }
+
+        .app .showarea .comments .comment_one .avatar {
+            width: 40px;
+            height: 40px;
+            margin-right: 5px;
+            float: left;
+        }
+
+        .app .showarea .comments .comment_one .username {
+            width: 480px;
+            height: 12px;
+            font-size: 12px;
+            line-height: 12px;
+            float: left;
+        }
+
+        .app .showarea .comments .comment_one .message {
+            width: 480px;
+            height: 28px;
+            line-height: 14px;
+            font-size: 14px;
+            float: left;
+        }
+
+        .app .funcarea {
+            width: 1200px;
+            height: 85px;
+            margin: 20px 0;
+        }
+
+        .app .funcarea .comment_area {
+            width: 975px;
+            border: 1px solid #e3e3e3;
+            height: 60px;
+            padding: 10px;
+            font-size: 18px;
+            float: left;
+            resize: none;
+        }
+
+        .app .funcarea .comment_btn {
+            width: 200px;
+            height: 80px;
+            font-size: 40px;
+            color: #ffffff;
+            background: #0000ff;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 80px;
+            float: left;
+        }
+
+        .app #ppt_wrap {
+            width: 580px;
+            height: 600px;
+            overflow-y: scroll;
+            float: left;
+            border: 1px solid #eee;
+        }
+
+        .app #luckyDrawWrap {
+            width: 580px;
+            height: 100px;
+            float: left;
+            border: 1px solid #eee;
+            margin-left: 10px;
+            padding: 10px;
+            display: none;
+        }
+
+        .app #luckyDrawWrap #SignUpWrap {
+            margin: 10px 0;
+        }
+
+        .app #luckyDrawWrap #SignUpWrap .signup_blank {
+            width: 540px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .app #luckyDrawWrap #SignUpWrap .signup_blank input {
+            width: 182px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .app #luckyDrawWrap #SignUpWrap .SignUp {
+            width: 40px;
+            height: 30px;
+            line-height: 30px;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            background: #ff0000;
+        }
+</style>
+</head>
+
+<body>
+    <div class="app">
+        <div class="app_header">
+            <div> 标题：<span id="act_name"></span> 页面浏览量 <span id="act_viewnum">0</span></div>
+        </div>
+        <div id="barrage">
+        </div>
+        <div class="showarea">
+            <div class="player">
+                <div id="J_prismPlayer" class="prism-player"></div>
+            </div>
+            <div class="comments">
+            </div>
+        </div>
+        <div class="funcarea">
+            <textarea class="comment_area"></textarea>
+            <button class="comment_btn">评 论</button>
+        </div>
+        <div>
+            <div id="ppt_wrap">
+                <img id="ppt_content" style="display:none;" src="" />
+            </div>
+                <div id="luckyDrawWrap">
+                    <p>奖项：<span id="lucky_award_name"></span></p>
+                    <p>截止时间：<span id="lucky_deadline"></span></p>
+                    <div id="SignUpWrap">
+                        <p class="signup_blank">用户名：<input id="uname" type="text" value="" /> 手机：<input id="voucher" type="text" value="" /> <button id="SignUp" class="SignUp">报名</button></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+        //定义一个解析评论的函数
+        function parseComment({ avatar, username, message }) {
+            return $(`<div class='comment_one'><img class="avatar" src='${avatar}' /> <p class='username'>${username}</p> <p class='message'>${message}</p></div>`);
+        }
+
+
+        //项目初始化
+        Mudu.Init(
+            180266,
+            function() {
+
+                //这个里面调用目睹api，结合自身业务实现相关逻辑
+                console.log('Mudu Web Sdk 初始化成功');
+
+                //监听新评论事件
+                var delk = Mudu.MsgBus.On('Comment.New', function(newComment) {
+
+                    var obj = JSON.parse(newComment);
+                    $(".comments").prepend(parseComment(obj));
+                    console.log(obj.username + '发送了一条新评论: ' + obj.message + obj.checked);
+                });
+
+                // 取消监听评论事件，取消之后如果有新的评论就不会收到通知了
+                // Mudu.Room.Comment.Off(delk);
+
+                //获取最新三页的评论
+                for (var i = Mudu.Room.Comment.GetPage(), j = 0; i > 0; i--, j++) {
+                    if (j > 3) {
+                        break;
+                    }
+                    //获取评论
+                    Mudu.Room.Comment.Get(i, function(response) {
+                        var obj = JSON.parse(response);
+                        $.each(obj.data.comments, (idx, comment) => {
+                            $(".comments").append(parseComment(comment));
+                        })
+                    });
+                }
+
+
+                //初始化播放器
+                var player = window.player = new Mudu.Player({
+                    containerId: 'J_prismPlayer',
+                    type: 'live',
+                    src: 'https://myun-hw-s3.myun.tv/melj80jz/5z16kya0/melj80jz/1554690224888452743_genMedia.m3u8',
+                    // src: Mudu.Room.GetPlayAddr(),
+                    autoplay: true, //自动播放：false
+                    repeat: true,
+                    controls: true,
+                    // width:'18.75rem',
+                    // height:'10.547rem'
+                });
+
+                var menus = Mudu.Room.GetMenus();
+                console.log(menus);
+
+                Mudu.Room.GetLiveImage(function(data) {
+                    var obj = JSON.parse(data);
+                    console.log(data);
+                });
+
+                Mudu.MsgBus.On('Player.Ready', function() {
+                    //player.setPlayerSize(800,600);
+                });
+                //监听直播状态变化事件
+                Mudu.MsgBus.On('Room.StreamEvent', function(data, topic) {
+                    var obj = JSON.parse(data);
+                    console.log(data);
+                    if (obj.event == 1) {
+                        player.play();
+                    } else {
+                        player.stop();
+                    }
+                });
+                Mudu.MsgBus.On('Player.Stoped', function() {
+                    //  player.stop();
+                });
+
+                //监听ppt变化事件
+                Mudu.Room.PPT.On('PPT.Changed', function(data, topic) {
+                    var obj = JSON.parse(data);
+                    $("#ppt_content").show().attr("src", obj.url);
+                });
+
+
+                //定义一个随机数生产函数
+                var GetRandomNum = function(Max, Min) {
+                    var Range = Max - Min;
+                    var Rand = Math.random();
+                    return (Min + Math.round(Rand * Range));
+                }
+
+                //监听弹幕事件并处理
+                Mudu.Room.Barrage.On('Barrage.New', function(data, topic) {
+                    var obj = JSON.parse(data);
+                    var left_1 = GetRandomNum(1200, 0)
+                    var top_1 = GetRandomNum(60, 0);
+
+                    var left_2 = GetRandomNum(1200, 0)
+                    var top_2 = GetRandomNum(60, 0);
+                    var $dom = $(`<span style="position:absolute;left:${left_1}px;top:${top_1}px">${obj.text}</span>`);
+                    $("#barrage").append($dom);
+                    $dom.animate({ left: left_2 + 'px', top: top_2 + 'px' });
+                    setTimeout(function() {
+                        $dom.remove();
+                    }, GetRandomNum(10, 6) * 1000);
+                });
+
+
+                //元素添加点击事件
+                $(".comment_btn").bind('click', () => {
+                    var $dom = $(".comment_area");
+                    if ($.trim($dom.val()) == "") {
+                        return;
+                    }
+                    //发送评论
+                    Mudu.Room.Comment.Send($dom.val(), () => {
+                        $dom.val('');
+                    });
+                });
+
+                //显示页面浏览量
+                $("#act_viewnum").text(Mudu.Room.GetViewNum());
+                //显示直播间名字
+                $("#act_name").text(Mudu.Room.GetName());
+                //显示ppt图片
+                $("#ppt_content").show().attr("src", Mudu.Room.PPT.GetUrl());
+
+
+                //监听开奖事件
+                Mudu.Room.LuckyDraw.On('LuckyDraw.Open', (data) => {
+                    var jsonObj = JSON.parse(data);
+                    var html = '中奖用户：\n';
+                    $.each(jsonObj.data.luckers.luckers, function(idx, lucker) {
+                        html += `用户 ${lucker.uname} 手机：${lucker.voucher} \n`;
+                    });
+                    alert(html);
+                });
+                Mudu.Room.LuckyDraw.Result(
+                    function(response) {
+                        response = JSON.parse(response);
+                        console.log(response.data);
+                        if (response.status === 'y') {
+                            html = '中奖用户：\n';
+                            $.each(response.data.luckers.luckers, function(idx, lucker) {
+                                html += '用户' + lucker.uname + ' 手机：' + lucker.voucher + ' \n';
+                            });
+                            alert(html);
+                        }
+                    })
+
+                //获取抽奖信息
+                Mudu.Room.LuckyDraw.Get(function(response) {
+                    response = JSON.parse(response);
+                    console.log(response);
+                    var award_name = response.data.lucky_draw.award_name;
+                    var deadline = response.data.lucky_draw.deadline;
+                    console.log(award_name);
+                    console.log(deadline);
+                    if (!deadline) {
+                        return;
+                    }
+                    $("#luckyDrawWrap").show();
+                    $("#lucky_award_name").text(award_name);
+                    $("#lucky_deadline").text(deadline);
+                });
+
+
+                //直播间浏览量发生变化时，在页面上显示实时人数
+                Mudu.Room.On('Room.ViewNumChanged', function(num) {
+                    $("#act_viewnum").text(num);
+                });
+
+                //元素添加点击事件
+                $("#SignUp").bind('click', () => {
+                    var uname = $.trim($("#uname").val()); //获取报名人的名字
+                    var voucher = $.trim($("#voucher").val()); //获取凭证，这里一般是手机号码或者员工工号等等
+                    if (uname != "" && voucher != "") {
+                        //调用抽奖报名api，进行抽奖报名
+                        console.log('报名');
+                        Mudu.Room.LuckyDraw.SignUp({
+                            userName: uname,
+                            voucher: voucher,
+                        }, function(response) {
+                            var jsonObj = JSON.parse(response);
+                            console.log('报名报名');
+                            if (jsonObj.status == 'y') {
+                                console.log('报名成功');
+                                $("#SignUpWrap").hide();
+                                alert("报名成功");
+                            } else {
+                                alert(jsonObj.info
+
+                                );
+                            }
+
+                        })
+                    }
+                })
+            });
+        </script>
+</body>
+</html>
