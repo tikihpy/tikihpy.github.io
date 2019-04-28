@@ -1,0 +1,30 @@
+.video-wrapper{
+    overflow: hidden;
+
+}
+.video-wrapper .controls{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    margin: auto;
+    background: rgba(223, 7, 7, 0.5);
+    z-index: 99999;
+ }
+.video-wrapper button{
+    display: block;
+    width: 50%;
+    height: 50%;
+    border:0;
+    cursor:pointer;
+    font-size: 17px;
+    color: #fff;
+    background: transparent;
+ }
+.video-wrapper button[paused]{
+    font-size: 12px;
+ }
+
+ #movie {
+    width: 400px;
+    height: 225px;
+ }
