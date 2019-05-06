@@ -1,0 +1,166 @@
+.app {
+    width: 1200px;
+    height: 772px;
+    margin: 0 auto;  
+    /* margin 外边距属性 http://www.w3school.com.cn/css/pr_margin.asp */
+    overflow: hidden;
+    /* overflow 溢出属性 http://www.w3school.com.cn/cssref/pr_pos_overflow.asp */
+    background-color: aqua;
+}
+.app_header {
+    width: 1160px;
+    height: 30px;
+    font-size: 10px;
+    text-align: center;
+    /* 文本对齐方式 http://www.w3school.com.cn/cssref/pr_text_text-align.asp */
+    background: rgb(228, 160, 71);
+    color: #ffffff;
+    letter-spacing: 10px;
+    /* 元素字母间距 http://www.w3school.com.cn/cssref/pr_text_letter-spacing.asp */
+    padding: 10px 10px;
+    /* 元素的 4 个内边距 http://www.w3school.com.cn/cssref/pr_padding.asp */
+    margin-bottom: 10px;
+    /* 元素的下外边距 http://www.w3school.com.cn/cssref/pr_margin-bottom.asp */
+    margin: 10px;
+}    
+.showarea{
+    width: 660px;
+    height: 380px;
+    background-color: rgb(224, 98, 26);
+    /* float: left; */
+    margin: 10px;
+}
+.player{
+    width: 640px;
+    height: 360px;
+    padding: 10px 10px; 
+}
+.comments_history{
+    width: 510px;
+    height: 330px;
+    background-color: rgb(216, 213, 37);
+
+    position: absolute;
+    left: 790px;
+    top: 68px;
+    margin: 10px;
+    
+}
+.comments{
+    width: 510px;
+    height: 110px;
+    background-color: rgb(216, 37, 186);
+
+    position: absolute;
+    left: 790px;
+    top: 339px;
+    margin: 10px;
+    
+    
+}
+.comment_area{
+    width: 468px;
+    height: 40px;
+    background-color: rgb(250, 250, 250);
+    padding: 10px 10px;
+    margin: 10px;
+}
+.comment_btn{
+    border:2px solid;
+    border-radius:25px;
+    position: absolute;
+    left: 450px;
+    top: 80px;
+}
+.barrage{
+    width: 660px;
+    height: 100px;
+    background-color: rgb(31, 182, 241);
+    margin: 10px;
+}
+#ppt_wrap{
+    width: 150px;
+    height: 100px;
+    background-color: rgb(37, 216, 97);
+    position: absolute;
+    left: 800px;
+    top: 468px;
+    overflow: hidden;
+}
+#ppt_content{
+    width: 200px;
+    height: 130px;
+    background-color: darkorange;
+}
+.luckyDrawWrap{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(233, 230, 79);
+    position: absolute;
+    left: 960px;
+    top: 468px;
+    font-size: 5px;
+}
+.lucky_btn{
+    border:2px solid;
+    border-radius:25px;
+    position: absolute;
+    left: 40px;
+    top: 70px;
+}
+#SignUpWrap{
+    width: 130px;
+    height: 100px;
+    background-color: rgb(79, 164, 233);
+    position: absolute;
+    left: 1070px;
+    top: 468px;
+    font-size: 5px;
+}
+#uname{
+    width: 60px;
+
+}
+#voucher{
+    width: 60px;
+
+}
+#SignUp_btn{
+    position: absolute;
+    left: 70px;
+    top: 70px;
+    font-size: 5px;
+    border:2px solid;
+    border-radius:25px;
+}
+#vote{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(184, 79, 233);
+    position: absolute;
+    left: 1210px;
+    top: 468px;
+}
+.vote_btn{
+    border:2px solid;
+    border-radius:25px;
+    position: absolute;
+    left: 40px;
+    top: 70px;
+}
+#topic{
+    width: 1160px;
+    height: 170px;
+    font-size: 10px;
+    background-color: rgb(233, 148, 79);
+    padding: 10px 10px;
+    margin: 10px;
+}
+.topic_area{
+    width: 1100px;
+    height: 160px;
+}
+.topic_btn{
+    border:2px solid;
+    border-radius:25px;
+}

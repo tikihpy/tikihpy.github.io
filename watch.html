@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <link rel='stylesheet' href="styles/watch.css"  />
+
+    <!-- 播放器依赖于Promise,兼容ie及其它低版本浏览器的用户需添加polyfill, 如下: -->
+    <script src="//static.mudu.tv/es6-promise/es6-promise.auto.min.js"></script>
+    
+    <!-- 以下为必须添加项 -->
+    <script>window.FETCHER_SERVER_URL = "ws://fetcher.mudu.tv:8088";</script>
+    <!-- https下请使用 <script>window.FETCHER_SERVER_URL = "wss://fetcher.mudu.tv";</script> -->
+    <script src="//static.mudu.tv/fetcher/bundle.6d7aca164d2389e8bea6.js"></script>
+    <script src="//static.mudu.tv/static/websdk/sdk.js"></script>
+    <script src='scripts/Init.js'></script>
+
+
+
+</head>
+<body>
+    <!-- 直播间组件 -->
+    <div class="app">
+            <div class="app_header">
+                <div> 
+                    标题：<span id="act_name"></span> <br />
+                    页面浏览量 <span id="act_viewnum">0</span>
+                </div>
+            </div>
+           
+            <!-- 播放器组件 -->
+            <div class="showarea">
+                <div class="player">
+                    <div id="J_prismPlayer" class="prism-player"></div>
+                </div>
+            </div>
+
+            <!-- 评论组件 -->
+            <div class="comments_history" >
+
+            </div>
+            <div class="comments">
+                <textarea class="comment_area"></textarea>
+                <button class="comment_btn">评 论</button>
+            </div>
+
+            <!-- 弹幕组件 -->
+            <div class="barrage" >
+            
+            </div>
+
+
+            <!-- PPT组件 -->
+            <div id="ppt_wrap">
+                <img id="ppt_content" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557126972233&di=04982d0b6fb498426ce58c196cb4672c&imgtype=0&src=http%3A%2F%2Fimage.yy.com%2Fyywebalbumbs2bucket%2Fe898a219605a48fea4ab871691a41a75_1465621271358.jpg" />
+            </div>
+
+            <!-- 抽奖组件 -->
+            <div class="luckyDrawWrap">
+                <p>奖项：<span id="lucky_award_name"></span></p>
+                <p>截止时间：<span id="lucky_deadline"></span></p>  
+                <button class="lucky_btn">抽 奖</button> 
+            </div>
+
+            <!-- 报名组件 -->
+            <div id="SignUpWrap">
+                    <p class="signup_blank">
+                        用户名：<input id="uname"  type="text" value="" /> <br/>
+                        手 机：<input id="voucher"  type="text" value="" />
+                        <button id="SignUp_btn" class="SignUp">报 名</button>
+                    </p>
+            </div>
+            <!-- 投票组件 -->
+            <div id='vote'>
+                <button class="vote_btn">投 票</button>
+
+            </div>
+
+             <!-- 话题互动组件 -->
+             <div id='topic'>
+                <textarea class="topic_area"></textarea>
+                <button class="topic_btn">话 题</button>
+
+            </div>
+    
+        </div>
+
+
+
+
+
+
+
+<script src='scripts/muduroom.js'></script>    
+<script src='scripts/muduplayer.js'></script> 
+<script src='scripts/barrage.js'></script>
+<script src='scripts/comment.js'></script>
+  
+
+</body>
+</html>
