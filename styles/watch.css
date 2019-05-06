@@ -36,7 +36,7 @@
     padding: 10px 10px; 
 }
 .comments_history{
-    width: 510px;
+    width: 470px;
     height: 330px;
     background-color: rgb(216, 213, 37);
 
@@ -45,6 +45,40 @@
     top: 68px;
     margin: 10px;
     
+}
+.msg_area{
+    width: 400px;
+    height: 55px;
+    background-color: rgb(67, 216, 37);
+
+    position: absolute;
+    left: 50px;
+    top: 10px;
+    margin: 10px;
+}
+.img{
+    width: 20px;
+    height: 20px;
+    background-color: rgb(216, 37, 192);
+    overflow: hidden;
+}
+.username{
+    /* width: 20px;
+    height: 20px; */
+    background-color: rgb(40, 37, 216);
+    /* overflow: hidden; */
+    position: absolute;
+    left: 20px;
+    top: 0px;
+}
+.text{
+    width: 20px;
+    height: 20px;
+    background-color: rgb(216, 204, 37);
+    overflow: hidden;
+    position: absolute;
+    left: 20px;
+    top: 30px;
 }
 .comments{
     width: 510px;

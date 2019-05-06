@@ -1,3 +1,5 @@
+
+
 var isChannelLiving = !!Mudu.Room.GetLiveStatus() // Mudu.Room.GetLiveStatus() 获取当前的直播状态 类型为number: `1`为正在直播，`0`为不在直播 
 
 var player = new Mudu.Player(
