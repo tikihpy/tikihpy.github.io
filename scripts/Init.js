@@ -1,6 +1,8 @@
 Mudu.Init(
-  // 频道id
-  185053,
+  // 线上频道id
+  // 185053,
+  // 测试服频道ID
+  10003046,
 
   // 初始化完成的回调函数，无参数
   function () {
@@ -68,6 +70,7 @@ Mudu.Init(
 
           // 返回评论页数，类型为int
     var commentPage = Mudu.Room.Comment.GetPage()
+    console.log(commentPage);
 
 
     Mudu.Room.Comment.Send(
@@ -76,6 +79,7 @@ Mudu.Init(
       
         // 发送完成的回调函数，参数为response对象
         function (response) {
+          response = JSON.parse(response)
           if (response.status === 'y') {
             console.log('发送成功')
           }
@@ -87,7 +91,7 @@ Mudu.Init(
 
     Mudu.Room.Comment.Get(
       // 要获取评论的页码，类型为int
-      1,
+      5012,
 
       // 评论获取成功的回调函数，参数为response对象
       function (response) {
@@ -108,7 +112,27 @@ Mudu.Init(
       // 事件处理函数，参数为新的评论，类型为object
       function (newComment) {
         newComment = JSON.parse(newComment)
-        console.log(newComment.username + '发送了一条新评论: ' + newComment.message)
+        console.log(newComment);
+        console.log(newComment.username + '发送了一条新评论: ' + newComment.message);
+        
+        
+        
+        // 添加聊天记录
+        var list = document.createElement('li');
+        list.setAttribute('class','msg_area');
+        
+        var alertcmt = document.createElement("img");
+        alertcmt.setAttribute('class','img');
+        alertcmt.setAttribute('src','https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2866492045,1432640156&fm=26&gp=0.jpg');
+        var description = document.createElement('span');
+        description.setAttribute('class','msg');
+        var desctext = document.createTextNode(newComment.message);
+
+        list.appendChild(alertcmt);
+        list.appendChild(description);
+        description.appendChild(desctext);
+
+        document.getElementsByTagName('ul')[0].appendChild(list);
       }
     );
 
@@ -120,7 +144,8 @@ Mudu.Init(
       // 事件处理函数，参数为弹幕对象
       function (barrage) {
         barrage = JSON.parse(barrage)
-        console.log('收到新的弹幕，内容为: ', barrage.text)
+        // console.log('收到新的弹幕，内容为: ', barrage.text)
+        console.log('收到新的弹幕，内容为: ', barrage)
       }
     )
   }
@@ -134,11 +159,11 @@ function sendCmt() {
   Mudu.Room.Comment.Send(
     // 要发送的评论文本，类型为string
     value || 'neirongweikong',
-    msgtext = value,
 
   
     // 发送完成的回调函数，参数为response对象
     function (response) {
+      response = JSON.parse(response)
       if (response.status === 'y') {
         console.log('发送成功')
       }
@@ -148,3 +173,39 @@ function sendCmt() {
     }
   )
 }
+
+
+// 获取指定评论页数
+function getPage(){
+  var value = document.getElementsByClassName('page_area')[0].value;
+
+  Mudu.Room.Comment.Get(
+    // 要获取评论的页码，类型为int
+    value,
+
+    // 评论获取成功的回调函数，参数为response对象
+    function (response) {
+      response = JSON.parse(response)
+      if (response.status === 'y') {
+        // console.log('获取评论成功，数据为：', response.data)
+        console.log('获取评论成功，数据为：', response)
+      } 
+      if (response.status === 'n'){
+        console.log('获取评论失败')
+      }
+    }
+  )
+}
+
+function addLoadEvent(func){
+  var oldload = window.onload;
+  if(typeof window.onload != 'function'){
+      window.onload = func;
+  }else{
+      window.onload = function(){
+          oldload();
+          func();
+      }
+  }
+}
+

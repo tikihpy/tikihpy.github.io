@@ -12,7 +12,8 @@
     <script>window.FETCHER_SERVER_URL = "ws://fetcher.mudu.tv:8088";</script>
     <!-- https下请使用 <script>window.FETCHER_SERVER_URL = "wss://fetcher.mudu.tv";</script> -->
     <script src="//static.mudu.tv/fetcher/bundle.6d7aca164d2389e8bea6.js"></script>
-    <script src="//static.mudu.tv/static/websdk/sdk.js"></script>
+    <!-- <script src="//static.mudu.tv/static/websdk/sdk.js"></script> -->
+    <script src= 'newscripts/2019050704sdk.js'></script>
     <script src='scripts/Init.js'></script>
 
 
@@ -36,18 +37,20 @@
             </div>
 
             <!-- 评论组件 -->
+            
             <ul class="comments_history" >
-                <li class="msg_area">
-                    <img  class='img' src=''><br/>
-                    <span class="username">66666</span><br/>
-                    <!-- <div class="text" value = 'mesg'>88</div> -->
-                </li>
 
             </ul>
+            
+            <div class="page">
+                    <textarea class="page_area"></textarea>
+                    <button class="page_btn" onclick="getPage()">页 数</button>
+                </div>
             <div class="comments">
                 <textarea class="comment_area"></textarea>
                 <button class="comment_btn" onclick="sendCmt()">评 论</button>
             </div>
+       
 
             <!-- 弹幕组件 -->
             <div class="barrage" >
@@ -90,6 +93,7 @@
     
         </div>
 
+<script src='scripts/addLoadEvent.js'></script>
 
 
 </body>
