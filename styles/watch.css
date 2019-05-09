@@ -10,19 +10,61 @@
 .app_header {
     width: 1160px;
     height: 30px;
-    font-size: 10px;
-    text-align: center;
-    /* 文本对齐方式 http://www.w3school.com.cn/cssref/pr_text_text-align.asp */
+    /* font-size: 12px;
+    text-align: center; */
     background: rgb(228, 160, 71);
-    color: #ffffff;
-    letter-spacing: 10px;
-    /* 元素字母间距 http://www.w3school.com.cn/cssref/pr_text_letter-spacing.asp */
-    padding: 10px 10px;
-    /* 元素的 4 个内边距 http://www.w3school.com.cn/cssref/pr_padding.asp */
-    margin-bottom: 10px;
-    /* 元素的下外边距 http://www.w3school.com.cn/cssref/pr_margin-bottom.asp */
+    /* color: #1115ec;
+    font-weight:bold;
+    letter-spacing: 3px; */
+    padding: 10px 10px;  
     margin: 10px;
+    /* line-height: 4px; */
 }
+#act_name{
+    font-size: 5px;
+    /* text-align: center; */
+    color: #1115ec;
+    font-weight:bold;
+    letter-spacing: 3px;
+    line-height: 4px;
+    position: absolute;
+    left: 600px;
+    top: 20px;
+}
+#act_status{
+    font-size: 5px;
+    color: #1115ec;
+    font-weight:bold;
+    letter-spacing: 3px;
+    line-height: 4px;
+    position: absolute;
+    left: 600px;
+    top: 40px;
+}
+#act_viewnum{
+    font-size: 5px;
+    color: #1115ec;
+    font-weight:bold;
+    letter-spacing: 3px;
+    line-height: 4px;
+    position: absolute;
+    left: 800px;
+    top: 20px;
+}
+#roomPlayAddr{
+    font-size: 5px;
+    width: 500px;
+    overflow: hidden;
+    color: #1115ec;
+    font-weight:bold;
+    /* letter-spacing: 3px; */
+    /* line-height: 4px; */
+    position: absolute;
+    left: 800px;
+    top: 30px;
+}
+
+
 .switch_btn{
     width: 70px;
     height: 25px;
@@ -69,6 +111,16 @@
     background-color: rgb(255, 0, 106);
     position: absolute;
     left: 420px;
+    top: 30px;
+    border:2px solid;
+    border-radius:25px;
+} 
+.live_btn{
+    width: 70px;
+    height: 25px;
+    background-color: rgb(255, 0, 106);
+    position: absolute;
+    left: 490px;
     top: 30px;
     border:2px solid;
     border-radius:25px;
