@@ -27,6 +27,21 @@
                     标题：<span id="act_name"></span> <br />
                     页面浏览量 <span id="act_viewnum">0</span>
                 </div>
+                <div class= 'switch'>
+                    <button class="switch_btn" onclick="switchVedio()">切换视频</button>
+                </div>
+                <div class= 'play'>
+                    <button class="play_btn" onclick="playVedio()">开始播放</button>
+                 </div>
+                <div class= 'pause'>
+                    <button class="pause_btn" onclick="pauseVedio()">暂停播放</button>
+                </div>
+                <div class= 'stop'>
+                    <button class="stop_btn" onclick="stopVedio()">停止播放</button>
+                </div>
+                <div class= 'state'>
+                    <button class="state_btn" onclick="state()">直播状态</button>
+                </div>
             </div>
            
             <!-- 播放器组件 -->
@@ -38,9 +53,9 @@
 
             <!-- 评论组件 -->
             
-            <ul class="comments_history" >
+            <ol reversed class="comments_history" >
 
-            </ul>
+            </ol>
             
             <div class="page">
                     <textarea class="page_area"></textarea>
@@ -54,6 +69,7 @@
 
             <!-- 弹幕组件 -->
             <div class="barrage" >
+                <!-- <span class="content">弹幕内容。。。。。。。。。。。</span> -->
             
             </div>
 
@@ -92,7 +108,5 @@
             </div>
     
         </div>
-
-
 </body>
 </html>

@@ -1,0 +1,81 @@
+/* * 这东西叫“通配符”用来匹配页面上所有元素。因为某些元素如 body、 li、 p 这是有默认的margin值，这样就不方便我们精确控制，所以我们干脆就先把所有元素的margin、padding先设置为0，以后根据需要再单独设置某一项的margin和padding数值 。 */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.wrap {
+    max-width: 1000px;
+    padding: 25px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    background: goldenrod;
+}
+
+.header {
+    min-height: 100px;
+    background: rosybrown;
+    text-align: center;
+    line-height: 100px;
+    margin-bottom: 20px;
+}
+
+.container {
+    overflow: hidden;
+    height: 400px;
+}
+
+.container_left, .container_right {
+    float: left;
+    width: 48%;
+    height: 100%;
+}
+
+.container_right {
+    margin-left: 4%;
+}
+
+.player {
+    height: 300px;
+    background: violet;
+}
+
+.danmu {
+    height: 150px;
+    background: aqua
+}
+
+.mb15 {
+    margin-bottom: 15px;
+}
+
+.msg_list {
+    height: 100px;
+    background: aqua
+}
+
+.msg_get {
+    background: antiquewhite;
+    height: 100px;
+}
+
+.msg_send {
+    height: 80px;
+    background: hotpink;
+}
+
+.others {
+    height: 80px;
+    background: palegreen;
+    text-align: left;
+}
+
+.others > div {
+    display: inline-block;
+}
+
+.topic {
+    min-height: 120px;
+    background: khaki
+}
+
