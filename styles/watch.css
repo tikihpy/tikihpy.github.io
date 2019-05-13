@@ -53,8 +53,8 @@
 }
 #roomPlayAddr{
     font-size: 5px;
-    width: 500px;
-    overflow: hidden;
+    width: 450px;
+    overflow: scroll;
     color: #1115ec;
     font-weight:bold;
     /* letter-spacing: 3px; */

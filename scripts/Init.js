@@ -3,6 +3,8 @@ Mudu.Init(
   // 185053,
   // 测试服频道ID
   10003046,
+  // // 白名单频道
+  // 10003142,
 
   // 初始化完成的回调函数，无参数
   function () {
@@ -44,12 +46,7 @@ Mudu.Init(
     description.appendChild(desctext);
     document.getElementsByClassName('app_header')[0].appendChild(description);
 
-
-
   }
-
-
-
 
     // 返回直播间浏览量，类型为number整数
     var roomViewNum = Mudu.Room.GetViewNum()
@@ -70,15 +67,6 @@ Mudu.Init(
     var desctext = document.createTextNode('直播地址：'+'['+roomPlayAddr+']');
     description.appendChild(desctext);
     document.getElementsByClassName('app_header')[0].appendChild(description);
-
-
-
-
-
-
-
-
-
 
 
     var isChannelLiving = !!Mudu.Room.GetLiveStatus() // Mudu.Room.GetLiveStatus() 获取当前的直播状态 类型为number: `1`为正在直播，`0`为不在直播 
@@ -138,10 +126,7 @@ Mudu.Init(
 
     window.player = player;
 
- 
-
-
-          // 返回评论页数，类型为int
+    // 返回评论页数，类型为int
     var commentPage = Mudu.Room.Comment.GetPage()
     console.log(commentPage);
 
