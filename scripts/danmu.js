@@ -1,18 +1,9 @@
-/**
- * 获取指定范围的随机数
- * @param {*开始} start 
- * @param {*技术} end 
- */
+// * 获取指定范围的随机数
 function Random(start, end) {
     let num = (Math.random() * (end - start) + start).toString();
     return parseInt(num, 10);
 }
 
-
-/**
- * 添加一个弹幕
- * @param {*内容} text 
- */
 function SetBarrage(text) {
     // 创建dom并添加class 和各种数据
     var barrage = document.createElement('span');

@@ -356,10 +356,26 @@ window.player = player;
         var pli = document.getElementsByClassName('barrage');
 
         var description = document.createElement('p');
-        description.setAttribute('id','content');
+        description.setAttribute('class','content');
         var desctext = document.createTextNode(barrage.text);
         description.appendChild(desctext);
         document.getElementsByClassName('barrage')[0].appendChild(description);
+
+        // 获取指定范围的随机数
+        function Random(start, end) {
+          let num = (Math.random() * (end - start) + start).toString();
+          return parseInt(num, 10);
+      }
+        // 创建弹幕从右到左面的10-15的随机秒数
+        const randomTime = Random(10, 20);
+        // 创建离上方的距离  百分比 现在是半屏
+        const randomTop = Random(0, 70);
+        description.style.top = randomTop + "%";
+        description.style.animation = "barrage " + randomTime + "s linear";
+        // 添加一个定时器 在运行完成之后删除这个DOM
+        setTimeout(() => {
+          document.getElementsByClassName('barrage')[0].removeChild(description)
+      }, randomTime * 1000);
 
       }
       

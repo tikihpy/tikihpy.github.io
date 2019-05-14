@@ -62,7 +62,30 @@
     margin-top: 10px;
     border:2px solid;
     overflow: scroll;
+    position: relative;
 }
+
+.content {
+    /* top: 200px; */
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    display: inline-block;
+    padding: 4px 18px;
+    color: rgb(227, 241, 22);
+    position: absolute;
+    white-space: nowrap;
+    /* transition: all 0.3s; */
+}
+/* 动画这样写 */
+@keyframes barrage {
+    from {
+        left: 100%;
+    }
+    to {
+        left: -100%;
+    }
+}
+
 .show-history, .check-page{
     float: left;
     width: 48.5%;
@@ -82,6 +105,7 @@
     overflow: auto;
     -webkit-box-direction: reverse;
     padding: 40px;
+    padding-top: 10px;
 
 }
 .msg-page{
@@ -110,14 +134,14 @@
     width: 640px;
     height: 360px;
 }
-#content{
+/* #content{
     width: 630px;
     height: 18px;
     background-color: rgb(22, 231, 231);
     font-size: 10px;
     padding: 2px 5px;
     overflow: auto;
-}
+} */
 .ppt_wrap, .luckyDrawWrap, .SignUpWrap, .vote{
     width: 140px;
     float: left;
