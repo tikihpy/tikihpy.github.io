@@ -358,9 +358,6 @@ window.player = player;
         var description = document.createElement('p');
         description.setAttribute('id','content');
         var desctext = document.createTextNode(barrage.text);
-
-        // list.appendChild(alertcmt);
-        // pli.appendChild(description);
         description.appendChild(desctext);
         document.getElementsByClassName('barrage')[0].appendChild(description);
 
@@ -475,7 +472,6 @@ function getPage(){
   Mudu.Room.Comment.Get(
     // 要获取评论的页码，类型为int
     value,
-
     // 评论获取成功的回调函数，参数为response对象
     function (response) {
       response = JSON.parse(response)
@@ -486,6 +482,29 @@ function getPage(){
       if (response.status === 'n'){
         console.log('获取评论失败')
       }
+
+    // 添加自定义获取某一页聊天记录
+    // for(var i=0;i<response.data.comments.length;i++){
+    for(var i=response.data.comments.length-1;0<=i;i--){
+      var pagelist = document.createElement('li');
+      pagelist.setAttribute('class','getpage');
+      var alertcmt = document.createElement("img");
+      alertcmt.setAttribute('class','getavatar');
+      alertcmt.setAttribute('src',response.data.comments[i].avatar);
+      var description = document.createElement('span');
+      description.setAttribute('class','getmsg');
+      var desctext = document.createTextNode(response.data.comments[i].message);
+      pagelist.appendChild(alertcmt);
+      pagelist.appendChild(description);
+      description.appendChild(desctext);
+      // document.getElementsByTagName('ol')[1].appendChild(pagelist);
+      var firstLi = document.getElementsByClassName('getpage')[0]
+            if (firstLi) {
+              document.getElementsByTagName("ol")[1].insertBefore(pagelist, firstLi);
+            } else {
+              document.getElementsByTagName('ol')[1].appendChild(pagelist);
+            }   
+     }
     }
   )
 }
@@ -514,39 +533,27 @@ function playVedio(){
   player.play();
  
 }
-
 // 暂停播放
 function pauseVedio(){
   player.pause();
   
 }
-
 // 停止播放
 function stopVedio(){
   player.stop();
   
 }
-
-
 // 直播状态
 function state(){
   var state = player.getState()
   alert(state);
 }
-
 // 返回直播
 function live(){
-  
   Mudu.Room.User.GetUser()
   // 需要在sdk 初始化成功后才能使用
-  Mudu.Room.User.Assign('name', 'https://static.mudu.tv/index/avatar.png', '66666', function(){
-
-  })
-
-
-
+  Mudu.Room.User.Assign('name', 'https://static.mudu.tv/index/avatar.png', '66666', function(){})
   var isChannelLiving = !!Mudu.Room.GetLiveStatus() // Mudu.Room.GetLiveStatus() 获取当前的直播状态 类型为number: `1`为正在直播，`0`为不在直播 
-
   var player = new Mudu.Player(
     {
       // 必须，播放器容器ID，播放器会被添加到该DOM元素中
