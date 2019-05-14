@@ -228,6 +228,10 @@
     margin: 10px;
     overflow: auto;
 }
+.container {
+    position: relative;
+}
+
 #content{
     width: 640px;
     height: 18px;
@@ -326,3 +330,5 @@
     border:2px solid;
     border-radius:25px;
 }
+
+

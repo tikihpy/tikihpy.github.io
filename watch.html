@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo</title>
-    <link rel='stylesheet' href="styles/watch.css"  />
+    <!-- <link rel='stylesheet' href="styles/watch.css"  /> -->
+    <link rel='stylesheet' href="styles/watchlayout.css"  />
 
     <!-- 播放器依赖于Promise,兼容ie及其它低版本浏览器的用户需添加polyfill, 如下: -->
     <script src="//static.mudu.tv/es6-promise/es6-promise.auto.min.js"></script>
@@ -29,82 +30,85 @@
                     <p id="act_viewnum"></p> -->
 
                 </div>
-                <div class= 'switch'>
-                    <button class="switch_btn" onclick="switchVedio()">切换视频</button>
-                </div>
-                <div class= 'play'>
-                    <button class="play_btn" onclick="playVedio()">开始播放</button>
-                 </div>
-                <div class= 'pause'>
-                    <button class="pause_btn" onclick="pauseVedio()">暂停播放</button>
-                </div>
-                <div class= 'stop'>
-                    <button class="stop_btn" onclick="stopVedio()">停止播放</button>
-                </div>
-                <div class= 'state'>
-                    <button class="state_btn" onclick="state()">直播状态</button>
-                </div>
-                <div class= 'live'>
-                    <button class="live_btn" onclick="live()">返回直播</button>
-                </div>
+                
             </div>
-           
-            <!-- 播放器组件 -->
-            <div class="showarea">
-                <div class="player">
-                    <div id="J_prismPlayer" class="prism-player"></div>
+        <div class = 'container'>
+            <div class='top_part'>
+            <div class = 'palyer_part'>
+                 <!-- 播放器组件 -->
+                <div class="showarea">
+                    <div class="player">
+                        <div id="J_prismPlayer" class="prism-player"></div>
+                    </div>
                 </div>
-            </div>
+
+                <div class ='button_part'>
+                        <button class="switch_btn" onclick="switchVedio()">切换视频</button>
+                        <button class="play_btn" onclick="playVedio()">开始播放</button>
+                        <button class="pause_btn" onclick="pauseVedio()">暂停播放</button>
+                        <button class="stop_btn" onclick="stopVedio()">停止播放</button>
+                        <button class="state_btn" onclick="state()">直播状态</button>
+                        <button class="live_btn" onclick="live()">返回直播</button>
+                </div>
+    
+                <!-- 弹幕组件 -->
+                <div class="barrage" >
+                        <!-- <span class="content">弹幕内容。。。。。。。。。。。</span> -->   
+                </div>
+                
+        </div>
 
             <!-- 评论组件 -->
-            
-            <ol reversed class="comments_history" >
-
-            </ol>
-            
-            <div class="page">
-                    <textarea class="page_area"></textarea>
-                    <button class="page_btn" onclick="getPage()">页 数</button>
+            <div class = 'comment_part'>
+                <div class="show-history">
+                    <ol reversed class="comments_history" ></ol>
+                    <div class="comments">
+                        <textarea class="comment_area"></textarea>
+                        <button class="comment_btn" onclick="sendCmt()">评 论</button>
+                    </div>
                 </div>
-            <div class="comments">
-                <textarea class="comment_area"></textarea>
-                <button class="comment_btn" onclick="sendCmt()">评 论</button>
+                <div class=" check-page">
+                    <div class = 'msg-page'>
+                            <ol reversed class="check_history" ></ol>
+                    </div>
+                    <div class="page">
+                        <textarea class="page_area"></textarea>
+                        <button class="page_btn" onclick="getPage()">页 数</button>
+                    </div>
+
+                </div>
+
+                <div class='others'>
+                  <!-- PPT组件 -->
+                    <div class="ppt_wrap">
+                        <img id="ppt_content" src="https://static.mudu.tv/index/avatar.png" />
+                    </div>
+    
+                <!-- 抽奖组件 -->
+                    <div class="luckyDrawWrap">
+                        <p>奖项：<span id="lucky_award_name"></span></p>
+                        <p>截止时间：<span id="lucky_deadline"></span></p>  
+                        <button class="lucky_btn">抽 奖</button> 
+                    </div>
+    
+                <!-- 报名组件 -->
+                    <div class="SignUpWrap">
+                            <p class="signup_blank">
+                                用户名：<input id="uname"  type="text" value="" /> <br/>
+                                手 机：<input id="voucher"  type="text" value="" />
+                                <button class="SignUp_btn">报 名</button>
+                            </p>
+                    </div>
+                    <!-- 投票组件 -->
+                    <div class='vote'>
+                        <button class="vote_btn">投 票</button>
+                    </div>
+                 </div>
             </div>
-       
-
-            <!-- 弹幕组件 -->
-            <div class="barrage" >
-                <!-- <span class="content">弹幕内容。。。。。。。。。。。</span> -->
-            
+                
             </div>
-
-
-            <!-- PPT组件 -->
-            <div id="ppt_wrap">
-                <img id="ppt_content" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557126972233&di=04982d0b6fb498426ce58c196cb4672c&imgtype=0&src=http%3A%2F%2Fimage.yy.com%2Fyywebalbumbs2bucket%2Fe898a219605a48fea4ab871691a41a75_1465621271358.jpg" />
-            </div>
-
-            <!-- 抽奖组件 -->
-            <div class="luckyDrawWrap">
-                <p>奖项：<span id="lucky_award_name"></span></p>
-                <p>截止时间：<span id="lucky_deadline"></span></p>  
-                <button class="lucky_btn">抽 奖</button> 
-            </div>
-
-            <!-- 报名组件 -->
-            <div id="SignUpWrap">
-                    <p class="signup_blank">
-                        用户名：<input id="uname"  type="text" value="" /> <br/>
-                        手 机：<input id="voucher"  type="text" value="" />
-                        <button id="SignUp_btn" class="SignUp">报 名</button>
-                    </p>
-            </div>
-            <!-- 投票组件 -->
-            <div id='vote'>
-                <button class="vote_btn">投 票</button>
-
-            </div>
-
+        
+        </div>
              <!-- 话题互动组件 -->
              <div id='topic'>
                 <textarea class="topic_area"></textarea>

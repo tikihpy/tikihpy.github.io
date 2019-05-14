@@ -61,7 +61,7 @@ Mudu.Init(
 
     // 返回直播状态，类型为number: `1`为正在直播，`0`为不在直播
     var roomLiveStatus = Mudu.Room.GetLiveStatus()
-    console.log(roomLiveStatus);
+    console.log('直播间状态：',roomLiveStatus);
 
     if(roomLiveStatus==1){
     var description = document.createElement('p');
@@ -141,7 +141,7 @@ window.player = player;
  // 返回视频回看配置
  var trailer = Mudu.Room.GetTrailer()
 
- console.log(trailer);
+ console.log('回看视频配置：',trailer);
 
 var livadrr=trailer.m3u8,img = trailer.trailer_img
 
@@ -263,21 +263,9 @@ window.player = player;
 
 }
 
-
-
-
-
-
-
-
-
-
- 
-
-
-          // 返回评论页数，类型为int
+    // 返回评论页数，类型为int
     var commentPage = Mudu.Room.Comment.GetPage()
-    console.log(commentPage);
+    console.log('返回评论页：',commentPage);
 
 
     Mudu.Room.Comment.Send(
@@ -297,10 +285,10 @@ window.player = player;
       )
 
     Mudu.Room.Comment.Get(
-      // 要获取评论的页码，类型为int
+    // 要获取评论的页码，类型为int
       5012,
 
-      // 评论获取成功的回调函数，参数为response对象
+    // 评论获取成功的回调函数，参数为response对象
       function (response) {
         response = JSON.parse(response)
         if (response.status === 'y') {
@@ -319,7 +307,7 @@ window.player = player;
       // 事件处理函数，参数为新的评论，类型为object
       function (newComment) {
         newComment = JSON.parse(newComment)
-        console.log(newComment);
+        console.log('新评论内容：',newComment);
         console.log(newComment.username + '发送了一条新评论: ' + newComment.message);
         
 
@@ -447,6 +435,9 @@ window.player = player;
         var response = JSON.parse(response)
         console.log('开奖啦')
       })
+      
+      var signupConfig = Mudu.Room.Signup.GetConfig()
+      console.log('报名问卷数据：',signupConfig);
 
 
 
@@ -505,7 +496,8 @@ function switchVedio() {
     {
         // isLive 非必需 boolean 控制播放器的ui展示,默认为false; 根据播放视频的实际情况填写
         isLive: false,
-        file: 'https://myun-hw-s3.myun.tv/258x6zl7/5rnb4rz0/lg394145/09o8dza0_1557373313144322954_480p.m3u8',
+        // file: 'https://myun-hw-s3.myun.tv/258x6zl7/5rnb4rz0/lg394145/09o8dza0_1557373313144322954_480p.m3u8',
+        file: 'https://myun-hw-s3.myun.tv/melj80jz/5p3yv7x0/lxzk3kd5/lnyogj65_1557724163000226304_origin.m3u8',
         image: 'https://cdn13.mudu.tv/assets/upload/155646148686924.jpeg',
         // 非必须 isLive为false时展示在时间进度条上的高亮点，hover时可展示text字段内容 （视频为回看视频时，会默认添加高亮信息，设置为[]可覆盖）
         highlights: [{
@@ -517,32 +509,32 @@ function switchVedio() {
 
 }
 
-
+// 开始播放
 function playVedio(){
   player.play();
  
 }
 
-
+// 暂停播放
 function pauseVedio(){
   player.pause();
   
 }
 
-
+// 停止播放
 function stopVedio(){
   player.stop();
   
 }
 
 
-
+// 直播状态
 function state(){
   var state = player.getState()
   alert(state);
 }
 
-
+// 返回直播
 function live(){
   
   Mudu.Room.User.GetUser()

@@ -1,0 +1,160 @@
+/* * 这东西叫“通配符”用来匹配页面上所有元素。因为某些元素如 body、 li、 p 这是有默认的margin值，这样就不方便我们精确控制，所以我们干脆就先把所有元素的margin、padding先设置为0，以后根据需要再单独设置某一项的margin和padding数值 。 */
+* {
+    margin: 0;
+    padding: 0;
+}
+.app {
+    max-width: 1440px;
+    height: 3900px;
+    padding: 40px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    margin: 0 auto;   
+    background-color: aqua;
+}
+.app_header {
+    background: rgb(193, 241, 17);
+    min-height: 120px;
+    text-align: left;
+    line-height: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 1340px;
+}
+
+#act_name, #act_status, #act_viewnum, #roomPlayAddr{
+    font-size: 15px;
+    width: 1340px;
+    overflow: scroll;
+    color: #1115ec;
+    font-weight:bold;
+    margin-top: 10px;
+    display: list-item;
+
+}
+.palyer_part, .comment_part{
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.showarea{
+    width: 640px;
+    height: 360px;
+}
+.button_part{
+    margin: 10px;
+    padding: 5px;
+
+}
+.switch_btn, .play_btn, .pause_btn, .stop_btn, .state_btn, .live_btn{
+    width: 70px;
+    height: 25px;
+    background-color: rgb(200, 255, 0);
+    border:2px solid;
+    border-radius:25px;
+    display: inline-block;
+}
+.barrage{
+    width: 640px;
+    height: 139px;
+    background-color: rgb(31, 182, 241);
+    margin-top: 10px;
+    border:2px solid;
+    overflow: scroll;
+}
+.show-history, .check-page{
+    float: left;
+    width: 48.5%;
+    height: 100%;
+    /* padding-bottom: 40px; */
+    border:2px solid;
+
+}
+.check-page{
+    margin-left: 1.5%;
+    
+}
+.comments_history, .msg-page{
+  
+    height: 260px;
+    background-color: rgb(10, 247, 61);
+    overflow: auto;
+    -webkit-box-direction: reverse;
+    padding: 40px;
+
+}
+.msg-page{
+    overflow: auto;
+    -webkit-box-direction: reverse;
+    
+
+}
+.page, .comments{
+    height: 60px;
+    background-color: rgb(37, 216, 61);
+    
+}
+.img{
+    width: 20px;
+    height: 20px;
+    background-color: rgb(216, 37, 192);
+    margin-top: 5px;
+}
+.comment_area, .page_area{
+    background-color: rgb(250, 250, 250);
+    height: 50px;
+    width: 260px;
+}
+.player{
+    width: 640px;
+    height: 360px;
+}
+#content{
+    width: 630px;
+    height: 18px;
+    background-color: rgb(22, 231, 231);
+    font-size: 10px;
+    padding: 2px 5px;
+    overflow: auto;
+}
+.ppt_wrap, .luckyDrawWrap, .SignUpWrap, .vote{
+    width: 140px;
+    float: left;
+    height: 120px;
+    margin-top: 10px;
+
+}
+.ppt_wrap, .luckyDrawWrap{
+    margin-right: 8px;
+    padding: 9px;
+    background-color: rgb(156, 19, 235);
+    border:2px solid;
+}
+.SignUpWrap, .vote{
+    padding: 8px;
+    margin-left: 9px;
+    background-color: rgb(156, 19, 235);
+    border:2px solid;
+}
+#uname, #voucher{
+    width: 100%;
+
+}
+
+#topic{
+    width: 640px;
+    height: 170px;
+    font-size: 10px;
+}
+.topic_area{
+    width: 580px;
+    height: 60px;
+}
+
+.topic_btn, .vote_btn, .SignUp_btn, .lucky_btn, .page_btn, .comment_btn{
+    border:2px solid;
+    border-radius:25px;
+    width: 50px;
+}
+
