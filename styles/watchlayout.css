@@ -17,11 +17,13 @@
     min-height: 120px;
     text-align: left;
     line-height: 20px;
-    margin-bottom: 10px;
     padding: 10px;
     width: 1340px;
 }
-
+.container{
+    width: 1340px;
+    height: 585px;
+}
 #act_name, #act_status, #act_viewnum, #roomPlayAddr{
     font-size: 15px;
     width: 1340px;
@@ -32,15 +34,22 @@
     display: list-item;
 
 }
-.palyer_part, .comment_part{
-    float: left;
-    width: 50%;
-    height: 100%;
+.palyer_part{
+    position: relative;
+    top: 10px;
+    width: 670px;
 }
-
+.comment_part{
+    position: absolute;
+    left: 730px;
+    top: 170px;
+    width: 670px;
+    padding-left: 4px;
+}
 .showarea{
     width: 640px;
     height: 360px;
+    border: 2px solid;
 }
 .button_part{
     margin: 10px;
@@ -88,30 +97,23 @@
 
 .show-history, .check-page{
     float: left;
-    width: 48.5%;
-    height: 100%;
-    /* padding-bottom: 40px; */
+    width: 48%;
     border:2px solid;
 
 }
 .check-page{
-    margin-left: 1.5%;
+    margin-left: 2.5%;
     
 }
-.comments_history, .msg-page{
-  
-    height: 260px;
+.comments_history, .check_history{
+    width: 281.5px;
+    height: 335px;
     background-color: rgb(10, 247, 61);
     overflow: auto;
     -webkit-box-direction: reverse;
-    padding: 40px;
+    padding-left: 40px;
     padding-top: 10px;
-
-}
-.msg-page{
-    overflow: auto;
-    -webkit-box-direction: reverse;
-    
+    position: relative;
 
 }
 .page, .comments{
@@ -134,30 +136,23 @@
     width: 640px;
     height: 360px;
 }
-/* #content{
-    width: 630px;
-    height: 18px;
-    background-color: rgb(22, 231, 231);
-    font-size: 10px;
-    padding: 2px 5px;
-    overflow: auto;
-} */
 .ppt_wrap, .luckyDrawWrap, .SignUpWrap, .vote{
-    width: 140px;
+    width: 134.5px;
     float: left;
     height: 120px;
     margin-top: 10px;
 
 }
 .ppt_wrap, .luckyDrawWrap{
-    margin-right: 8px;
-    padding: 9px;
+    margin-right: 10px;
+    padding: 10px;
     background-color: rgb(156, 19, 235);
     border:2px solid;
 }
 .SignUpWrap, .vote{
-    padding: 8px;
-    margin-left: 9px;
+    padding: 10px;
+    margin-left: 5px;
+    margin-right: 3px;
     background-color: rgb(156, 19, 235);
     border:2px solid;
 }
@@ -165,15 +160,33 @@
     width: 100%;
 
 }
+.topic-all{
+    width: 1340px;
+    height: 170px;
+    /* background-color: #1115ec; */
 
-#topic{
+}
+.topic-page, .topic{
     width: 640px;
+    border:2px solid;
+
+}
+.topic-page{
+    background-color: chocolate;
+    height: 170px;
+    
+}
+.topic{
+    width: 665px;
     height: 170px;
     font-size: 10px;
+    position: relative;
+    top: -174px;
+    left: 694px;
 }
 .topic_area{
     width: 580px;
-    height: 60px;
+    height: 160px;
 }
 
 .topic_btn, .vote_btn, .SignUp_btn, .lucky_btn, .page_btn, .comment_btn{

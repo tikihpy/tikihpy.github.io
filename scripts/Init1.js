@@ -18,59 +18,39 @@ Mudu.Init(
     // 直播间
     // 返回直播间名字，类型为string
     var roomName = Mudu.Room.GetName()
-
     var rName = document.getElementsByClassName('app_header');
-
     var description = document.createElement('p');
     description.setAttribute('id','act_name');
     var desctext = document.createTextNode('直播间：'+roomName);
     description.appendChild(desctext);
     document.getElementsByClassName('app_header')[0].appendChild(description);
 
-   
-
-
-
-
     // 返回直播间浏览量，类型为number整数
     var roomViewNum = Mudu.Room.GetViewNum()
-
     var description = document.createElement('p');
     description.setAttribute('id','act_viewnum');
     var desctext = document.createTextNode('浏览量：'+roomViewNum);
     description.appendChild(desctext);
     document.getElementsByClassName('app_header')[0].appendChild(description);
 
-
-
     // 返回直播间视频地址，类型为string
     var roomPlayAddr = Mudu.Room.GetPlayAddr()
-
     var description = document.createElement('p');
     description.setAttribute('id','roomPlayAddr');
     var desctext = document.createTextNode('直播地址：'+'['+roomPlayAddr+']');
     description.appendChild(desctext);
     document.getElementsByClassName('app_header')[0].appendChild(description);
 
-
-
-
-
     var isChannelLiving = !!Mudu.Room.GetLiveStatus() // Mudu.Room.GetLiveStatus() 获取当前的直播状态 类型为number: `1`为正在直播，`0`为不在直播 
-
-
     // 返回直播状态，类型为number: `1`为正在直播，`0`为不在直播
     var roomLiveStatus = Mudu.Room.GetLiveStatus()
     console.log('直播间状态：',roomLiveStatus);
-
     if(roomLiveStatus==1){
     var description = document.createElement('p');
     description.setAttribute('id','act_status');
     var desctext = document.createTextNode('直播状态：live');
     description.appendChild(desctext);
     document.getElementsByClassName('app_header')[0].appendChild(description);
-
-
 
  var player = new Mudu.Player(
   {
@@ -124,13 +104,7 @@ Mudu.Init(
     }]
   }
 );
-
 window.player = player;
-
-
-
-
-
 }else {
  var description = document.createElement('p');
  description.setAttribute('id','act_status');
@@ -200,9 +174,6 @@ var livadrr=trailer.m3u8,img = trailer.trailer_img
   }
 );
 window.player = player;
-
-
-
  }else{
   
   var player = new Mudu.Player(
@@ -260,9 +231,7 @@ window.player = player;
   window.player = player;
   
  }
-
 }
-
     // 返回评论页数，类型为int
     var commentPage = Mudu.Room.Comment.GetPage()
     console.log('返回评论页：',commentPage);
@@ -365,7 +334,7 @@ window.player = player;
         function Random(start, end) {
           let num = (Math.random() * (end - start) + start).toString();
           return parseInt(num, 10);
-      }
+        }
         // 创建弹幕从右到左面的10-15的随机秒数
         const randomTime = Random(10, 20);
         // 创建离上方的距离  百分比 现在是半屏
@@ -376,9 +345,7 @@ window.player = player;
         setTimeout(() => {
           document.getElementsByClassName('barrage')[0].removeChild(description)
       }, randomTime * 1000);
-
-      }
-      
+      } 
     )
 
 
@@ -524,7 +491,7 @@ function getPage(){
     }
   )
 }
-
+//切换视频
 function switchVedio() {
       
   player.load([
