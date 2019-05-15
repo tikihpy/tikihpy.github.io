@@ -35,14 +35,14 @@
 
 }
 .palyer_part{
-    position: relative;
-    top: 10px;
+    position: absolute;
+    top: 170px;
     width: 670px;
 }
 .comment_part{
-    position: absolute;
-    left: 730px;
-    top: 170px;
+    position: relative;
+    left: 688px;
+    top: 10px;
     width: 670px;
     padding-left: 4px;
 }
@@ -177,12 +177,12 @@
     
 }
 .topic{
-    width: 665px;
+    width: 664px;
     height: 170px;
     font-size: 10px;
     position: relative;
     top: -174px;
-    left: 694px;
+    left: 692px;
 }
 .topic_area{
     width: 580px;
