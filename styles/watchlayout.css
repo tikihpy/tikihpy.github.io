@@ -203,7 +203,7 @@
     height: 160px;
 }
 
-.topic_btn, .vote_btn, .SignUp_btn, .lucky_btn, .lucky_close_btn, .signuplucky_btn, .page_btn, .comment_btn{
+.topic_btn, .vote_btn, .SignUp_btn, .lucky_btn, .luckyresult_btn, .lucky_close_btn, .result_close_btn, .signuplucky_btn, .page_btn, .comment_btn{
     border:2px solid;
     border-radius:25px;
     width: 50px;
@@ -243,4 +243,31 @@
     position: absolute;
     left: 15%;
     top: 15%;
+}
+.resultpage{
+    display: none;           
+    position: relative;
+    z-index:99999;           
+    left:10%;           
+    top:10%;           
+    width:250px;           
+    background-color:rgb(233, 10, 203);          
+    text-align: left;           
+}
+.allluckers{
+    position: relative;
+    left: 5%;
+    top: 15%;
+    padding: 6px;
+}
+.luckers{
+    position: relative;
+    left: 15%;
+    top: 15%;
+    padding: 6px;
+}
+.result_close_btn{
+    position: relative;
+    left: 75%;
+    margin-top: 8px;
 }

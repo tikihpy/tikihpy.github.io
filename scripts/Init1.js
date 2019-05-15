@@ -381,31 +381,11 @@ window.player = player;
     
     )
 
-    Mudu.Room.LuckyDraw.Result(
-      // 回调函数，参数为response对象
-      function (response) {
-        response = JSON.parse(response)
-        if (response.status === 'y') {
-          console.log('抽奖结果获取成功，数据为：', response.data)
-        }
-        if (response.status === 'n') {
-          console.log('抽奖结果获取失败')
-        }
-      }
-    )
 
 
 
 
-    Mudu.MsgBus.On(
-      // 事件名，值为LuckyDraw.Open
-      "LuckyDraw.Open",
-    
-      // 事件处理函数
-      function (response) {
-        var response = JSON.parse(response)
-        console.log('开奖啦')
-      })
+   
       
       var signupConfig = Mudu.Room.Signup.GetConfig()
       console.log('报名问卷数据：',signupConfig);
@@ -597,36 +577,84 @@ function OpenDiv(){
   document.getElementById("setdata").style.display="block"; 
 }
   
-  // 给div层中的关闭添加onclick事件：
+// 给div层中的关闭添加onclick事件：
 function CloseDiv(){ 
 document.getElementById("setdata").style.display="none";
 }
 
 //添加抽奖报名信息
 function signuplucky(){
-
     var uname = document.getElementsByClassName('uname')[0].value;
     var voucher = document.getElementsByClassName('phone')[0].value;
     Mudu.Room.LuckyDraw.SignUp(
       {
         // 观众名，类型为string
         userName: uname,
-    
         // 抽奖唯一凭证，类型为string，推荐使用手机号作为唯一凭证
         voucher: voucher,
       },
-    
       // 回调函数，参数为response
       function (response) {
         response = JSON.parse(response)
         if (response.status === 'y') {
-          console.log('抽奖报名成功')
+          console.log('抽奖报名成功',response);
+          alert(response.info);
         }
         if (response.status === 'n') {
-          console.log('抽奖报名失败')
-        }
-
-        
+          console.log('抽奖报名失败',response);
+          alert(response.info);
+        } 
       }
     )
   }
+
+// 获取抽奖结果
+function getluckyResult(){
+  Mudu.Room.LuckyDraw.Result(
+    // 回调函数，参数为response对象
+    function (response) {
+      response = JSON.parse(response)
+      if (response.status === 'y') {
+        console.log('抽奖结果获取成功，数据为：', response.data)
+          var alllist = document.createElement('ol');
+          alllist.setAttribute('class','allluckers');
+          for(var i=0;i<response.data.luckers.length;i++){
+          var pagelist = document.createElement('li');
+          pagelist.setAttribute('class','luckers');
+          var description = document.createElement('span');
+          description.setAttribute('class','luckersphone');
+          var desctext = document.createTextNode(response.data.luckers[i].voucher);
+          alllist.appendChild(pagelist);
+          pagelist.appendChild(description);
+          description.appendChild(desctext);
+        }
+        document.getElementsByClassName('ollist')[0].appendChild(alllist);
+      }
+      if (response.status === 'n') {
+        console.log('抽奖结果获取失败')
+        alert(response.info);
+      }
+    }
+  )
+}
+//抽奖结果弹窗
+function Openresult(){       
+  document.getElementsByClassName("resultpage")[0].style.display="block"; 
+  // document.getElementById("resultpage").style.display="block"; 
+}
+function Closeresult(){ 
+document.getElementsByClassName("resultpage")[0].style.display="none";
+// document.getElementById("resultpage").style.display="none";
+document.getElementsByClassName('ollist')[0].innerHTML='';
+}
+
+
+  Mudu.MsgBus.On(
+    // 事件名，值为LuckyDraw.Open
+    "LuckyDraw.Open",
+  
+    // 事件处理函数
+    function (response) {
+      var response = JSON.parse(response)
+      console.log('开奖啦')
+    })

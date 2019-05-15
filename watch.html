@@ -91,6 +91,7 @@
                         <p>奖项：<span id="lucky_award_name"></span></p>
                         <p>截止时间：<span id="lucky_deadline"></span></p>  
                         <button class="lucky_btn" onclick="OpenDiv()">抽 奖</button> 
+                        <button class="luckyresult_btn" onclick="getluckyResult();Openresult()">结果</button> 
                         <div id="setdata">
                             <table class='table'> 
                             <tr><td>昵称</td><td><input class = 'uname' type="text"></td></tr>  
@@ -98,6 +99,14 @@
                             </table>
                             <button class="lucky_close_btn" onclick="CloseDiv()">关 闭</button>
                             <button class="signuplucky_btn" onclick="signuplucky()">提 交</button>
+                        </div>
+                        <div class="resultpage">
+                            <button class="result_close_btn" onclick="Closeresult()">关 闭</button>
+                            <div class='ollist'>
+                            <!-- <ol class='luckers'>
+
+                            </ol> -->
+                            </div>   
                         </div>
                     </div>
     
