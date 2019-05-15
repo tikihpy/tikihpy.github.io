@@ -116,10 +116,24 @@
     position: relative;
 
 }
-.page, .comments{
+.comments{
     height: 60px;
     background-color: rgb(37, 216, 61);
     
+}
+.page{
+    height: 40px;
+    background-color: rgb(37, 216, 61);
+    
+}
+.allpage{
+    background-color: rgb(37, 216, 61);
+    height: 20px;
+}
+.page_area{
+    background-color: rgb(250, 250, 250);
+    height: 30px;
+    width: 260px;
 }
 .img{
     width: 20px;
@@ -127,7 +141,7 @@
     background-color: rgb(216, 37, 192);
     margin-top: 5px;
 }
-.comment_area, .page_area{
+.comment_area{
     background-color: rgb(250, 250, 250);
     height: 50px;
     width: 260px;
@@ -189,7 +203,7 @@
     height: 160px;
 }
 
-.topic_btn, .vote_btn, .SignUp_btn, .lucky_btn, .page_btn, .comment_btn{
+.topic_btn, .vote_btn, .SignUp_btn, .lucky_btn, .lucky_close_btn, .signuplucky_btn, .page_btn, .comment_btn{
     border:2px solid;
     border-radius:25px;
     width: 50px;
@@ -201,4 +215,32 @@
 }
 .getmsg{
     overflow: scroll;
+}
+
+#setdata{
+            
+    display: none;           
+    position: relative;
+    z-index:99999;           
+    left:10%;           
+    top:10%;           
+    width:250px;           
+    height:150px;           
+    background-color:rgb(10, 218, 233);          
+    text-align: center;           
+}         
+.lucky_close_btn{
+    position: absolute;
+    left: 60%;
+    top:75%;
+}  
+.signuplucky_btn{
+    position: absolute;
+    left: 20%;
+    top:75%;
+} 
+.table{
+    position: absolute;
+    left: 15%;
+    top: 15%;
 }

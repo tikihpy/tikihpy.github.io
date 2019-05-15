@@ -236,6 +236,12 @@ window.player = player;
     var commentPage = Mudu.Room.Comment.GetPage()
     console.log('返回评论页：',commentPage);
 
+    var description = document.createElement('span');
+    description.setAttribute('class','number');
+    var desctext = document.createTextNode('页面总数：'+commentPage + '页');
+    description.appendChild(desctext);
+    document.getElementsByClassName('allpage')[0].appendChild(description);
+
 
     Mudu.Room.Comment.Send(
         // 要发送的评论文本，类型为string
@@ -266,6 +272,8 @@ window.player = player;
         if (response.status === 'n'){
           console.log('获取评论失败')
         }
+
+
       }
     )
 
@@ -352,53 +360,36 @@ window.player = player;
 
 
     // 抽奖组件
-    Mudu.Room.LuckyDraw.Get(function (response) {
+    Mudu.Room.LuckyDraw.Get(
+      function (response) {
       response = JSON.parse(response)
       if (response.status === 'y') {
-        console.log('获取成功，数据为：', response.data)
+        console.log('抽奖获取成功，数据为：', response.data);
       }
       if (response.status === 'n') {
-        console.log('获取失败')
+        console.log('抽奖获取失败')
       }
-    })
+      var lucky = document.getElementById('lucky_award_name')
+      var luckytime = document.getElementById('lucky_deadline')
+      lucky.innerHTML=response.data.lucky_draw.award_name;
+      luckytime.innerHTML=response.data.lucky_draw.deadline;
 
 
 
+    }
 
-    Mudu.Room.LuckyDraw.SignUp(
-      {
-        // 观众名，类型为string
-        userName: 'xiaobaitu23',
     
-        // 抽奖唯一凭证，类型为string，推荐使用手机号作为唯一凭证
-        voucher: '13155818359',
-      },
-    
-      // 回调函数，参数为response
-      function (response) {
-        response = JSON.parse(response)
-        if (response.status === 'y') {
-          console.log('抽奖报名成功')
-        }
-        if (response.status === 'n') {
-          console.log('抽奖报名失败')
-        }
-      }
     )
-
-
-
-
 
     Mudu.Room.LuckyDraw.Result(
       // 回调函数，参数为response对象
       function (response) {
         response = JSON.parse(response)
         if (response.status === 'y') {
-          console.log('获取成功，数据为：', response.data)
+          console.log('抽奖结果获取成功，数据为：', response.data)
         }
         if (response.status === 'n') {
-          console.log('获取失败')
+          console.log('抽奖结果获取失败')
         }
       }
     )
@@ -429,11 +420,11 @@ window.player = player;
 function sendCmt() {
   var value = document.getElementsByClassName('comment_area')[0].value;
   
+  
   Mudu.Room.Comment.Send(
     // 要发送的评论文本，类型为string
     value || 'neirongweikong',
 
-  
     // 发送完成的回调函数，参数为response对象
     function (response) {
       response = JSON.parse(response)
@@ -592,3 +583,50 @@ function live(){
 
   window.player = player;
 }
+
+// // 重新获取最新总页数
+// function getallpage(){
+//   var commentPage = Mudu.Room.Comment.GetPage()
+//   console.log('返回评论页：',commentPage);
+//   // document.getElementsByClassName("number").innerHTML = commentPage;
+// }
+
+
+//抽奖报名弹窗
+function OpenDiv(){       
+  document.getElementById("setdata").style.display="block"; 
+}
+  
+  // 给div层中的关闭添加onclick事件：
+function CloseDiv(){ 
+document.getElementById("setdata").style.display="none";
+}
+
+//添加抽奖报名信息
+function signuplucky(){
+
+    var uname = document.getElementsByClassName('uname')[0].value;
+    var voucher = document.getElementsByClassName('phone')[0].value;
+    Mudu.Room.LuckyDraw.SignUp(
+      {
+        // 观众名，类型为string
+        userName: uname,
+    
+        // 抽奖唯一凭证，类型为string，推荐使用手机号作为唯一凭证
+        voucher: voucher,
+      },
+    
+      // 回调函数，参数为response
+      function (response) {
+        response = JSON.parse(response)
+        if (response.status === 'y') {
+          console.log('抽奖报名成功')
+        }
+        if (response.status === 'n') {
+          console.log('抽奖报名失败')
+        }
+
+        
+      }
+    )
+  }

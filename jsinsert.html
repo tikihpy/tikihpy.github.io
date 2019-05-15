@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+        div {
+        border:solid 1px #ff0000;
+        }
+    </style>
+    <script >
+        window.onload = function () {
+             
+            var vtop = "js插入上面";
+            var vcenter = "js中插入";
+            var vbottom = "js插入下面";
+            var vcurrent = document.getElementById("1");
+            //上面
+            var newNodeTop = document.createElement("div");
+            newNodeTop.innerHTML = vtop;
+            vcurrent.parentNode.insertBefore(newNodeTop, vcurrent);
+            //中间
+            var newNodeCenter = document.createElement("div");
+            newNodeCenter.innerHTML = vcenter;
+            vcurrent.appendChild(newNodeCenter);
+            //下面
+            var newNodeBottom = document.createElement("div");
+            newNodeBottom.innerHTML = vbottom;
+            vcurrent.parentNode.insertBefore(newNodeBottom, vcurrent.nextSibling)
+ 
+        }
+    </script>
+</head>
+<body>
+    <div id="1">
+        <span >324324</span>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>shopinglist</title>
+    <style>
+    #div1{
+            
+        display: none;           
+        position: absolute;           
+        left:50%;           
+        top:50%;           
+        width:250px;           
+        height:150px;           
+        background-color:gray;          
+        text-align: center;           
+        }
+        
+        #open{            
+        position: absolute;           
+        top:50%;           
+        left:50%;          
+        width:100px;           
+        height:50px;           
+        }            
+    </style>
+</head>
+
+<body>
+
+    <div id="div1">
+    
+    <table>
+    
+    <tr><td>账号</td><td><input type="text"></td></tr>
+    
+    <tr><td>密码</td><td><input type="text"></td></tr>
+    
+    </table>
+    
+    <a href="javascript:CloseDiv();">关闭</a>
+    
+    </div>
+    
+    <input type="button" value="打开" onclick="javascript:OpenDiv();" id="open">
+
+<script>
+
+        function OpenDiv(){
+        
+        document.getElementById("div1").style.display="block";
+        
+        document.getElementById("open").style.display="none";
+        
+        }
+        
+        // 给div层中的关闭添加onclick事件：
+        
+        function CloseDiv(){
+        
+        document.getElementById("div1").style.display="none";
+        
+        document.getElementById("open").style.display="block";
+        
+        }
+            
+ </script>      
+</body>
+</html>   

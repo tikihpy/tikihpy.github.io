@@ -61,13 +61,17 @@
                 <div class="show-history">
                     <ol reversed class="comments_history" ></ol>
                     <div class="comments">
-                        <textarea class="comment_area"></textarea>
+                        <textarea class="comment_area" onclick="clear()"></textarea>
                         <button class="comment_btn" onclick="sendCmt()">评 论</button>
                     </div>
                 </div>
                 <div class=" check-page">
                     <div class = 'msg-page'>
                             <ol reversed class="check_history" ></ol>
+                    </div>
+                    <!-- <button class="allpage_btn" onclick="getallpage()">获 取</button> -->
+                    <div class='allpage'>
+                        <!-- 总页数：<span class="number"></span> -->
                     </div>
                     <div class="page">
                         <textarea class="page_area"></textarea>
@@ -86,7 +90,15 @@
                     <div class="luckyDrawWrap">
                         <p>奖项：<span id="lucky_award_name"></span></p>
                         <p>截止时间：<span id="lucky_deadline"></span></p>  
-                        <button class="lucky_btn">抽 奖</button> 
+                        <button class="lucky_btn" onclick="OpenDiv()">抽 奖</button> 
+                        <div id="setdata">
+                            <table class='table'> 
+                            <tr><td>昵称</td><td><input class = 'uname' type="text"></td></tr>  
+                            <tr><td>手机</td><td><input class = 'phone' type="text"></td></tr> 
+                            </table>
+                            <button class="lucky_close_btn" onclick="CloseDiv()">关 闭</button>
+                            <button class="signuplucky_btn" onclick="signuplucky()">提 交</button>
+                        </div>
                     </div>
     
                 <!-- 报名组件 -->
