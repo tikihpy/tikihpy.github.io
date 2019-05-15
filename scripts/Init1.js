@@ -52,6 +52,46 @@ Mudu.Init(
     description.appendChild(desctext);
     document.getElementsByClassName('app_header')[0].appendChild(description);
 
+    // 返回直播间视频地址列表，类型为array
+    var roomPlayAddr = Mudu.Room.GetPlayList()
+    console.log('直播间视频地址列表'+roomPlayAddr);
+
+    // 返回视频回看配置
+    var trailer = Mudu.Room.GetTrailer()
+    console.log('视频回看配置'+trailer);
+
+    // 返回直播间自定义菜单, 类型为Array
+    var menus = Mudu.Room.GetMenus()
+    console.log('直播间自定义菜单'+menus);
+
+    // 返回直播间自定义广告栏, 类型为Array
+    var ads = Mudu.Room.GetBanners();
+    console.log('直播间自定义广告栏'+ads);
+
+    // 返回直播间主题名称, 类型为string： 目前有两个值(default, tech)
+    var activeTheme = Mudu.Room.GetActiveTheme()
+    console.log('直播间主题名称'+activeTheme);
+
+    // 返回直播间主题配置，类型为Array
+    var themes = Mudu.Room.GetThemes()
+    console.log('直播间主题配置'+themes);
+
+    // Room.StreamEvent事件会在直播流状态改变时(通常是后台开始直播或者关闭直播)被触发
+    Mudu.MsgBus.On(
+      // 事件名，值为Room.StreamEvent
+      'Room.StreamEvent',
+  
+      // 事件处理函数，参数类型为object
+      function (data) {
+          data = JSON.parse(data)
+  
+          var msg = data.event == 1 ? '开始直播' : '停止直播'
+          console.log(msg)
+      }
+  )
+
+
+
  var player = new Mudu.Player(
   {
     // 必须，播放器容器ID，播放器会被添加到该DOM元素中
@@ -417,6 +457,15 @@ function sendCmt() {
     }
   )
 }
+// 清空评论输入框内容
+function clearcomment(){
+  document.getElementsByClassName('comment_area')[0].value='';
+}
+
+
+
+
+
 
 
 // 获取指定评论页数
@@ -462,6 +511,12 @@ function getPage(){
     }
   )
 }
+
+// 清空页面输入框内容
+function clearpage(){
+  document.getElementsByClassName('page_area')[0].value='';
+}
+
 //切换视频
 function switchVedio() {
       
@@ -648,13 +703,14 @@ document.getElementsByClassName("resultpage")[0].style.display="none";
 document.getElementsByClassName('ollist')[0].innerHTML='';
 }
 
-
-  Mudu.MsgBus.On(
+Mudu.MsgBus.On(
     // 事件名，值为LuckyDraw.Open
     "LuckyDraw.Open",
   
     // 事件处理函数
     function (response) {
       var response = JSON.parse(response)
-      console.log('开奖啦')
+      console.log('开奖啦');
+      console.log(response);
+      alert('开奖了！！！请点击【结果】按钮获取获奖名单！！！！！');
     })

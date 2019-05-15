@@ -61,8 +61,8 @@
                 <div class="show-history">
                     <ol reversed class="comments_history" ></ol>
                     <div class="comments">
-                        <textarea class="comment_area" onclick="clear()"></textarea>
-                        <button class="comment_btn" onclick="sendCmt()">评 论</button>
+                        <textarea class="comment_area" ></textarea>
+                        <button class="comment_btn" onclick="sendCmt();clearcomment()">评 论</button>
                     </div>
                 </div>
                 <div class=" check-page">
@@ -75,7 +75,7 @@
                     </div>
                     <div class="page">
                         <textarea class="page_area"></textarea>
-                        <button class="page_btn" onclick="getPage()">页 数</button>
+                        <button class="page_btn" onclick="getPage();clearpage()">页 数</button>
                     </div>
 
                 </div>
@@ -106,7 +106,8 @@
                             <!-- <ol class='luckers'>
 
                             </ol> -->
-                            </div>   
+                            </div>
+                            
                         </div>
                     </div>
     
