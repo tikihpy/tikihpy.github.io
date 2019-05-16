@@ -203,11 +203,12 @@
     height: 160px;
 }
 
-.topic_btn, .vote_btn, .SignUp_btn, .lucky_btn, .luckyresult_btn, .lucky_close_btn, .result_close_btn, .signuplucky_btn, .page_btn, .comment_btn{
+.topic_btn, .vote_btn, .SignUp_btn, .lucky_btn, .luckyresult_btn, .lucky_close_btn, .result_close_btn, .signuplucky_btn, .signup-close, .signsubmit-btn, .page_btn, .comment_btn{
     border:2px solid;
     border-radius:25px;
     width: 50px;
 }
+
 .getavatar{
     widows: 20px;
     height: 20px;
@@ -270,4 +271,41 @@
     position: relative;
     left: 75%;
     margin-top: 8px;
+}
+.signup-all{
+    background-color: rgb(240, 236, 21);
+    position: relative;
+    left: -200%;
+    top: 55%;
+    width: 600px;
+    height: 800px;
+    z-index:99999;
+    display: none;
+}
+.signup-column-box{
+    position: relative;
+    left: 5%;
+    padding: 10px;
+    line-height: 90px;
+}
+.listdiv{
+    position: relative;
+    /* left: 1%; */
+    margin: 10px;
+    width: 90%;
+    line-height: 20px;
+    background-color: rgb(226, 43, 83);
+
+}
+.signup-close{
+    position: relative;
+    left: 90%;
+    margin-top: 8px;
+}
+.input-content-radio{
+    width: 20px;
+}
+.signsubmit-btn{
+    position: relative;
+    left: 40%;
 }

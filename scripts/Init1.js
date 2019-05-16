@@ -12,7 +12,7 @@ Mudu.Init(
 
     Mudu.Room.User.GetUser()
     // 需要在sdk 初始化成功后才能使用
-    Mudu.Room.User.Assign('name', 'https://static.mudu.tv/index/avatar.png', '66666', function(){
+    Mudu.Room.User.Assign('=。=【WebSDK】', 'https://static.mudu.tv/index/avatar.png', '66666', function(){
 
     })
     // 直播间
@@ -369,9 +369,6 @@ window.player = player;
         // console.log('收到新的弹幕，内容为: ', barrage.text)
         console.log('收到新的弹幕，内容为: ', barrage)
 
-
-        var pli = document.getElementsByClassName('barrage');
-
         var description = document.createElement('p');
         description.setAttribute('class','content');
         var desctext = document.createTextNode(barrage.text);
@@ -413,27 +410,344 @@ window.player = player;
       var luckytime = document.getElementById('lucky_deadline')
       lucky.innerHTML=response.data.lucky_draw.award_name;
       luckytime.innerHTML=response.data.lucky_draw.deadline;
+    }   
+    )   
 
 
 
-    }
-
-    
-    )
-
-
-
-
-
-   
-      
+    // 返回null获取报名问卷配置, 类型为object
       var signupConfig = Mudu.Room.Signup.GetConfig()
       console.log('报名问卷数据：',signupConfig);
+      console.log(signupConfig.columns);
+      for(var i=0;i<signupConfig.columns.length;i++){
+        console.log(signupConfig.columns[i].type);
+
+        if(signupConfig.columns[i].type=="nickname"){
+          console.log('判断打印nickname');
+
+          
+          var listdiv = document.createElement('div');
+          listdiv.setAttribute('class','listdiv');
+          var description = document.createElement('p');
+          description.setAttribute('class','column-content');
+          var desctext = document.createTextNode(signupConfig.columns[i].name);
+          listdiv.appendChild(description);
+          description.appendChild(desctext);
+          document.getElementsByClassName('signup-column-box')[0].appendChild(listdiv);
+
+          if (signupConfig.columns[i].type=="nickname"){
+          var inputtext = document.createElement('input');
+          description.setAttribute('class','input-content');
+          listdiv.appendChild(inputtext);
+          }else if(signupConfig.columns[i].type=="phone"){
+            var inputtext = document.createElement('input');
+            description.setAttribute('class','input-content');
+            listdiv.appendChild(inputtext);
+              }else if(signupConfig.columns[i].type=="input"){
+                var inputtext = document.createElement('input');
+                description.setAttribute('class','input-content');
+                listdiv.appendChild(inputtext);
+                }else if(signupConfig.columns[i].type=="textarea"){
+                  var inputtext = document.createElement('input');
+                  description.setAttribute('class','input-content');
+                  listdiv.appendChild(inputtext);
+                  }else if(signupConfig.columns[i].type=="question"){
+                    var inputtext = document.createElement('input');
+                    description.setAttribute('class','input-content');
+                    listdiv.appendChild(inputtext);
+                    }else if(signupConfig.columns[i].type=="questionAnswer"){
+                      var inputtext = document.createElement('input');
+                      description.setAttribute('class','input-content');
+                      listdiv.appendChild(inputtext);
+                      }
+
+
+
+
+
+
+        }else if(signupConfig.columns[i].type=="phone"){
+          console.log('判断打印phone');
+
+          var listdiv = document.createElement('div');
+          listdiv.setAttribute('class','listdiv');
+          var description = document.createElement('p');
+          description.setAttribute('class','column-content');
+          var desctext = document.createTextNode(signupConfig.columns[i].name);
+          listdiv.appendChild(description);
+          description.appendChild(desctext);
+          document.getElementsByClassName('signup-column-box')[0].appendChild(listdiv);
+
+          if (signupConfig.columns[i].type=="nickname"){
+            var inputtext = document.createElement('input');
+            description.setAttribute('class','input-content');
+            listdiv.appendChild(inputtext);
+            }else if(signupConfig.columns[i].type=="phone"){
+              var inputtext = document.createElement('input');
+              description.setAttribute('class','input-content');
+              listdiv.appendChild(inputtext);
+                }else if(signupConfig.columns[i].type=="input"){
+                  var inputtext = document.createElement('input');
+                  description.setAttribute('class','input-content');
+                  listdiv.appendChild(inputtext);
+                  }else if(signupConfig.columns[i].type=="textarea"){
+                    var inputtext = document.createElement('input');
+                    description.setAttribute('class','input-content');
+                    listdiv.appendChild(inputtext);
+                    }else if(signupConfig.columns[i].type=="question"){
+                      var inputtext = document.createElement('input');
+                      description.setAttribute('class','input-content');
+                      listdiv.appendChild(inputtext);
+                      }else if(signupConfig.columns[i].type=="questionAnswer"){
+                        var inputtext = document.createElement('input');
+                        description.setAttribute('class','input-content');
+                        listdiv.appendChild(inputtext);
+                        }
+
+
+        }else if(signupConfig.columns[i].type=="input"){
+          console.log('判断打印input');
+
+          var listdiv = document.createElement('div');
+          listdiv.setAttribute('class','listdiv');
+          var description = document.createElement('p');
+          description.setAttribute('class','column-content');
+          var desctext = document.createTextNode(signupConfig.columns[i].name);
+          listdiv.appendChild(description);
+          description.appendChild(desctext);
+          document.getElementsByClassName('signup-column-box')[0].appendChild(listdiv);
+
+          if (signupConfig.columns[i].type=="nickname"){
+            var inputtext = document.createElement('input');
+            inputtext.setAttribute('class','input-content');
+            listdiv.appendChild(inputtext);
+            }else if(signupConfig.columns[i].type=="phone"){
+              var inputtext = document.createElement('input');
+              inputtext.setAttribute('class','input-content');
+              listdiv.appendChild(inputtext);
+                }else if(signupConfig.columns[i].type=="input"){
+                  var inputtext = document.createElement('input');
+                  inputtext.setAttribute('class','input-content');
+                  listdiv.appendChild(inputtext);
+                  }else if(signupConfig.columns[i].type=="textarea"){
+                    var inputtext = document.createElement('input');
+                    inputtext.setAttribute('class','input-content');
+                    listdiv.appendChild(inputtext);
+                    }else if(signupConfig.columns[i].type=="question"){
+                      var inputtext = document.createElement('input');
+                      inputtext.setAttribute('class','input-content');
+                      listdiv.appendChild(inputtext);
+                      }else if(signupConfig.columns[i].type=="questionAnswer"){
+                        var inputtext = document.createElement('input');
+                        inputtext.setAttribute('class','input-content');
+                        listdiv.appendChild(inputtext);
+                        }
+
+
+        }else if(signupConfig.columns[i].type=="textarea"){
+          console.log('判断打印textarea');
+
+          var listdiv = document.createElement('div');
+          listdiv.setAttribute('class','listdiv');
+          var description = document.createElement('p');
+          description.setAttribute('class','column-content');
+          var desctext = document.createTextNode(signupConfig.columns[i].name);
+          listdiv.appendChild(description);
+          description.appendChild(desctext);
+          document.getElementsByClassName('signup-column-box')[0].appendChild(listdiv);
+
+          if (signupConfig.columns[i].type=="nickname"){
+            var inputtext = document.createElement('input');
+            inputtext.setAttribute('class','input-content');
+            listdiv.appendChild(inputtext);
+            }else if(signupConfig.columns[i].type=="phone"){
+              var inputtext = document.createElement('input');
+              inputtext.setAttribute('class','input-content');
+              listdiv.appendChild(inputtext);
+                }else if(signupConfig.columns[i].type=="input"){
+                  var inputtext = document.createElement('input');
+                  inputtext.setAttribute('class','input-content');
+                  listdiv.appendChild(inputtext);
+                  }else if(signupConfig.columns[i].type=="textarea"){
+                    var inputtext = document.createElement('input');
+                    inputtext.setAttribute('class','input-content');
+                    listdiv.appendChild(inputtext);
+                    }else if(signupConfig.columns[i].type=="question"){
+                      var inputtext = document.createElement('input');
+                      inputtext.setAttribute('class','input-content');
+                      listdiv.appendChild(inputtext);
+                      }else if(signupConfig.columns[i].type=="questionAnswer"){
+                        var inputtext = document.createElement('input');
+                        inputtext.setAttribute('class','input-content');
+                        listdiv.appendChild(inputtext);
+                        }
+
+
+        }else if(signupConfig.columns[i].type=="question"){
+          console.log('判断打印question');
+
+          var listdiv = document.createElement('ul');
+          listdiv.setAttribute('class','listdiv');
+          var description = document.createElement('li');
+          description.setAttribute('class','column-content');
+          var desctext = document.createTextNode(signupConfig.columns[i].name);
+          listdiv.appendChild(description);
+          description.appendChild(desctext);
+          document.getElementsByClassName('signup-column-box')[0].appendChild(listdiv);
+
+          if (signupConfig.columns[i].type=="nickname"){
+            var inputtext = document.createElement('input');
+            inputtext.setAttribute('class','input-content');
+            listdiv.appendChild(inputtext);
+            }else if(signupConfig.columns[i].type=="phone"){
+              var inputtext = document.createElement('input');
+              inputtext.setAttribute('class','input-content');
+              listdiv.appendChild(inputtext);
+                }else if(signupConfig.columns[i].type=="input"){
+                  var inputtext = document.createElement('input');
+                  inputtext.setAttribute('class','input-content');
+                  listdiv.appendChild(inputtext);
+                  }else if(signupConfig.columns[i].type=="textarea"){
+                    var inputtext = document.createElement('input');
+                    inputtext.setAttribute('class','input-content');
+                    listdiv.appendChild(inputtext);
+                    }else if(signupConfig.columns[i].type=="question"){
+
+                      var multi_select =signupConfig.columns[i].multi_select
+                      console.log(multi_select);
+                    if (multi_select==1){
+                      //单选项
+                      console.log(signupConfig.columns[i].options);
+                      var options = signupConfig.columns[i].options;
+                      // 遍历返回选项
+                      for(var x in options){
+                        // 获取返回选项对象及属性
+                        var option = x + ':' + options[x];
+                        console.log(option);
+                        //添加选项栏
+                        var opt=document.createElement('div');
+                        opt.setAttribute('class','opt');
+                        // 添加选项按钮
+                        var radio =document.createElement('span');
+                        var inputtext = document.createElement('input');
+                        inputtext.setAttribute('class','input-content-radio');
+                        inputtext.setAttribute('type','radio');
+                        // 添加name属性，name 属性定义的单选按钮组 (具有相同名称的单选按钮 属于同一组)
+                        inputtext.setAttribute('name','radio-'+i);
+                        radio.appendChild(inputtext);
+                        opt.appendChild(radio);
+                        // 添加选项内容
+                        var inputoption = document.createElement('span');
+                        inputoption.setAttribute('class','inputoption');
+                        var optiondata = document.createTextNode(option);
+                        inputoption.appendChild(optiondata);
+                        opt.appendChild(inputoption);
+                        // 添加选项栏目到上级
+                        listdiv.appendChild(opt);
+
+                       }
+                    }else if (multi_select>1){
+                      // 多选
+                      for(var x in options){
+                        // 获取返回选项对象及属性
+                        var option = x + ':' + options[x];
+                        console.log(option);
+                        //添加选项栏
+                        var opt=document.createElement('div');
+                        opt.setAttribute('class','opt');
+                        // 添加选项按钮
+                        var radio =document.createElement('span');
+                        var inputtext = document.createElement('input');
+                        inputtext.setAttribute('class','input-content-radio');
+                        inputtext.setAttribute('type','checkbox');
+                        // 添加name属性，name 属性定义的单选按钮组 (具有相同名称的单选按钮 属于同一组)
+                        inputtext.setAttribute('name','radio-'+i);
+                        radio.appendChild(inputtext);
+                        opt.appendChild(radio);
+                        // 添加选项内容
+                        var inputoption = document.createElement('span');
+                        inputoption.setAttribute('class','inputoption');
+                        var optiondata = document.createTextNode(option);
+                        inputoption.appendChild(optiondata);
+                        opt.appendChild(inputoption);
+                        // 添加选项栏目到上级
+                        listdiv.appendChild(opt);
+
+                       }
+                    }
+
+                    // 添加允许填写答案框
+                    var allowfill =signupConfig.columns[i].allow_fill_by_self;
+                    console.log(allowfill);
+                    if(allowfill == true){
+                      var optallowfill=document.createElement('div');
+                      optallowfill.setAttribute('class','optallowfill');
+                      var optallowfillinput = document.createElement('input');
+                      optallowfillinput.setAttribute('class','input-content');
+                      optallowfill.appendChild(optallowfillinput);
+                      listdiv.appendChild(optallowfill);
+                    }
+                      }else if(signupConfig.columns[i].type=="questionAnswer"){
+                        var inputtext = document.createElement('input');
+                        inputtext.setAttribute('class','input-content');
+                        listdiv.appendChild(inputtext);
+                        }
+
+
+        }else if(signupConfig.columns[i].type=="questionAnswer"){
+          console.log('判断打印questionAnswer');
+
+          var listdiv = document.createElement('ul');
+          listdiv.setAttribute('class','listdiv');
+          var description = document.createElement('li');
+          description.setAttribute('class','column-content');
+          var desctext = document.createTextNode(signupConfig.columns[i].name);
+          listdiv.appendChild(description);
+          description.appendChild(desctext);
+          document.getElementsByClassName('signup-column-box')[0].appendChild(listdiv);
+
+          if (signupConfig.columns[i].type=="nickname"){
+            var inputtext = document.createElement('input');
+            inputtext.setAttribute('class','input-content');
+            listdiv.appendChild(inputtext);
+            }else if(signupConfig.columns[i].type=="phone"){
+              var inputtext = document.createElement('input');
+              inputtext.setAttribute('class','input-content');
+              listdiv.appendChild(inputtext);
+                }else if(signupConfig.columns[i].type=="input"){
+                  var inputtext = document.createElement('input');
+                  inputtext.setAttribute('class','input-content');
+                  listdiv.appendChild(inputtext);
+                  }else if(signupConfig.columns[i].type=="textarea"){
+                    var inputtext = document.createElement('input');
+                    inputtext.setAttribute('class','input-content');
+                    listdiv.appendChild(inputtext);
+                    }else if(signupConfig.columns[i].type=="question"){
+                      var inputtext = document.createElement('input');
+                      inputtext.setAttribute('class','input-content');
+                      listdiv.appendChild(inputtext);
+                      }else if(signupConfig.columns[i].type=="questionAnswer"){
+                        var inputtext = document.createElement('input');
+                        inputtext.setAttribute('class','input-content');
+                        listdiv.appendChild(inputtext);
+                        }
+        }
+ 
+      }
+      // 添加报名提交按钮
+        var signsubmit = document.createElement('button');
+        signsubmit.setAttribute('class','signsubmit-btn');
+        // signsubmit.setAttribute('onclick','signclose();sendsigndata()');
+        var desctext = document.createTextNode('提交');
+        signsubmit.appendChild(desctext);
+        document.getElementsByClassName('signup-column-box')[0].appendChild(signsubmit);
+
+
+
 
 
 
   }
-  
 );
 
 // 评论绑定事件
@@ -619,14 +933,6 @@ function live(){
   window.player = player;
 }
 
-// // 重新获取最新总页数
-// function getallpage(){
-//   var commentPage = Mudu.Room.Comment.GetPage()
-//   console.log('返回评论页：',commentPage);
-//   // document.getElementsByClassName("number").innerHTML = commentPage;
-// }
-
-
 //抽奖报名弹窗
 function OpenDiv(){       
   document.getElementById("setdata").style.display="block"; 
@@ -714,3 +1020,74 @@ Mudu.MsgBus.On(
       console.log(response);
       alert('开奖了！！！请点击【结果】按钮获取获奖名单！！！！！');
     })
+
+
+
+
+function singupwj(){
+// 返回null获取报名问卷配置, 类型为object
+var signupConfig = Mudu.Room.Signup.GetConfig()
+console.log('报名问卷数据：',signupConfig);
+console.log(signupConfig.columns);
+// 第一个参数为手机号，第二个参数为发送成功或失败的回调函数
+Mudu.Room.Signup.SendSms(
+18099998888,
+function (response) {
+    response = JSON.parse(response)
+    console.log(response)
+}
+)
+
+// 第一个参数为一个对象, code为短信验证码(可不填), columns为question及其答案数组.
+Mudu.Room.Signup.Submit(
+{code: 8909, columns: [
+    {type: 'phone', 'name': '手机号', text: '18099998888'},
+    {type: 'nickname', 'name': '姓名', text: '目睹君'},
+    {type: 'question', 'name': '你喜欢听哪些歌手', selects: ['A', 'B', 'D'], text: 'Coldplay' }
+]},
+function (response) {
+    response = JSON.parse(response)
+    console.log(response)
+}
+)
+
+}
+
+//榜单报名问卷弹窗开启关闭
+function signopen(){
+  document.getElementsByClassName('signup-all')[0].style.display="block";
+}
+function signclose(){
+  document.getElementsByClassName('signup-all')[0].style.display="none";
+}
+
+
+// function sendsigndata(){
+
+//     // 第一个参数为手机号，第二个参数为发送成功或失败的回调函数
+//     Mudu.Room.Signup.SendSms(
+//       18099998888,
+//       function (response) {
+//           response = JSON.parse(response)
+//           console.log(response)
+//       }
+//     )
+
+
+
+
+//   // 第一个参数为一个对象, code为短信验证码(可不填), columns为question及其答案数组.
+// Mudu.Room.Signup.Submit(
+//   {code: 8909, 
+//     columns: [
+//       {type: 'phone', 'name': '手机号', text: '18099998888'},
+//       {type: 'nickname', 'name': '姓名', text: '目睹君'},
+//       {type: 'question', 'name': '你喜欢听哪些歌手', selects: ['A', 'B', 'D'], text: 'Coldplay' }
+//     ]
+//   },
+//   function (response) {
+//       response = JSON.parse(response)
+//       console.log(response)
+//   }
+// )
+// }

@@ -69,7 +69,6 @@
                     <div class = 'msg-page'>
                             <ol reversed class="check_history" ></ol>
                     </div>
-                    <!-- <button class="allpage_btn" onclick="getallpage()">获 取</button> -->
                     <div class='allpage'>
                         <!-- 总页数：<span class="number"></span> -->
                     </div>
@@ -116,9 +115,20 @@
                             <p class="signup_blank">
                                 用户名：<input id="uname"  type="text" value="" /> <br/>
                                 手 机：<input id="voucher"  type="text" value="" />
-                                <button class="SignUp_btn">报 名</button>
                             </p>
+                            <button class="SignUp_btn" onclick="signopen()">报 名</button>
+                            <div class='signup-all'>
+                                <button class="signup-close" onclick="signclose()">关 闭</button>
+                                <div class='signup-content-box'>
+                                    <div class='signup-column-box'>
+
+                                    </div>
+
+                                </div>
+                                
+                            </div>
                     </div>
+
                     <!-- 投票组件 -->
                     <div class='vote'>
                         <button class="vote_btn">投 票</button>
