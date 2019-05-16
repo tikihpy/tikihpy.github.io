@@ -486,6 +486,65 @@ window.player = player;
               var inputtext = document.createElement('input');
               description.setAttribute('class','input-content');
               listdiv.appendChild(inputtext);
+
+
+              
+
+
+
+
+
+
+              // 是否发送验证码
+              var sendsms = signupConfig.send_sms;
+              console.log(sendsms);
+              
+              if(sendsms == 1){
+              // 点击发送验证码按钮
+              var outdiv = document.createElement('div');
+              outdiv.setAttribute('class','outdiv');
+              var yzmbutton = document.createElement('button');
+              yzmbutton.setAttribute('class','sendsms-btn');
+              yzmbutton.setAttribute('onclick','sendsigndata()');
+              var desctext = document.createTextNode('发送验证码');
+              outdiv.appendChild(yzmbutton);
+              listdiv.appendChild(outdiv);
+              yzmbutton.appendChild(desctext);
+
+              // 验证码输入
+              var outdiv = document.createElement('div');
+              outdiv.setAttribute('class','outdiv');
+              
+              var smstag = document.createElement('p');
+              smstag.setAttribute('class','sendsms');
+              var desctext = document.createTextNode('验证码');
+              outdiv.appendChild(smstag);
+              listdiv.appendChild(outdiv);
+              smstag.appendChild(desctext);
+
+              var outdiv = document.createElement('div');
+              outdiv.setAttribute('class','outdiv');
+
+              var smsinput = document.createElement('input');
+              smsinput.setAttribute('class','smsinput');
+              outdiv.appendChild(smsinput);
+              listdiv.appendChild(outdiv);
+
+              }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 }else if(signupConfig.columns[i].type=="input"){
                   var inputtext = document.createElement('input');
                   description.setAttribute('class','input-content');
@@ -737,7 +796,7 @@ window.player = player;
       // 添加报名提交按钮
         var signsubmit = document.createElement('button');
         signsubmit.setAttribute('class','signsubmit-btn');
-        // signsubmit.setAttribute('onclick','signclose();sendsigndata()');
+        // signsubmit.setAttribute('onclick','signclose()');
         var desctext = document.createTextNode('提交');
         signsubmit.appendChild(desctext);
         document.getElementsByClassName('signup-column-box')[0].appendChild(signsubmit);
@@ -1062,18 +1121,21 @@ function signclose(){
 }
 
 
-// function sendsigndata(){
+function sendsigndata(){
 
-//     // 第一个参数为手机号，第二个参数为发送成功或失败的回调函数
-//     Mudu.Room.Signup.SendSms(
-//       18099998888,
-//       function (response) {
-//           response = JSON.parse(response)
-//           console.log(response)
-//       }
-//     )
+  var value = document.getElementsByClassName('smsinput')[0].value;
 
 
+    // 第一个参数为手机号，第二个参数为发送成功或失败的回调函数
+    Mudu.Room.Signup.SendSms(
+      value,
+      function (response) {
+          response = JSON.parse(response)
+          console.log(response)
+      }
+    )
+
+  }
 
 
 //   // 第一个参数为一个对象, code为短信验证码(可不填), columns为question及其答案数组.
@@ -1090,4 +1152,3 @@ function signclose(){
 //       console.log(response)
 //   }
 // )
-// }

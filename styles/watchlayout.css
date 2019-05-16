@@ -275,10 +275,10 @@
 .signup-all{
     background-color: rgb(240, 236, 21);
     position: relative;
-    left: -200%;
+    left: -220%;
     top: 55%;
     width: 600px;
-    height: 800px;
+    /* height: 800px; */
     z-index:99999;
     display: none;
 }
@@ -308,4 +308,9 @@
 .signsubmit-btn{
     position: relative;
     left: 40%;
+}
+.sendsms-btn{
+    border:2px solid;
+    border-radius:25px;
+    width: 70px;
 }
