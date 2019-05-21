@@ -14,13 +14,18 @@
     <!-- https下请使用 <script>window.FETCHER_SERVER_URL = "wss://fetcher.mudu.tv";</script> -->
     <script src="//static.mudu.tv/fetcher/bundle.6d7aca164d2389e8bea6.js"></script>
     <!-- <script src="//static.mudu.tv/static/websdk/sdk.js"></script> -->
-    <script src= 'newscripts/2019050704sdk.js'></script>
+    <!-- 测试服SDK -->
+    <!-- <script src= 'newscripts/2019050704sdk.js'></script> -->
+    <!-- 线上SDK -->
+    <script src="//static.mudu.tv/static/websdk/sdk.js"></script>
     <script src='scripts/Init1.js'></script>
 
 
 
 </head>
 <body>
+
+    <div class="websdk-version" ></div>
     <!-- 直播间组件 -->
     <div class="app">
             <div class="app_header">
@@ -83,6 +88,21 @@
                   <!-- PPT组件 -->
                     <div class="ppt_wrap">
                         PPT <!-- <img id="ppt_content" src="https://static.mudu.tv/index/avatar.png" /> -->
+                        <!-- <button class="ppt-btn">PPT</button> -->
+                        <div class="ppt-box">
+                            <div class="ppt-content">
+                                <!-- <button class="pptclose-btn">ppt-off</button> -->
+                                <!-- <p class="pptadr">PPT图片地址</p>
+                                <p class="pptname">ppt名称</p>
+                                <p class="ppttotal">ppt总页数</p>
+                                <p class="pptcur">ppt所在页数</p>
+                                <p class="pptturn">是否允许用户翻页</p> -->
+                            </div>
+                            <div class="pptshow">
+                        
+                            </div>
+
+                        </div>
                     </div>
     
                 <!-- 抽奖组件 -->
@@ -131,7 +151,13 @@
 
                     <!-- 投票组件 -->
                     <div class='vote'>
-                        <button class="vote_btn">投 票</button>
+                        <!-- <button class="vote_btn">投 票</button> -->
+                        <div class="vote-box">
+                                <div class="vote-content">
+
+                                </div>
+                        </div>
+                        <div class='voteshow' ></div>
                     </div>
                  </div>
             </div>

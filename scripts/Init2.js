@@ -1,12 +1,9 @@
 
 Mudu.Init(
   // 线上频道id
-  185053,
+  // 185053,
   // 测试服频道ID
-  // 10003046,
-  // 10003171,
-  // 测试服子账号
-  // 10003145,
+  10003046,
 
 
   // 初始化完成的回调函数，无参数
@@ -288,113 +285,6 @@ window.player = player;
   
  }
 }
-
-// PPT组件
-
-// IsOpen 获取控制台是否开启显示PPT
-// 返回boolean, true为开启, false为关闭
-var isOpen = Mudu.Room.PPT.IsOpen()
-console.log('是否开启显示PPT:'+isOpen);
-
-if (isOpen==true){
-    var description = document.createElement('button');
-    description.setAttribute('class','ppt-btn');
-    description.setAttribute('onclick','openppt()');
-    var desctext = document.createTextNode('ppt-on');
-    description.appendChild(desctext);
-    document.getElementsByClassName('ppt_wrap')[0].appendChild(description);
-
-}
-
-
-// PPT.Changed事件会在控制台进行ppt翻页时触发
-Mudu.MsgBus.On('PPT.Changed', function (response) {
-    response = JSON.parse(response)
-    console.log(response)
-})
-
-
-// PPT.IsOpen事件会在控制台切换ppt“观看页显示”时被触发
-Mudu.MsgBus.On('PPT.IsOpen', function (response) {
-    response = JSON.parse(response)
-    console.log('观看页显示:'+response)
-})
-
-
-// PPT.AllowTurnPage事件会在控制台切换ppt“允许用户翻页”时被触发
-Mudu.MsgBus.On('PPT.AllowTurnPage', function (response) {
-    response = JSON.parse(response)
-    console.log('允许用户翻页:'+response)
-})
-
-// PPT.Doc.delete事件会在控制台删除当前ppt时被触发
-Mudu.MsgBus.On('PPT.Doc.delete', function () {
-    // 无参数
-    console.log('ppt被删了');
-    alert('ppt被删了');
-})
-
-// PPT.trailer.changed 事件会在播放器播放回看视频时, 当前视频节点上有ppt时被触发
-Mudu.MsgBus.On('PPT.trailer.changed', function (data) {
-    var ppt_url = data.currentUrl
-    console.log('当前视频节点的ppt图片地址是', ppt_url)
-})
-
-//投票组件
-
-Mudu.MsgBus.On(
-  // 事件名，值为Vote.Changed
-  "Vote.Changed",
-
-  // 事件处理函数
-  function (response) {
-    var response = JSON.parse(response)
-    console.log('投票状态改变');
-    console.log(response.data);
-  })
-
-
-
-
-
-
-  Mudu.Room.Vote.Get(function (response) {
-    response = JSON.parse(response)
-    if (response.status === 'y') {
-      console.log('获取成功，数据为：', response.data)
-
-
-
-      if(response.data.vote_status==1){
-
-        var description = document.createElement('button');
-        description.setAttribute('class','vote-btn');
-        description.setAttribute('onclick','openvote()');
-        var desctext = document.createTextNode('vote-on');
-        description.appendChild(desctext);
-        document.getElementsByClassName('vote')[0].appendChild(description);
-  
-  
-      }
-  
-  
-
-
-
-
-
-
-    }
-    if (response.status === 'n') {
-      console.log('获取失败')
-    }
-  })
-
-
-
-
-
-
     // 返回评论页数，类型为int
     var commentPage = Mudu.Room.Comment.GetPage()
     console.log('返回评论页：',commentPage);
@@ -560,11 +450,11 @@ Mudu.MsgBus.On(
 
           if (signupConfig.columns[i].type=="nickname"){
           var inputtext = document.createElement('input');
-          inputtext.setAttribute('class','nickname');
+          inputtext.setAttribute('class','input-content');
           listdiv.appendChild(inputtext);
           }else if(signupConfig.columns[i].type=="phone"){
             var inputtext = document.createElement('input');
-            inputtext.setAttribute('class','phone');
+            inputtext.setAttribute('class','input-content');
             listdiv.appendChild(inputtext);
               }else if(signupConfig.columns[i].type=="input"){
                 var inputtext = document.createElement('input');
@@ -572,15 +462,15 @@ Mudu.MsgBus.On(
                 listdiv.appendChild(inputtext);
                 }else if(signupConfig.columns[i].type=="textarea"){
                   var inputtext = document.createElement('input');
-                  inputtext.setAttribute('class','textarea');
+                  inputtext.setAttribute('class','input-content');
                   listdiv.appendChild(inputtext);
                   }else if(signupConfig.columns[i].type=="question"){
                     var inputtext = document.createElement('input');
-                    inputtext.setAttribute('class','question');
+                    inputtext.setAttribute('class','input-content');
                     listdiv.appendChild(inputtext);
                     }else if(signupConfig.columns[i].type=="questionAnswer"){
                       var inputtext = document.createElement('input');
-                      inputtext.setAttribute('class','questionAnswer');
+                      inputtext.setAttribute('class','input-content');
                       listdiv.appendChild(inputtext);
                       }
 
@@ -603,11 +493,11 @@ Mudu.MsgBus.On(
 
           if (signupConfig.columns[i].type=="nickname"){
             var inputtext = document.createElement('input');
-            inputtext.setAttribute('class','nickname');
+            inputtext.setAttribute('class','input-content');
             listdiv.appendChild(inputtext);
             }else if(signupConfig.columns[i].type=="phone"){
               var inputtext = document.createElement('input');
-              inputtext.setAttribute('class','phone');
+              inputtext.setAttribute('class','input-content');
               listdiv.appendChild(inputtext);
 
 
@@ -671,15 +561,15 @@ Mudu.MsgBus.On(
                   listdiv.appendChild(inputtext);
                   }else if(signupConfig.columns[i].type=="textarea"){
                     var inputtext = document.createElement('input');
-                    inputtext.setAttribute('class','textarea');
+                    inputtext.setAttribute('class','input-content');
                     listdiv.appendChild(inputtext);
                     }else if(signupConfig.columns[i].type=="question"){
                       var inputtext = document.createElement('input');
-                      inputtext.setAttribute('class','question');
+                      inputtext.setAttribute('class','input-content');
                       listdiv.appendChild(inputtext);
                       }else if(signupConfig.columns[i].type=="questionAnswer"){
                         var inputtext = document.createElement('input');
-                        inputtext.setAttribute('class','questionAnswer');
+                        inputtext.setAttribute('class','input-content');
                         listdiv.appendChild(inputtext);
                         }
 
@@ -698,11 +588,11 @@ Mudu.MsgBus.On(
 
           if (signupConfig.columns[i].type=="nickname"){
             var inputtext = document.createElement('input');
-            inputtext.setAttribute('class','nickname');
+            inputtext.setAttribute('class','input-content');
             listdiv.appendChild(inputtext);
             }else if(signupConfig.columns[i].type=="phone"){
               var inputtext = document.createElement('input');
-              inputtext.setAttribute('class','phone');
+              inputtext.setAttribute('class','input-content');
               listdiv.appendChild(inputtext);
                 }else if(signupConfig.columns[i].type=="input"){
                   var inputtext = document.createElement('input');
@@ -710,15 +600,15 @@ Mudu.MsgBus.On(
                   listdiv.appendChild(inputtext);
                   }else if(signupConfig.columns[i].type=="textarea"){
                     var inputtext = document.createElement('input');
-                    inputtext.setAttribute('class','textarea');
+                    inputtext.setAttribute('class','input-content');
                     listdiv.appendChild(inputtext);
                     }else if(signupConfig.columns[i].type=="question"){
                       var inputtext = document.createElement('input');
-                      inputtext.setAttribute('class','question');
+                      inputtext.setAttribute('class','input-content');
                       listdiv.appendChild(inputtext);
                       }else if(signupConfig.columns[i].type=="questionAnswer"){
                         var inputtext = document.createElement('input');
-                        inputtext.setAttribute('class','questionAnswer');
+                        inputtext.setAttribute('class','input-content');
                         listdiv.appendChild(inputtext);
                         }
 
@@ -737,11 +627,11 @@ Mudu.MsgBus.On(
 
           if (signupConfig.columns[i].type=="nickname"){
             var inputtext = document.createElement('input');
-            inputtext.setAttribute('class','nickname');
+            inputtext.setAttribute('class','input-content');
             listdiv.appendChild(inputtext);
             }else if(signupConfig.columns[i].type=="phone"){
               var inputtext = document.createElement('input');
-              inputtext.setAttribute('class','phone');
+              inputtext.setAttribute('class','input-content');
               listdiv.appendChild(inputtext);
                 }else if(signupConfig.columns[i].type=="input"){
                   var inputtext = document.createElement('input');
@@ -749,15 +639,15 @@ Mudu.MsgBus.On(
                   listdiv.appendChild(inputtext);
                   }else if(signupConfig.columns[i].type=="textarea"){
                     var inputtext = document.createElement('input');
-                    inputtext.setAttribute('class','textarea');
+                    inputtext.setAttribute('class','input-content');
                     listdiv.appendChild(inputtext);
                     }else if(signupConfig.columns[i].type=="question"){
                       var inputtext = document.createElement('input');
-                      inputtext.setAttribute('class','question');
+                      inputtext.setAttribute('class','input-content');
                       listdiv.appendChild(inputtext);
                       }else if(signupConfig.columns[i].type=="questionAnswer"){
                         var inputtext = document.createElement('input');
-                        inputtext.setAttribute('class','questionAnswer');
+                        inputtext.setAttribute('class','input-content');
                         listdiv.appendChild(inputtext);
                         }
 
@@ -776,11 +666,11 @@ Mudu.MsgBus.On(
 
           if (signupConfig.columns[i].type=="nickname"){
             var inputtext = document.createElement('input');
-            inputtext.setAttribute('class','nickname');
+            inputtext.setAttribute('class','input-content');
             listdiv.appendChild(inputtext);
             }else if(signupConfig.columns[i].type=="phone"){
               var inputtext = document.createElement('input');
-              inputtext.setAttribute('class','phone');
+              inputtext.setAttribute('class','input-content');
               listdiv.appendChild(inputtext);
                 }else if(signupConfig.columns[i].type=="input"){
                   var inputtext = document.createElement('input');
@@ -788,7 +678,7 @@ Mudu.MsgBus.On(
                   listdiv.appendChild(inputtext);
                   }else if(signupConfig.columns[i].type=="textarea"){
                     var inputtext = document.createElement('input');
-                    inputtext.setAttribute('class','textarea');
+                    inputtext.setAttribute('class','input-content');
                     listdiv.appendChild(inputtext);
                     }else if(signupConfig.columns[i].type=="question"){
 
@@ -805,7 +695,7 @@ Mudu.MsgBus.On(
                         console.log(option);
                         //添加选项栏
                         var opt=document.createElement('div');
-                        opt.setAttribute('class','question');
+                        opt.setAttribute('class','opt');
                         // 添加选项按钮
                         var radio =document.createElement('span');
                         var inputtext = document.createElement('input');
@@ -868,7 +758,7 @@ Mudu.MsgBus.On(
                     }
                       }else if(signupConfig.columns[i].type=="questionAnswer"){
                         var inputtext = document.createElement('input');
-                        inputtext.setAttribute('class','questionAnswer');
+                        inputtext.setAttribute('class','input-content');
                         listdiv.appendChild(inputtext);
                         }
 
@@ -887,11 +777,11 @@ Mudu.MsgBus.On(
 
           if (signupConfig.columns[i].type=="nickname"){
             var inputtext = document.createElement('input');
-            inputtext.setAttribute('class','nickname');
+            inputtext.setAttribute('class','input-content');
             listdiv.appendChild(inputtext);
             }else if(signupConfig.columns[i].type=="phone"){
               var inputtext = document.createElement('input');
-              inputtext.setAttribute('class','phone');
+              inputtext.setAttribute('class','input-content');
               listdiv.appendChild(inputtext);
                 }else if(signupConfig.columns[i].type=="input"){
                   var inputtext = document.createElement('input');
@@ -899,15 +789,15 @@ Mudu.MsgBus.On(
                   listdiv.appendChild(inputtext);
                   }else if(signupConfig.columns[i].type=="textarea"){
                     var inputtext = document.createElement('input');
-                    inputtext.setAttribute('class','textarea');
+                    inputtext.setAttribute('class','input-content');
                     listdiv.appendChild(inputtext);
                     }else if(signupConfig.columns[i].type=="question"){
                       var inputtext = document.createElement('input');
-                      inputtext.setAttribute('class','question');
+                      inputtext.setAttribute('class','input-content');
                       listdiv.appendChild(inputtext);
                       }else if(signupConfig.columns[i].type=="questionAnswer"){
                         var inputtext = document.createElement('input');
-                        inputtext.setAttribute('class','questionAnswer');
+                        inputtext.setAttribute('class','input-content');
                         listdiv.appendChild(inputtext);
                         }
         }
@@ -1248,26 +1138,7 @@ function Submitdata(){
   alert(arr);
 
 // 获取昵称
-
-
-
-// var nickname = document.getElementsByClassName('nickname')[0].value;
-// console.log('nickname:'+nickname);
-// var phone = document.getElementsByClassName("phone")[0].value;
-// console.log('nickname:'+phone);
-// var inputcontent = document.getElementsByClassName("input-content")[0].value;
-// console.log('nickname:'+inputcontent);
-// var textarea = document.getElementsByClassName("textarea")[0].value;
-// console.log('nickname:'+textarea);
-// var question = document.getElementsByClassName("question")[0].value;
-// console.log('nickname:'+question);
-// var questionAnswer = document.getElementsByClassName("questionAnswer")[0].value;
-// console.log('nickname:'+questionAnswer);
-
-
-
-
-
+// var nickname = document.getElementsByClassName()
 
 
   // 第一个参数为一个对象, code为短信验证码(可不填), columns为question及其答案数组.
@@ -1290,389 +1161,13 @@ Mudu.Room.Signup.Submit(
 )
 }
 
-// 报名问卷未完成部分：报名信息提交，必选项检查，发送短信
-
-
-
-// PPT相关
-
-function openppt(){
-  document.getElementsByClassName("ppt-box")[0].style.display="block"; 
-  document.getElementsByClassName("ppt-btn")[0].style.display="none";
-
-
-  var description = document.createElement('button');
-  description.setAttribute('class','pptclose-btn');
-  description.setAttribute('onclick','closeppt()');
-  var desctext = document.createTextNode('ppt-off');
-  description.appendChild(desctext);
-  document.getElementsByClassName('ppt-content')[0].appendChild(description);
-
-
-
-  // GetUrl 获取当前控制台PPT图片地址
-  // 返回string, 如果为空字符串, 则表示控制台未选择ppt
-  var url = Mudu.Room.PPT.GetUrl()
-  console.log('PPT图片地址:'+url);
-
-  // GetName 获取ppt名称
-  // 返回string
-  var name = Mudu.Room.PPT.GetName()
-  console.log('ppt名称:'+name);
-
-  // GetCurrentPage 获取当前控制台ppt所在页数
-  // 返回number, 从1开始
-  var currentPage = Mudu.Room.PPT.GetCurrentPage()
-  console.log('ppt所在页:'+currentPage);
-
-  // GetTotalPage 获取当前ppt总页数
-  // 返回number
-  var totalPage = Mudu.Room.PPT.GetTotalPage()
-  console.log('ppt总页数:'+totalPage);
-
-
-  // GetAllowTurnPage 获取控制台是否允许用户翻页
-  // 返回boolean, true为允许, false为禁止
-  var allowTurnPage = Mudu.Room.PPT.GetAllowTurnPage()
-  console.log('是否允许用户翻页:'+allowTurnPage);
-
-  var description = document.createElement('p');
-  description.setAttribute('class','pptadr');
-  var desctext = document.createTextNode('PPT图片地址:'+url);
-  description.appendChild(desctext);
-  document.getElementsByClassName('ppt-content')[0].appendChild(description);
-
-  var description = document.createElement('p');
-  description.setAttribute('class','pptname');
-  var desctext = document.createTextNode('ppt名称:'+name);
-  description.appendChild(desctext);
-  document.getElementsByClassName('ppt-content')[0].appendChild(description);
-
-  var description = document.createElement('p');
-  description.setAttribute('class','ppttotal');
-  var desctext = document.createTextNode('ppt总页数:'+totalPage);
-  description.appendChild(desctext);
-  document.getElementsByClassName('ppt-content')[0].appendChild(description);
-
-  var description = document.createElement('p');
-  description.setAttribute('class','pptcur');
-  var desctext = document.createTextNode('ppt所在页:'+currentPage);
-  description.appendChild(desctext);
-  document.getElementsByClassName('ppt-content')[0].appendChild(description);
-
-  var description = document.createElement('p');
-  description.setAttribute('class','pptturn');
-  var desctext = document.createTextNode('是否允许用户翻页:'+allowTurnPage);
-  description.appendChild(desctext);
-  document.getElementsByClassName('ppt-content')[0].appendChild(description);
-
-
-// 添加上一页PPT显示
-  var description = document.createElement('button');
-  description.setAttribute('class','pptpreview-btn');
-  description.setAttribute('onclick','pptpreview()');
-  var desctext = document.createTextNode('上一页');
-  description.appendChild(desctext);
-  document.getElementsByClassName('ppt-content')[0].appendChild(description);
-// 添加下一页PPT显示
-  var description = document.createElement('button');
-  description.setAttribute('class','pptnext-btn');
-  description.setAttribute('onclick','pptnext()');
-  var desctext = document.createTextNode('下一页');
-  description.appendChild(desctext);
-  document.getElementsByClassName('ppt-content')[0].appendChild(description);
-// 添加当前PPT显示
-  var description = document.createElement('img');
-  description.setAttribute('class','pptcurshow');
-  description.setAttribute('src',url);
-  document.getElementsByClassName('pptshow')[0].appendChild(description);
-
-
-}
-function closeppt(){
-  document.getElementsByClassName("ppt-box")[0].style.display="none"; 
-  document.getElementsByClassName('ppt-content')[0].innerHTML='';
-  document.getElementsByClassName('pptshow')[0].innerHTML='';
-  document.getElementsByClassName("ppt-btn")[0].style.display="block"; 
+// 判断必填项
+function notmust(){
 
 }
 
 
 
 
-function pptpreview(){
 
-// GetCurrentPage 获取当前控制台ppt所在页数
-  // 返回number, 从1开始
-  var currentPage = Mudu.Room.PPT.GetCurrentPage()
-  console.log('ppt所在页:'+currentPage);
 
-  var page;
-  if(0<page<currentPage){
-    page = currentPage-1;
-  }else{
-    page=0;
-  }
- 
-
-  
-  // 第一个参数为页码, 第二个参数为获取后的回调函数
-  Mudu.Room.PPT.GetPageImgUrl( page, function (url) {
-  console.log('图片地址为: ', url);
-  
-  
-  document.getElementsByClassName('pptshow')[0].innerHTML='';
-
-
-  // 添加当前PPT显示
-  var description = document.createElement('img');
-  description.setAttribute('class','pptcurshow');
-  description.setAttribute('src',url);
-  document.getElementsByClassName('pptshow')[0].appendChild(description);
-  
-  })
-}
- 
-function pptnext(){
-
-
-// 返回number
-var totalPage = Mudu.Room.PPT.GetTotalPage();
-
-
-// GetCurrentPage 获取当前控制台ppt所在页数
-  // 返回number, 从1开始
-  var currentPage = Mudu.Room.PPT.GetCurrentPage()
-  console.log('ppt所在页:'+currentPage);
-
-  var page=currentPage;
-
-  page = currentPage+1;
-
-  console.log(page);
- // // 第一个参数为页码, 第二个参数为获取后的回调函数
- Mudu.Room.PPT.GetPageImgUrl( page, function (url) {
-  console.log('图片地址为: ', url);
-
-
-  document.getElementsByClassName('pptshow')[0].innerHTML='';
-
-
-  // 添加当前PPT显示
-  var description = document.createElement('img');
-  description.setAttribute('class','pptcurshow');
-  description.setAttribute('src',url);
-  document.getElementsByClassName('pptshow')[0].appendChild(description);
-
-
-})
-
-}
-
-
-
-function openvote(){
-
-  document.getElementsByClassName("vote-box")[0].style.display="block"; 
-  document.getElementsByClassName("vote-btn")[0].style.display="none"; 
-
-  var description = document.createElement('button');
-  description.setAttribute('class','voteclose-btn');
-  description.setAttribute('onclick','closevote()');
-  var desctext = document.createTextNode('vote-off');
-  description.appendChild(desctext);
-  document.getElementsByClassName('vote-content')[0].appendChild(description);
-
-
-  Mudu.Room.Vote.Get(function (response) {
-    response = JSON.parse(response)
-    if (response.status === 'y') {
-    console.log('获取成功，数据为：', response.data)
-
-    var description = document.createElement('p');
-    description.setAttribute('class','votename');
-    var desctext = document.createTextNode('投票名称：'+response.data.vote_name);
-    description.appendChild(desctext);
-    document.getElementsByClassName('vote-content')[0].appendChild(description);
-
-    var description = document.createElement('p');
-    description.setAttribute('class','votetime');
-    var desctext = document.createTextNode('截止时间：'+response.data.end_time);
-    description.appendChild(desctext);
-    document.getElementsByClassName('vote-content')[0].appendChild(description);
-
-
-      for (var i=0;i<response.data.questions.length;i++){
-
-        console.log('问题长度：'+response.data.questions.length);
-      
-
-        var description = document.createElement('ul');
-        description.setAttribute('class','voteitem');
-
-
-
-        var normalitem = document.createElement('li');
-        normalitem.setAttribute('class','normalitem');
-        var desctext = document.createTextNode(response.data.questions[i].question_name);
-        normalitem.appendChild(desctext);
-        description.appendChild(normalitem);
-
-        for (var j=0;j<response.data.questions[i].items.length;j++){
-
-        var item = document.createElement('ul');
-        item.setAttribute('class','item');
-        normalitem.appendChild(item);
-
-
-        var itemdata = document.createElement('div');
-        itemdata.setAttribute('class','itemdata');
-        item.appendChild(itemdata);
-
-
-        var p = response.data.questions[i].question_multi
-          if (p>1){
-
-            var radio =document.createElement('span');
-            var inputtext = document.createElement('input');
-            inputtext.setAttribute('class','vote-content-checkbox');
-            inputtext.setAttribute('type','checkbox');
-            // 添加name属性，name 属性定义的单选按钮组 (具有相同名称的单选按钮 属于同一组)
-            inputtext.setAttribute('name','checkbox-'+i);
-            radio.appendChild(inputtext);
-            itemdata.appendChild(radio);
-          }else{
-            // 添加选项按钮
-            var radio =document.createElement('span');
-            var inputtext = document.createElement('input');
-            inputtext.setAttribute('class','vote-content-radio');
-            inputtext.setAttribute('type','radio');
-            // 添加name属性，name 属性定义的单选按钮组 (具有相同名称的单选按钮 属于同一组)
-            inputtext.setAttribute('name','radio-'+i);
-            radio.appendChild(inputtext);
-            itemdata.appendChild(radio);
-          }
-
-
-
-
-
-
-        
-
-
-        var itemlist = document.createElement('li');
-        itemlist.setAttribute('class','itemlist');
-        var desctext = document.createTextNode(response.data.questions[i].items[j].item_name);
-        itemlist.appendChild(desctext);
-        itemdata.appendChild(itemlist);
-
-        var imgitem = document.createElement('img');
-        imgitem.setAttribute('class','voteimg');
-
-        var desctext = response.data.questions[i].items[j].image
-        imgitem.setAttribute('src',desctext);
-        itemdata.appendChild(imgitem);
-
-        if(response.data.questions[i].items[j].image == ''){
-          itemdata.removeChild(imgitem);
-          // document.getElementsByClassName('voteimg')[0].style.display='none';
-        }
-
-
-
-        var percent = document.createElement('div');
-        percent.setAttribute('class','percent');
-        var desctext = document.createTextNode(response.data.questions[i].items[j].percent);
-        percent.appendChild(desctext);
-        item.appendChild(percent);
-
-
-
-        }
-
-
-
-        document.getElementsByClassName('vote-content')[0].appendChild(description);
-
-
-
-      }
-
-
-      var description = document.createElement('button');
-      description.setAttribute('class','votesub-btn');
-      description.setAttribute('onclick','closevote()');
-      var desctext = document.createTextNode('提交');
-      description.appendChild(desctext);
-      document.getElementsByClassName('vote-content')[0].appendChild(description);
-
-
-
-
-
-
-    }
-    if (response.status === 'n') {
-      console.log('获取失败')
-    }
-  })
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-function closevote(){
-  document.getElementsByClassName("vote-box")[0].style.display="none"; 
-  document.getElementsByClassName('vote-content')[0].innerHTML='';
-  document.getElementsByClassName('voteshow')[0].innerHTML='';
-  document.getElementsByClassName("vote-btn")[0].style.display="block"; 
-
-}
-
-
-
-
-
-
-
-
-function vote(){
-
-  Mudu.Room.Vote.Vote(
-    // 问题及答案(数组)
-    [
-      {
-        // 4265为vote_id
-        // "1|1" 表示第一个问题，用户的答案是第一个选项
-        "4265":"1|1"
-      },
-      {
-        // 4265为vote_id
-        // "2|2,3" 表示第二个问题，用户的答案是第二个选项和第三个选项
-        "4265":"2|2,3"
-      }
-  
-    ],
-  
-    // 回调函数，参数为response
-    function (response) {
-      response = JSON.parse(response)
-      if (response.status === 'y') {
-        console.log('投票成功')
-      }
-      if (response.status === 'n') {
-        console.log('投票失败')
-      }
-    }
-  )
-}

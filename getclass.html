@@ -1,0 +1,90 @@
+
+<html>
+<head>
+<script type="text/javascript">
+window.onload = function()
+{   var topMenus = getClass('li','topMenu');
+    for(var i=0;i < topMenus.length; i++)
+    {
+        alert(topMenus[i].innerHTML);        
+    }
+
+}
+
+function getClass(tagName,className) //获得标签名为tagName,类名className的元素
+{
+    if(document.getElementsByClassName) //支持这个函数
+    {        return document.getElementsByClassName(className);
+    }
+    else
+    {       var tags=document.getElementsByTagName(tagName);//获取标签
+        var tagArr=[];//用于返回类名为className的元素
+        for(var i=0;i < tags.length; i++)
+        {
+            if(tags[i].class == className)
+            {
+                tagArr[tagArr.length] = tags[i];//保存满足条件的元素
+            }
+        }
+        return tagArr;
+    }
+
+}
+
+ 
+
+</script>
+
+</head>
+<body>
+
+<ul id="nav">
+<li class="topMenu"><a href="#">产品介绍</a>
+    <ul class="subMenu">
+        <li><a href="#">产品1</a></li>
+        <li><a href="#">产品2</a></li>
+        <li><a href="#">产品3</a></li>
+        <li><a href="#">产品4</a></li>
+        <li><a href="#">产品5</a></li>
+        <li><a href="#">产品6</a></li>
+    </ul>
+</li>
+<li class="topMenu"><a href="#">服务介绍</a>
+    <ul class="subMenu">
+        <li><a href="#">服务1</a></li>
+        <li><a href="#">服务2</a></li>
+        <li><a href="#">服务3</a></li>
+        <li><a href="#">服务4</a></li>        
+    </ul>
+</li>
+<li class="topMenu"><a href="#">成功案例</a>
+    <ul class="subMenu">
+        <li><a href="#">案例1</a></li>
+        <li><a href="#">案例2</a></li>
+        <li><a href="#">案例3</a></li>
+        <li><a href="#">案例4</a></li>
+    </ul>
+</li>
+<li class="topMenu"><a href="#">关于我们</a>
+    <ul class="subMenu">
+        <li><a href="#">我们1</a></li>
+        <li><a href="#">我们2</a></li>
+        <li><a href="#">我们3</a></li>
+        <li><a href="#">我们4</a></li>
+    </ul>
+</li>
+<li class="topMenu"><a href="#">联系我们</a>
+    <ul class="subMenu">
+        <li><a href="#">联系1</a></li>
+        <li><a href="#">联系2</a></li>
+        <li><a href="#">联系3</a></li>
+        <li><a href="#">联系4</a></li>
+        <li><a href="#">联系5</a></li>
+        <li><a href="#">联系6</a></li>
+        <li><a href="#">联系7</a></li>
+    </ul>
+</li>
+
+</ul>
+</body>
+</html>

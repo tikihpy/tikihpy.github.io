@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>shopinglist</title>
+    <!-- // 播放器依赖于Promise,兼容ie及其它低版本浏览器的用户需添加polyfill, 如下: -->
+<script src="//static.mudu.tv/es6-promise/es6-promise.auto.min.js"></script>
+
+<!-- // 以下为必须添加项 -->
+<script>window.FETCHER_SERVER_URL = "ws://fetcher.mudu.tv:8088";</script>
+<!-- //https下请使用 <script>window.FETCHER_SERVER_URL = "wss://fetcher.mudu.tv";</script> -->
+<script src="//static.mudu.tv/fetcher/bundle.6d7aca164d2389e8bea6.js"></script>
+<script src="//static.mudu.tv/static/websdk/sdk.js"></script>
+<script src='scripts/ABAB.js'></script>
+
+</head>
+
+<body>
+
+        <body>
+                <!-- 直播间组件 -->
+                    <div id = 'container'>
+
+                             <!-- 播放器组件 -->
+                                <div class="player">
+                                    <div id="J_prismPlayer" class="prism-player"></div>
+                                </div>
+                                
+                    </div>
+                    <a class="llll" onclick="open()">点击点播</a>
+                    <div class="backplay"></div>
+
+                            
+                    </div>
+
+ 
+            </body>
+
+</body>
+</html>   
