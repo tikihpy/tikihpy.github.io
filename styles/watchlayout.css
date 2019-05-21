@@ -191,36 +191,8 @@
     width: 100%;
 
 }
-.topic-all{
-    height: 170px;
-    padding: 10px;
 
-}
-.topic-page, .topic{
-    float: left;
-    width: 48%;
-    border:2px solid;
-
-}
-.topic-page{
-    background-color: chocolate;
-    height: 170px;
-    
-}
-.topic{
-    height: 170px;
-    font-size: 10px;
-    margin-left: 3.3%;
-    position: relative;
-}
-
-.topic_area{
-    width: 90%;
-    height: 150px;
-    /* padding: 10px; */
-}
-
-.topic_btn, .vote_btn, .SignUp_btn, .lucky_btn, .luckyresult_btn, .lucky_close_btn, .result_close_btn, .signuplucky_btn, .signup-close, .signsubmit-btn, .page_btn, .ppt-btn, .pptclose-btn, .vote-btn, .pptclose-btn, .votesub-btn, .vote-btn, .voteclose-btn, .comment_btn{
+.topic_btn, .vote_btn, .SignUp_btn, .lucky_btn, .luckyresult_btn, .lucky_close_btn, .result_close_btn, .signuplucky_btn, .signup-close, .signsubmit-btn, .page_btn, .ppt-btn, .pptclose-btn, .vote-btn, .pptclose-btn, .votesub-btn, .vote-btn, .voteclose-btn, .gethuatipage-btn, .comment_btn{
     border:2px solid;
     border-radius:25px;
     width: 50px;
@@ -362,7 +334,6 @@
     left: -200%;
     top: 55%;
     width: 400px;
-    /* height: 800px; */
     z-index:99999;
     display: none;
     padding: 20px;
@@ -410,4 +381,109 @@
     position: relative;
     left: 45%;
    
+}
+
+.topic-all{
+    height: 600px;
+    padding: 10px;  
+
+}
+.topiccur, .alltopic-history{
+    float: left;
+    width: 49%;
+    border:2px solid;
+}
+
+.alltopic-history{
+    
+    height: 500px;
+    font-size: 15px;
+    margin-left: 1%;
+    position: relative;
+    background-color: blueviolet;
+    
+}
+.topiccur{
+    float: left;
+    height: 500px;
+  
+}
+.topic-page{
+    height: 420px;
+    overflow: scroll;
+    
+}
+.topic{
+    height: 80px;
+    font-size: 15px;
+    margin-left: 3.3%;
+    position: relative;
+}
+
+.topic_area{
+    width: 85%;
+    height: 50px;
+    margin: 10px;
+}
+
+.huatiimg{
+    position: relative;
+    width : 15%;
+    transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -o-transform: scale(0.8);
+}
+.huatidata{
+    position: relative;
+    left: 5%;
+}
+
+.gethuatiavatar{
+    position: relative;
+    width : 5%;
+    top: 10px;
+    transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    -o-transform: scale(0.5);
+}
+.gethuatiimgs{
+    display: inline;
+
+}
+.imgsigle{
+    width : 10%;
+    transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -o-transform: scale(0.8);
+}
+.page-history{
+    position: relative;
+    width: 95%;
+    margin: 1%;
+    left: 2%;
+    height: 450px;
+    overflow: auto;
+}
+
+.gethuatipage{
+    position: relative;
+    width: 96%;
+    left: 4%;
+}
+.gethuatiimsg{
+    position: relative;
+}
+.huatimsg_area{
+    position: relative;
+    width: 96%;
+}
+.topic_history{
+    position: relative;
+    width: 96%;
 }

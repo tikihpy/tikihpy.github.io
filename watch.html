@@ -167,19 +167,33 @@
         </div>
              <!-- 话题互动组件 -->
              <div class = 'topic-all'>
-                <div class = 'topic-page'>
-                        <ol reversed class="topic_history" >
-                            <!-- <li class="gettopic">
-                                <img class='getavatar' src='https://static.mudu.tv/index/avatar.png'/>
-                                <span class = 'gettopicmsg'>1232131</span>
-                            </li> -->
-                        </ol>
-                </div>
-                <div class='topic'>
-                    <textarea class="topic_area"></textarea>
-                    <button class="topic_btn">话 题</button>
+                 <div class="topiccur">
+                    <div class='topic'>
+                            <textarea class="topic_area"></textarea>
+                            <button class="topic_btn"  onclick="sendtopic()">话 题</button>
+                    </div>
+                    <div class = 'topic-page'>
+                            <ol reversed class="topic_history" >
+                                <!-- <li class="gettopic">
+                                    <img class='getavatar' src='https://static.mudu.tv/index/avatar.png'/>
+                                    <span class = 'gettopicmsg'>1232131</span>
+                                </li> -->
+                            </ol>
+                    </div>
+                 </div>
+                <div class='alltopic-history'>
+                    <textarea class="topic_pageget"></textarea>
+                    <button class="gethuatipage-btn" onclick="getpage()">页数</button>
+                    <span class="allpages"></span>
+                    <ol class="page-history">
 
+                    </ol>
+
+
+                        
+    
                 </div>
+
             </div>
     
         </div>

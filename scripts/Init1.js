@@ -22,9 +22,6 @@ Mudu.Init(
     var desctext = document.createTextNode('当前WebSDK版本：'+version);
     description.appendChild(desctext);
     document.getElementsByClassName('websdk-version')[0].appendChild(description);
-    
-  
-
 
     Mudu.Room.User.GetUser()
     // 需要在sdk 初始化成功后才能使用
@@ -107,7 +104,6 @@ Mudu.Init(
   )
 
 
-
  var player = new Mudu.Player(
   {
     // 必须，播放器容器ID，播放器会被添加到该DOM元素中
@@ -161,22 +157,27 @@ Mudu.Init(
   }
 );
 window.player = player;
+
 }else {
+  console.log('没有在直播');
  var description = document.createElement('p');
  description.setAttribute('id','act_status');
  var desctext = document.createTextNode('直播状态：暂未开始');
  description.appendChild(desctext);
  document.getElementsByClassName('app_header')[0].appendChild(description);
-
+  
+ 
  // 返回视频回看配置
- var trailer = Mudu.Room.GetTrailer()
+  var trailer = Mudu.Room.GetTrailer()
 
  console.log('回看视频配置：',trailer);
 
-var livadrr=trailer.m3u8,img = trailer.trailer_img
+  if(trailer.open ==true){
 
- if(trailer.open == true){
   
+  var livadrr=trailer.m3u8,img = trailer.trailer_img
+  console.log('回看视频地址：',livadrr);
+
  var player = new Mudu.Player(
   {
     // 必须，播放器容器ID，播放器会被添加到该DOM元素中
@@ -186,7 +187,7 @@ var livadrr=trailer.m3u8,img = trailer.trailer_img
     stretching: 'cover',
 
     // 非必需 boolean 控制播放器的ui展示, 默认为false; 根据播放视频的实际情况填写
-    isLive: isChannelLiving,
+    // isLive: isChannelLiving,
 
     // 必须，播放器视频播放地址
     src: livadrr,
@@ -241,10 +242,10 @@ window.player = player;
       stretching: 'cover',
   
       // 非必需 boolean 控制播放器的ui展示, 默认为false; 根据播放视频的实际情况填写
-      isLive: isChannelLiving,
+      // isLive: isChannelLiving,
   
       // 必须，播放器视频播放地址
-      src: livadrr,
+      src: 'https://myun-hw-s3.myun.tv/melj80jz/53rv86a5/0eybmjal/5zzdnnm5_1557998515953928753_480p.m3u8',
   
       // 非必须，播放器海报图 string
       image: 'https://cdn13.mudu.tv/assets/upload/155646148686924.jpeg',
@@ -306,20 +307,17 @@ if (isOpen==true){
 
 }
 
-
 // PPT.Changed事件会在控制台进行ppt翻页时触发
 Mudu.MsgBus.On('PPT.Changed', function (response) {
     response = JSON.parse(response)
     console.log(response)
 })
 
-
 // PPT.IsOpen事件会在控制台切换ppt“观看页显示”时被触发
 Mudu.MsgBus.On('PPT.IsOpen', function (response) {
     response = JSON.parse(response)
     console.log('观看页显示:'+response)
 })
-
 
 // PPT.AllowTurnPage事件会在控制台切换ppt“允许用户翻页”时被触发
 Mudu.MsgBus.On('PPT.AllowTurnPage', function (response) {
@@ -353,11 +351,6 @@ Mudu.MsgBus.On(
     console.log(response.data);
   })
 
-
-
-
-
-
   Mudu.Room.Vote.Get(function (response) {
     response = JSON.parse(response)
     if (response.status === 'y') {
@@ -377,18 +370,151 @@ Mudu.MsgBus.On(
   
       }
   
-  
-
-
-
-
-
-
     }
     if (response.status === 'n') {
       console.log('获取失败')
     }
   })
+
+
+// 话题互动组件
+
+
+// 返回number
+var pages = Mudu.Room.Topic.GetPage()
+console.log('话题互动总页数：'+pages);
+document.getElementsByClassName('allpages')[0].innerHTML="话题互动总页数："+pages;
+
+
+// 返回boolean, true为允许, false为不允许
+var isAllowPublish = Mudu.Room.Topic.GetAllowPublish()
+console.log('是否允许发布：'+isAllowPublish);
+
+
+
+// 返回boolean, true为允许, false为不允许
+var isAllowReply = Mudu.Room.Topic.GetAllowReply()
+console.log('是否允许回复：'+isAllowReply);
+
+
+
+// 返回boolean, true为需要审核, false为不需要审核
+var isNeedsCheck = Mudu.Room.Topic.GetNeedsCheck()
+console.log('是否需要审核：'+isNeedsCheck);
+
+
+
+
+
+
+
+
+
+// 第一个参数类型为object, 其中topicId为需要回复的话题id, msg为观众的回复内容
+Mudu.Room.Topic.SendReply(
+  {
+      topicId: 4116,
+      msg: '听说云导播台能做实时字幕，是真的吗'
+  },
+  function (response) {
+      response = JSON.parse(response)
+      console.log(response)
+  }
+)
+
+
+
+// Topic.AllowPublish事件会在控制台话题设置->允许观众发表切换时被触发
+
+Mudu.MsgBus.On(
+    // 事件名，值为Topic.AllowPublish
+    'Topic.AllowPublish', 
+
+    // 事件处理函数，参数类型为boolean, true表示允许发表, false表示不允许发表
+    function (isAllowPublish) {
+
+    }
+)
+
+
+// Topic.AllowReply事件会在控制台话题设置->允许观众回复切换时被触发
+
+Mudu.MsgBus.On(
+    // 事件名，值为Topic.AllowReply
+    'Topic.AllowReply', 
+
+    // 事件处理函数，参数类型为boolean, true表示允许回复, false表示不允许回复
+    function (isAllowReply) {
+
+    }
+)
+
+
+
+// Topic.NeedsCheck事件会在控制台话题设置->发送内容需要审核切换时被触发
+
+Mudu.MsgBus.On(
+    // 事件名，值为Topic.NeedsCheck
+    'Topic.NeedsCheck', 
+
+    // 事件处理函数，参数类型为boolean, true表示需要审核, false表示不需要审核
+    function (isNeedsCheck) {
+
+    }
+)
+
+
+// Topic.New事件会在收到新的话题时被触发
+
+Mudu.MsgBus.On(
+    // 事件名，值为Topic.New
+    'Topic.New', 
+
+    // 事件处理函数，参数为新收到的topic
+    function (topic) {
+        topic = JSON.parse(topic)
+        console.log(topic)
+    }
+)
+
+
+// Topic.Top事件会在话题被置顶或者需要置顶的时候被触发
+
+Mudu.MsgBus.On(
+    // 事件名，值为Topic.Top
+    'Topic.Top', 
+
+    // 事件处理函数，参数为被置顶或者取消置顶的topic
+    function (topic) {
+        topic = JSON.parse(topic)
+        console.log(topic)
+    }
+)
+
+// Topic.Reply.New事件会在收到新的回复时被触发
+
+Mudu.MsgBus.On(
+    // 事件名，值为Topic.Reply.New
+    'Topic.Reply.New', 
+
+    // 事件处理函数，参数为新收到的reply
+    function (reply) {
+        reply = JSON.parse(reply)
+        console.log(reply)
+    }
+)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -516,9 +642,6 @@ Mudu.MsgBus.On(
       } 
     )
 
-
-
-
     // 抽奖组件
     Mudu.Room.LuckyDraw.Get(
       function (response) {
@@ -535,8 +658,6 @@ Mudu.MsgBus.On(
       luckytime.innerHTML=response.data.lucky_draw.deadline;
     }   
     )   
-
-
 
     // 返回null获取报名问卷配置, 类型为object
       var signupConfig = Mudu.Room.Signup.GetConfig()
@@ -584,11 +705,6 @@ Mudu.MsgBus.On(
                       listdiv.appendChild(inputtext);
                       }
 
-
-
-
-
-
         }else if(signupConfig.columns[i].type=="phone"){
           console.log('判断打印phone');
 
@@ -609,13 +725,6 @@ Mudu.MsgBus.On(
               var inputtext = document.createElement('input');
               inputtext.setAttribute('class','phone');
               listdiv.appendChild(inputtext);
-
-
-              
-
-
-
-
 
 
               // 是否发送验证码
@@ -651,19 +760,6 @@ Mudu.MsgBus.On(
               listdiv.appendChild(outdiv);
 
               }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 }else if(signupConfig.columns[i].type=="input"){
                   var inputtext = document.createElement('input');
@@ -920,12 +1016,6 @@ Mudu.MsgBus.On(
         var desctext = document.createTextNode('提交');
         signsubmit.appendChild(desctext);
         document.getElementsByClassName('signup-column-box')[0].appendChild(signsubmit);
-
-
-
-
-
-
   }
 );
 
@@ -1553,14 +1643,6 @@ function openvote(){
             itemdata.appendChild(radio);
           }
 
-
-
-
-
-
-        
-
-
         var itemlist = document.createElement('li');
         itemlist.setAttribute('class','itemlist');
         var desctext = document.createTextNode(response.data.questions[i].items[j].item_name);
@@ -1579,26 +1661,16 @@ function openvote(){
           // document.getElementsByClassName('voteimg')[0].style.display='none';
         }
 
-
-
         var percent = document.createElement('div');
         percent.setAttribute('class','percent');
         var desctext = document.createTextNode(response.data.questions[i].items[j].percent);
         percent.appendChild(desctext);
         item.appendChild(percent);
 
-
-
         }
-
-
-
         document.getElementsByClassName('vote-content')[0].appendChild(description);
 
-
-
       }
-
 
       var description = document.createElement('button');
       description.setAttribute('class','votesub-btn');
@@ -1607,29 +1679,11 @@ function openvote(){
       description.appendChild(desctext);
       document.getElementsByClassName('vote-content')[0].appendChild(description);
 
-
-
-
-
-
     }
     if (response.status === 'n') {
       console.log('获取失败')
     }
   })
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 function closevote(){
   document.getElementsByClassName("vote-box")[0].style.display="none"; 
@@ -1638,13 +1692,6 @@ function closevote(){
   document.getElementsByClassName("vote-btn")[0].style.display="block"; 
 
 }
-
-
-
-
-
-
-
 
 function vote(){
 
@@ -1675,4 +1722,231 @@ function vote(){
       }
     }
   )
+}
+
+
+
+function sendtopic(){
+
+var text = document.getElementsByClassName('topic_area')[0].value;
+
+
+// 第一个参数为观众发送的内容, 其中msg为文字内容, images为图片列表, msg和images两者必须有一个不为空
+// 第二个参数为发送成功或失败的回调函数
+Mudu.Room.Topic.SendTopic(
+  {
+      msg: text,
+      images: [
+        'https://cdn13.mudu.tv/assets/upload/155840728477365.gif',
+        'https://cdn13.mudu.tv/assets/upload/155840730569339.gif',
+        'https://cdn13.mudu.tv/assets/upload/155840730554900.gif',
+        'https://cdn13.mudu.tv/assets/upload/155840728477365.gif',
+        'https://cdn13.mudu.tv/assets/upload/155840730569339.gif',
+        'https://cdn13.mudu.tv/assets/upload/155840730554900.gif',
+        'https://cdn13.mudu.tv/assets/upload/155840728477365.gif',
+        'https://cdn13.mudu.tv/assets/upload/155840730569339.gif',
+        'https://cdn13.mudu.tv/assets/upload/155840730554900.gif'
+      ]
+  },
+  function (response) {
+      response = JSON.parse(response)
+      console.log(response);
+      alert(response.info);
+
+        // 添加话题记录
+        var huatidata = document.createElement('li');
+        huatidata.setAttribute('class','huatidata');
+
+        var list = document.createElement('div');
+        list.setAttribute('class','huatimsg_area');
+        
+        var alertcmt = document.createElement("img");
+        alertcmt.setAttribute('class','img');
+        alertcmt.setAttribute('src','https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2866492045,1432640156&fm=26&gp=0.jpg');
+        var description = document.createElement('span');
+        description.setAttribute('class','huatimsg');
+        var desctext = document.createTextNode(text);
+        description.appendChild(desctext);
+        list.appendChild(alertcmt);
+        list.appendChild(description);
+
+        var alertimgs = document.createElement("div");
+        alertimgs.setAttribute('class','allimgs');
+
+        var alertimg1 = document.createElement("img");
+        alertimg1.setAttribute('src','https://cdn13.mudu.tv/assets/upload/155840728477365.gif');
+        alertimg1.setAttribute('class','huatiimg');
+        
+        var alertimg2 = document.createElement("img");
+        alertimg2.setAttribute('src','https://cdn13.mudu.tv/assets/upload/155840730569339.gif');
+        alertimg2.setAttribute('class','huatiimg');
+
+        var alertimg3 = document.createElement("img");
+        alertimg3.setAttribute('src','https://cdn13.mudu.tv/assets/upload/155840730554900.gif');
+        alertimg3.setAttribute('class','huatiimg');
+        alertimgs.appendChild(alertimg1);
+        alertimgs.appendChild(alertimg2);
+        alertimgs.appendChild(alertimg3);
+
+
+        var alertimgs2 = document.createElement("div");
+        alertimgs2.setAttribute('class','allimgs');
+
+        var alertimg1 = document.createElement("img");
+        alertimg1.setAttribute('src','https://cdn13.mudu.tv/assets/upload/155840728477365.gif');
+        alertimg1.setAttribute('class','huatiimg');
+        
+        var alertimg2 = document.createElement("img");
+        alertimg2.setAttribute('src','https://cdn13.mudu.tv/assets/upload/155840730569339.gif');
+        alertimg2.setAttribute('class','huatiimg');
+
+        var alertimg3 = document.createElement("img");
+        alertimg3.setAttribute('src','https://cdn13.mudu.tv/assets/upload/155840730554900.gif');
+        alertimg3.setAttribute('class','huatiimg');
+        alertimgs2.appendChild(alertimg1);
+        alertimgs2.appendChild(alertimg2);
+        alertimgs2.appendChild(alertimg3);
+
+
+
+        var alertimgs3 = document.createElement("div");
+        alertimgs3.setAttribute('class','allimgs');
+
+        var alertimg1 = document.createElement("img");
+        alertimg1.setAttribute('src','https://cdn13.mudu.tv/assets/upload/155840728477365.gif');
+        alertimg1.setAttribute('class','huatiimg');
+        
+        var alertimg2 = document.createElement("img");
+        alertimg2.setAttribute('src','https://cdn13.mudu.tv/assets/upload/155840730569339.gif');
+        alertimg2.setAttribute('class','huatiimg');
+
+        var alertimg3 = document.createElement("img");
+        alertimg3.setAttribute('src','https://cdn13.mudu.tv/assets/upload/155840730554900.gif');
+        alertimg3.setAttribute('class','huatiimg');
+        alertimgs3.appendChild(alertimg1);
+        alertimgs3.appendChild(alertimg2);
+        alertimgs3.appendChild(alertimg3);
+
+
+        list.appendChild(alertimgs3);
+        list.appendChild(alertimgs2);
+        list.appendChild(alertimgs);
+        huatidata.appendChild(list);
+        // document.getElementsByClassName('topic-page')[0].appendChild(huatidata);
+
+
+
+
+        
+       
+        if (response.topicNeedsChecked==1){
+            // document.getElementsByClassName('topic_history')[0].appendChild(huatidata);
+
+            var firstLi = document.getElementsByClassName('huatidata')[0]
+            if (firstLi) {
+              document.getElementsByClassName("topic_history")[0].insertBefore(huatidata, firstLi);
+            } else {
+              document.getElementsByClassName('topic_history')[0].appendChild(huatidata);
+            }  
+
+
+
+        }else{
+          alert('话题等待审核');
+        }
+
+
+  }
+)
+
+document.getElementsByClassName('topic_area')[0].value='';
+
+}
+
+function getpage(){
+
+var page=document.getElementsByClassName('topic_pageget')[0].value
+
+console.log('获取话题互动第'+ page +'页数据');
+
+// 第一个参数为页码，第二个参数为回调函数
+Mudu.Room.Topic.Get(
+  +page,
+  function (response) {
+      // response格式为: {status: 'y', flag: 100, topics: [topicItem1, topicItem2, ...]}
+      response = JSON.parse(response)
+      console.log(response);
+      console.log(response.topics);
+
+
+
+
+
+
+      for(var i=response.topics.length-1;0<=i;i--){
+
+        
+        var pagelist = document.createElement('li');
+        pagelist.setAttribute('class','gethuatipage');
+        var alertcmt = document.createElement("img");
+        alertcmt.setAttribute('class','gethuatiavatar');
+        alertcmt.setAttribute('src',response.topics[i].avatar);
+        var description = document.createElement('span');
+        description.setAttribute('class','gethuatimsg');
+        var desctext = document.createTextNode(response.topics[i].message);
+        pagelist.appendChild(alertcmt);
+        pagelist.appendChild(description);
+        description.appendChild(desctext);
+
+        var br = document.createElement('br');
+        pagelist.appendChild(br);
+
+        for(var j=0;j<response.topics[i].images.length;j++){
+
+        var alertimgdiv = document.createElement("div");
+        alertimgdiv.setAttribute('class','gethuatiimgs');
+
+        var alertimg = document.createElement("img");
+        alertimg.setAttribute('class','imgsigle');
+        alertimg.setAttribute('src',response.topics[i].images[j]);
+
+        alertimgdiv.appendChild(alertimg);
+        pagelist.appendChild(alertimgdiv);
+
+
+        }
+
+        // document.getElementsByTagName('ol')[1].appendChild(pagelist);
+        var firstLi = document.getElementsByClassName('gethuatipage')[0]
+              if (firstLi) {
+                document.getElementsByClassName("page-history")[0].insertBefore(pagelist, firstLi);
+              } else {
+                document.getElementsByClassName('page-history')[0].appendChild(pagelist);
+              }   
+      }
+
+
+
+
+
+
+
+      
+  }
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
