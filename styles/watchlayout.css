@@ -334,6 +334,7 @@
     left: -200%;
     top: 55%;
     width: 400px;
+    /* height: 800px; */
     z-index:99999;
     display: none;
     padding: 20px;
