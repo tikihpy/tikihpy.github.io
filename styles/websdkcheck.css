@@ -58,6 +58,31 @@
     /* background-color: rgb(110, 220, 20); */
     
 }
+.barrage{
+    background-color: rgb(20, 163, 220);
+    height: 200px;
+    overflow: scroll;
+    position: relative;
+}
+/* 弹幕动画这样写 */
+@keyframes barrage {
+    from {
+        left: 100%;
+    }
+    to {
+        left: -100%;
+    }
+}
+.content {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    display: inline-block;
+    padding: 4px 18px;
+    color: rgb(227, 241, 22);
+    position: absolute;
+    white-space: nowrap;
+}
+
 .lucky_box{
     /* background-color: rgb(20, 220, 143); */
   

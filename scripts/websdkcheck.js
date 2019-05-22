@@ -215,9 +215,6 @@ console.log(activeTheme);
 document.getElementsByClassName('room_8_1')[0].innerHTML="直播间主题名称:"+activeTheme;
 
 
-
-
-
 // 返回直播间主题配置，类型为Array
 var themes = Mudu.Room.GetThemes()
 console.log(themes);
@@ -233,7 +230,6 @@ for(var n=0;n<themes.length;n++){
     themesdiv.appendChild(Themes);
     document.getElementsByClassName('room_9_1')[0].appendChild(themesdiv); 
 }
-
 
 
 // Room.StreamEvent事件会在直播流状态改变时(通常是后台开始直播或者关闭直播)被触发
@@ -256,6 +252,81 @@ Mudu.MsgBus.On(
 
     }
 )
+
+// =======================================================================================================================================
+
+// 弹幕组件
+Mudu.MsgBus.On(
+    // 事件名，值为"Barrage.New"
+    "Barrage.New",
+    
+    // 事件处理函数，参数为弹幕对象
+    function (barrage) {
+        barrage = JSON.parse(barrage)
+        // console.log('收到新的弹幕，内容为: ', barrage.text)
+        console.log('收到新的弹幕，内容为: ', barrage)
+
+        var description = document.createElement('p');
+        description.setAttribute('class','content');
+        var desctext = document.createTextNode(barrage.text);
+        description.appendChild(desctext);
+        document.getElementsByClassName('barrage')[0].appendChild(description);
+
+        // 获取指定范围的随机数
+        function Random(start, end) {
+        let num = (Math.random() * (end - start) + start).toString();
+        return parseInt(num, 10);
+        }
+        // 创建弹幕从右到左面的10-15的随机秒数
+        const randomTime = Random(8, 30);
+        // 创建离上方的距离  百分比 现在是半屏
+        const randomTop = Random(0, 80);
+        description.style.top = randomTop + "%";
+        description.style.animation = "barrage " + randomTime + "s linear";
+        // 添加一个定时器 在运行完成之后删除这个DOM
+        setTimeout(() => {
+        document.getElementsByClassName('barrage')[0].removeChild(description)
+    }, randomTime * 1000);
+    } 
+    )
+    // Barrage.New事件会在收到新的弹幕时被触发
+Mudu.MsgBus.On(
+    // 事件名，值为"Barrage.New"
+    "Barrage.New",
+    
+    // 事件处理函数，参数为弹幕对象
+    function (barrage) {
+        barrage = JSON.parse(barrage)
+        console.log('收到新的弹幕，内容为: ', barrage.text)
+        document.getElementsByClassName('danmu_1_1')[0].innerHTML='收到新的弹幕: ';
+        timer=setTimeout(function () {
+            document.getElementsByClassName('danmu_1_1')[0].innerHTML='Barrage.New事件';   
+        }, 5000); 
+
+
+        var description = document.createElement('p');
+        description.setAttribute('class','barrage_text');
+        var desctext = document.createTextNode('内容：'+barrage.text);
+        description.appendChild(desctext);
+        document.getElementsByClassName('danmu_1_1')[0].appendChild(description);
+
+        var description = document.createElement('p');
+        description.setAttribute('class','barrage_stime');
+        var desctext = document.createTextNode('时间戳：'+barrage.stime);
+        description.appendChild(desctext);
+        document.getElementsByClassName('danmu_1_1')[0].appendChild(description);
+
+
+    }
+    )
+// =======================================================================================================================================
+
+
+
+
+
+
+
 
 }
 );
