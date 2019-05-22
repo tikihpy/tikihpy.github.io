@@ -1,0 +1,492 @@
+/* * 这东西叫“通配符”用来匹配页面上所有元素。因为某些元素如 body、 li、 p 这是有默认的margin值，这样就不方便我们精确控制，所以我们干脆就先把所有元素的margin、padding先设置为0，以后根据需要再单独设置某一项的margin和padding数值 。 */
+* {
+    margin: 0;
+    padding: 0;
+}
+.websdk-version{
+    max-width: 1440px;
+    background-color: rgb(219, 226, 226);
+    box-sizing: border-box;
+    padding-left: 40px;
+    margin: 0 auto;
+
+}
+.app {
+    max-width: 1440px;
+    height: 3900px;
+    padding: 40px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    margin: 0 auto;   
+    background-color: rgb(238, 238, 238);
+}
+.app_header {
+    background: rgb(219, 226, 226);
+    min-height: 120px;
+    text-align: left;
+    line-height:18px;
+    padding: 10px;
+    padding-bottom: 0px; 
+}
+.container{
+    height: 585px;
+    margin: 10px;
+    
+}
+#act_name, #act_status, #act_viewnum, #roomPlayAddr{
+    font-size: 15px;
+    overflow: scroll;
+    color: #1115ec;
+    font-weight:bold;
+    margin-top: 10px;
+    display: list-item;
+
+}
+/* .palyer_part{
+    position: absolute;
+    top: 170px;
+    width: 670px;
+}
+.comment_part{
+    position: relative;
+    left: 688px;
+    top: 10px;
+    width: 670px;
+    padding-left: 4px;
+} */
+.comment_part, .palyer_part{
+    float: left;
+    width: 50%;
+
+}
+.comment_part{
+    /* padding-left: 2%; */
+    
+}
+.showarea{
+    width: 640px;
+    height: 360px;
+    border: 2px solid;
+}
+.button_part{
+    margin: 10px;
+    padding: 5px;
+
+}
+.switch_btn, .play_btn, .pause_btn, .stop_btn, .state_btn, .live_btn{
+    width: 70px;
+    height: 25px;
+    background-color: rgb(219, 226, 226);
+    border:2px solid;
+    border-radius:25px;
+    display: inline-block;
+}
+.barrage{
+    width: 640px;
+    height: 139px;
+    background-color: rgb(219, 226, 226);
+    margin-top: 10px;
+    border:2px solid;
+    overflow: scroll;
+    position: relative;
+}
+
+.content {
+    /* top: 200px; */
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    display: inline-block;
+    padding: 4px 18px;
+    color: rgb(227, 241, 22);
+    position: absolute;
+    white-space: nowrap;
+    /* transition: all 0.3s; */
+}
+/* 动画这样写 */
+@keyframes barrage {
+    from {
+        left: 100%;
+    }
+    to {
+        left: -100%;
+    }
+}
+
+.show-history, .check-page{
+    float: left;
+    width: 48%;
+    border:2px solid;
+
+}
+.check-page{
+    margin-left: 2.5%;
+    
+}
+.comments_history, .check_history{
+    width: 281.5px;
+    height: 335px;
+    background-color: rgb(219, 226, 226);
+    overflow: auto;
+    -webkit-box-direction: reverse;
+    padding-left: 40px;
+    padding-top: 10px;
+    position: relative;
+
+}
+.comments{
+    height: 60px;
+    background-color: rgb(219, 226, 226);
+    
+}
+.page{
+    height: 40px;
+    background-color: rgb(219, 226, 226);
+    
+}
+.allpage{
+    background-color: rgb(219, 226, 226);
+    height: 20px;
+}
+.page_area{
+    background-color: rgb(219, 226, 226);
+    height: 30px;
+    width: 260px;
+}
+.img{
+    width: 20px;
+    height: 20px;
+    background-color: rgb(219, 226, 226);
+    margin-top: 5px;
+}
+.comment_area{
+    background-color: rgb(219, 226, 226);
+    height: 50px;
+    width: 260px;
+}
+.player{
+    width: 640px;
+    height: 360px;
+}
+.ppt_wrap, .luckyDrawWrap, .SignUpWrap, .vote{
+    width: 134.5px;
+    float: left;
+    height: 120px;
+    margin-top: 10px;
+
+}
+.ppt_wrap, .luckyDrawWrap{
+    margin-right: 10px;
+    padding: 10px;
+    background-color: rgb(219, 226, 226);
+    border:2px solid;
+}
+.SignUpWrap, .vote{
+    padding: 10px;
+    margin-left: 5px;
+    margin-right: 3px;
+    background-color: rgb(219, 226, 226);
+    border:2px solid;
+}
+#uname, #voucher{
+    width: 100%;
+
+}
+
+.topic_btn, .vote_btn, .SignUp_btn, .lucky_btn, .luckyresult_btn, .lucky_close_btn, .result_close_btn, .signuplucky_btn, .signup-close, .signsubmit-btn, .page_btn, .ppt-btn, .pptclose-btn, .vote-btn, .pptclose-btn, .votesub-btn, .vote-btn, .voteclose-btn, .gethuatipage-btn, .comment_btn{
+    border:2px solid;
+    border-radius:25px;
+    width: 50px;
+}
+
+.getavatar{
+    widows: 20px;
+    height: 20px;
+    overflow: hidden;
+}
+.getmsg{
+    overflow: scroll;
+}
+
+#setdata{
+            
+    display: none;           
+    position: relative;
+    z-index:99999;           
+    left:10%;           
+    top:10%;           
+    width:250px;           
+    height:150px;           
+    background-color:rgb(219, 226, 226);          
+    text-align: center;           
+}         
+.lucky_close_btn{
+    position: absolute;
+    left: 60%;
+    top:75%;
+}  
+.signuplucky_btn{
+    position: absolute;
+    left: 20%;
+    top:75%;
+} 
+.table{
+    position: absolute;
+    left: 15%;
+    top: 15%;
+}
+.resultpage{
+    display: none;           
+    position: relative;
+    z-index:99999;           
+    left:10%;           
+    top:10%;           
+    width:250px;           
+    background-color:rgb(219, 226, 226);          
+    text-align: left;           
+}
+.allluckers{
+    position: relative;
+    left: 5%;
+    top: 15%;
+    padding: 6px;
+}
+.luckers{
+    position: relative;
+    left: 15%;
+    top: 15%;
+    padding: 6px;
+}
+.result_close_btn{
+    position: relative;
+    left: 75%;
+    margin-top: 8px;
+}
+.signup-all{
+    background-color: rgb(219, 226, 226);
+    position: relative;
+    left: -220%;
+    top: 55%;
+    width: 600px;
+    /* height: 800px; */
+    z-index:99999;
+    display: none;
+}
+.signup-column-box{
+    position: relative;
+    left: 5%;
+    padding: 10px;
+    line-height: 90px;
+}
+.listdiv{
+    position: relative;
+    /* left: 1%; */
+    margin: 10px;
+    width: 90%;
+    line-height: 20px;
+    background-color: rgb(219, 226, 226);
+
+}
+.signup-close{
+    position: relative;
+    left: 90%;
+    margin-top: 8px;
+}
+.input-content-radio{
+    width: 20px;
+}
+.signsubmit-btn{
+    position: relative;
+    left: 40%;
+}
+.sendsms-btn{
+    border:2px solid;
+    border-radius:25px;
+    width: 70px;
+}
+.ppt-box{
+    background-color: rgb(161, 167, 167);
+    position: relative;
+    left: -180%;
+    top: 55%;
+    width: 600px;
+    /* height: 800px; */
+    z-index:99999;
+    display: none;
+
+}
+.pptshow{
+  
+}
+.pptcurshow{
+    position: relative;
+    width : 100%;
+    transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    -o-transform: scale(0.9);
+}
+
+
+.vote-box{
+    background-color: rgb(161, 167, 167);
+    position: relative;
+    left: -200%;
+    top: 55%;
+    width: 400px;
+    /* height: 800px; */
+    z-index:99999;
+    display: none;
+    padding: 20px;
+
+}
+.normalitem{
+    font-weight:bold;
+    font-size: 20px;
+    
+}
+.itemlist, .percent{
+    font-size: 15px;
+    color: rgb(238, 13, 99);
+}
+.voteitem{
+    position: relative;
+    left: 10%;
+    /* top: 55%; */
+}
+.voteimg{
+    position: relative;
+    width : 20%;
+    transform: scale(1);
+    -ms-transform: scale(1);
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    -o-transform: scale(1);
+}
+.percent{
+    position: relative;
+    left: 80%;
+    top: -80%;
+
+}
+.radio, .itemlist{
+    float: left;
+}
+.radio{
+    width: 10%;
+}
+.itemlist{
+    width: 80%;
+}
+.votesub-btn{
+    position: relative;
+    left: 45%;
+   
+}
+
+.topic-all{
+    height: 600px;
+    padding: 10px;  
+
+}
+.topiccur, .alltopic-history{
+    float: left;
+    width: 49%;
+    border:2px solid;
+    background-color: rgb(219, 226, 226)
+}
+
+.alltopic-history{
+    
+    height: 500px;
+    font-size: 15px;
+    margin-left: 1%;
+    position: relative;
+    background-color: rgb(219, 226, 226);
+    
+}
+.topiccur{
+    float: left;
+    height: 500px;
+    background-color: rgb(219, 226, 226);
+  
+}
+.topic-page{
+    height: 420px;
+    overflow: scroll;
+    
+}
+.topic{
+    height: 80px;
+    font-size: 15px;
+    margin-left: 3.3%;
+    position: relative;
+}
+
+.topic_area{
+    width: 85%;
+    height: 50px;
+    margin: 10px;
+}
+
+.huatiimg{
+    position: relative;
+    width : 15%;
+    transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -o-transform: scale(0.8);
+}
+.huatidata{
+    position: relative;
+    left: 5%;
+}
+
+.gethuatiavatar{
+    position: relative;
+    width : 5%;
+    top: 10px;
+    transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    -o-transform: scale(0.5);
+}
+.gethuatiimgs{
+    display: inline;
+
+}
+.imgsigle{
+    width : 10%;
+    transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -o-transform: scale(0.8);
+}
+.page-history{
+    position: relative;
+    width: 95%;
+    margin: 1%;
+    left: 2%;
+    height: 450px;
+    overflow: auto;
+}
+
+.gethuatipage{
+    position: relative;
+    width: 96%;
+    left: 4%;
+}
+.gethuatiimsg{
+    position: relative;
+}
+.huatimsg_area{
+    position: relative;
+    width: 96%;
+}
+.topic_history{
+    position: relative;
+    width: 96%;
+}

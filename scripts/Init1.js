@@ -89,6 +89,9 @@ Mudu.Init(
     var themes = Mudu.Room.GetThemes()
     console.log('直播间主题配置'+themes);
 
+
+
+
     // Room.StreamEvent事件会在直播流状态改变时(通常是后台开始直播或者关闭直播)被触发
     Mudu.MsgBus.On(
       // 事件名，值为Room.StreamEvent
@@ -100,10 +103,21 @@ Mudu.Init(
   
           var msg = data.event == 1 ? '开始直播' : '停止直播'
           console.log(msg)
+          console.log(data)
       }
   )
 
+  Mudu.MsgBus.On(
+    // 事件名，值为Player.Play
+    'Player.Play', 
+  
+    // 事件处理函数，参数为当前player组件对象
+    function (player) {
+      console.log('Mudu Player 播放开始')
+    }
+  )
 
+ 
  var player = new Mudu.Player(
   {
     // 必须，播放器容器ID，播放器会被添加到该DOM元素中
@@ -340,6 +354,17 @@ Mudu.MsgBus.On('PPT.trailer.changed', function (data) {
 
 //投票组件
 
+Mudu.Room.Vote.Get(function (response) {
+  response = JSON.parse(response)
+  if (response.status === 'y') {
+    console.log('投票获取成功，数据为：', response.data);
+  }
+  if (response.status === 'n') {
+    console.log('投票获取失败');
+  }
+})
+
+
 Mudu.MsgBus.On(
   // 事件名，值为Vote.Changed
   "Vote.Changed",
@@ -349,16 +374,36 @@ Mudu.MsgBus.On(
     var response = JSON.parse(response)
     console.log('投票状态改变');
     console.log(response.data);
+    console.log(response.data.view_enable);
+
+
+    if(response.data.view_enable=='1'){
+
+      var description = document.createElement('button');
+      description.setAttribute('class','vote-btn');
+      description.setAttribute('onclick','openvote()');
+      var desctext = document.createTextNode('vote-on');
+      description.appendChild(desctext);
+      document.getElementsByClassName('vote')[0].appendChild(description);
+
+
+    }else{
+      document.getElementsByClassName('vote')[0].removeChild(description);
+    }
+
+
+
+
   })
 
   Mudu.Room.Vote.Get(function (response) {
     response = JSON.parse(response)
     if (response.status === 'y') {
-      console.log('获取成功，数据为：', response.data)
+      console.log('投票获取成功，数据为：', response.data)
 
 
 
-      if(response.data.vote_status==1){
+      if(response.data.view_enable=='1'){
 
         var description = document.createElement('button');
         description.setAttribute('class','vote-btn');
@@ -445,6 +490,20 @@ Mudu.MsgBus.On(
 
     // 事件处理函数，参数类型为boolean, true表示允许回复, false表示不允许回复
     function (isAllowReply) {
+
+      isAllowReply = JSON.parse(isAllowReply)
+
+      console.log('----------------------------->'+isAllowReply);
+
+      if(isAllowReply == false){
+
+      alert('不允许回复');
+
+
+      }else{
+        alert('开启回复');
+
+      }
 
     }
 )
@@ -1314,61 +1373,24 @@ function sendsigndata(){
 // 提交报名问卷资料
 function Submitdata(){
 
-  var radio=document.getElementsByClassName("input-content-radio");
-  var arr = new Array();
-  for(var i=0;i<radio.length;i++){
-          if(radio[i].checked==true) {
-            arr[i]=radio[i].value;
-        }
-    };
-  alert(arr);
-
-  var columns = document.getElementsByClassName("input-content");
-  var arr = new Array();
-  for (var i=0; i<columns.length;i++){
-    arr[i]=columns[i].value;
-  };
-  alert(arr);
-
-  var columnsoptions = document.getElementsByClassName("inputoption");
-  var arr = new Array();
-  for (var i=0; i<columnsoptions.length;i++){
-    arr[i]=columnsoptions[i].innerHTML;
-  };
-  alert(arr);
-
-// 获取昵称
-
-
-
-// var nickname = document.getElementsByClassName('nickname')[0].value;
-// console.log('nickname:'+nickname);
-// var phone = document.getElementsByClassName("phone")[0].value;
-// console.log('nickname:'+phone);
-// var inputcontent = document.getElementsByClassName("input-content")[0].value;
-// console.log('nickname:'+inputcontent);
-// var textarea = document.getElementsByClassName("textarea")[0].value;
-// console.log('nickname:'+textarea);
-// var question = document.getElementsByClassName("question")[0].value;
-// console.log('nickname:'+question);
-// var questionAnswer = document.getElementsByClassName("questionAnswer")[0].value;
-// console.log('nickname:'+questionAnswer);
-
-
-
-
-
-
-
   // 第一个参数为一个对象, code为短信验证码(可不填), columns为question及其答案数组.
 Mudu.Room.Signup.Submit(
-  {code: 8909, 
+  // {code: 8909, 
+    {
     columns: [
-      {type: 'nickname', 'name': '姓名', text: '目睹君'},
+      // {type: 'nickname', 'name': '姓名', text: '目睹君'},
 
-      {type: 'phone', 'name': '手机号', text: '18099998888'},
+      // {type: 'phone', 'name': '手机号', text: '18099998888'},
       
-      {type: 'question', 'name': '你喜欢听哪些歌手', selects: ['A', 'B', 'D'], text: 'Coldplay' }
+      // {type: 'question', 'name': '你喜欢听哪些歌手', selects: ['A', 'B', 'D'], text: 'Coldplay' }
+      {type: "nickname", name: "昵称", text:'目睹君'},
+      {type: "phone", name: "手机", text: '18099998888'},
+      {type: "input", name: "单行", text: '单行1'},
+      {type: "textarea", name: "多行", text: '多行1'},
+      {type: "question", name: "选择题", selects: ['A']},
+      {type: "questionAnswer", name: "问答题", selects: ['A'], text: 'Coldplay'},
+      {type: "question", name: "选择题2", selects: ['A']}
+
     ]
   },
 
@@ -1379,10 +1401,6 @@ Mudu.Room.Signup.Submit(
   }
 )
 }
-
-// 报名问卷未完成部分：报名信息提交，必选项检查，发送短信
-
-
 
 // PPT相关
 
@@ -1577,7 +1595,7 @@ function openvote(){
   Mudu.Room.Vote.Get(function (response) {
     response = JSON.parse(response)
     if (response.status === 'y') {
-    console.log('获取成功，数据为：', response.data)
+    console.log('投票数据获取成功，数据为：', response.data)
 
     var description = document.createElement('p');
     description.setAttribute('class','votename');
@@ -1591,10 +1609,11 @@ function openvote(){
     description.appendChild(desctext);
     document.getElementsByClassName('vote-content')[0].appendChild(description);
 
+    console.log('问题长度：'+response.data.questions.length);
 
       for (var i=0;i<response.data.questions.length;i++){
 
-        console.log('问题长度：'+response.data.questions.length);
+        
       
 
         var description = document.createElement('ul');
@@ -1674,7 +1693,7 @@ function openvote(){
 
       var description = document.createElement('button');
       description.setAttribute('class','votesub-btn');
-      description.setAttribute('onclick','closevote()');
+      description.setAttribute('onclick','closevote();vote()');
       var desctext = document.createTextNode('提交');
       description.appendChild(desctext);
       document.getElementsByClassName('vote-content')[0].appendChild(description);
@@ -1695,18 +1714,49 @@ function closevote(){
 
 function vote(){
 
+
+ 
+  Mudu.Room.Vote.Get(function (response) {
+    response = JSON.parse(response)
+    if (response.status === 'y') {
+      console.log('投票数据获取成功，数据为：', response.data)
+    }
+    if (response.status === 'n') {
+      console.log('投票数据获取失败')
+    }
+
+    var id = response.data.id
+
+    console.log(id)
+
+
+  })
+    
+
   Mudu.Room.Vote.Vote(
+
+
+
+  
+    
+    
     // 问题及答案(数组)
     [
       {
         // 4265为vote_id
         // "1|1" 表示第一个问题，用户的答案是第一个选项
-        "4265":"1|1"
+        // "4265":"1|1"
+        "11078":"1|1"
       },
       {
         // 4265为vote_id
         // "2|2,3" 表示第二个问题，用户的答案是第二个选项和第三个选项
-        "4265":"2|2,3"
+        "11078":"2|1"
+      },
+      {
+        // 4265为vote_id
+        // "2|2,3" 表示第二个问题，用户的答案是第二个选项和第三个选项
+        "11078":"3|2"
       }
   
     ],
@@ -1718,7 +1768,9 @@ function vote(){
         console.log('投票成功')
       }
       if (response.status === 'n') {
-        console.log('投票失败')
+        console.log('投票失败');
+        console.log(response);
+        alert(response.info);
       }
     }
   )
@@ -1728,6 +1780,19 @@ function vote(){
 
 function sendtopic(){
 
+// // 返回boolean, true为允许, false为不允许
+// var isAllowPublish = Mudu.Room.Topic.GetAllowPublish()
+// console.log('是否允许发布话题'+isAllowPublish);
+
+// if(isAllowPublish == true){
+
+
+// // 返回boolean, true为需要审核, false为不需要审核
+// var isNeedsCheck = Mudu.Room.Topic.GetNeedsCheck()
+// console.log('是否允许需要审核'+isNeedsCheck);
+
+//   if(isNeedsCheck == false){
+  
 var text = document.getElementsByClassName('topic_area')[0].value;
 
 
@@ -1831,12 +1896,40 @@ Mudu.Room.Topic.SendTopic(
         list.appendChild(alertimgs3);
         list.appendChild(alertimgs2);
         list.appendChild(alertimgs);
+
+
+        // 添加回复
+        var reply = document.createElement("div");
+        reply.setAttribute('class','reply');
+       
+        var replyin = document.createElement('textarea');
+        replyin.setAttribute('class','replyin');
+
+        var replybtn = document.createElement('button');
+        replybtn.setAttribute('class','reply-btn');
+        replybtn.setAttribute('onclick','reply()');
+        var desctext = document.createTextNode('回复');
+        replybtn.appendChild(desctext);
+
+        reply.appendChild(replyin);
+        reply.appendChild(replybtn);
+        list.appendChild(reply);
+
         huatidata.appendChild(list);
         // document.getElementsByClassName('topic-page')[0].appendChild(huatidata);
 
 
 
+        // 返回boolean, true为允许, false为不允许
+        var isAllowReply = Mudu.Room.Topic.GetAllowReply()
+        if(isAllowReply==false){
+          list.removeChild(reply);
 
+        }
+
+
+
+      if(response.flag == 100){
         
        
         if (response.topicNeedsChecked==1){
@@ -1851,15 +1944,22 @@ Mudu.Room.Topic.SendTopic(
 
 
 
-        }else{
+        }else if(response.topicNeedsChecked==0){
           alert('话题等待审核');
+          
         }
-
+      }
 
   }
 )
 
 document.getElementsByClassName('topic_area')[0].value='';
+// }else{
+//   alert("话题需要审核");
+// }
+// }else{
+//   alert("不允许发布话题");
+// }
 
 }
 
@@ -1877,11 +1977,6 @@ Mudu.Room.Topic.Get(
       response = JSON.parse(response)
       console.log(response);
       console.log(response.topics);
-
-
-
-
-
 
       for(var i=response.topics.length-1;0<=i;i--){
 
@@ -1935,15 +2030,35 @@ Mudu.Room.Topic.Get(
   }
 )
 
+}
+
+function reply(){
 
 
 
 
+        // 回复显示
+        var replyout = document.createElement('div');
+        replyout.setAttribute('class','replyout');
+        
+        var alertcmt = document.createElement("img");
+        alertcmt.setAttribute('class','img');
+        alertcmt.setAttribute('src','https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2866492045,1432640156&fm=26&gp=0.jpg');
+        var description = document.createElement('span');
+        description.setAttribute('class','huatimsg');
 
+        var text = document.getElementsByClassName('replyin')[0].value;
+        var desctext = document.createTextNode(text);
 
+        description.appendChild(desctext);
+        replyout.appendChild(alertcmt);
+        replyout.appendChild(description);
 
+        var firstLi = document.getElementsByClassName('reply')[0]
 
+        document.getElementsByClassName("huatimsg_area")[0].insertBefore(replyout, firstLi);
 
+        document.getElementsByClassName('replyin')[0].value=''
 
 
 
