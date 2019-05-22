@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.wrap{
+    background-color: rgb(197, 193, 193);
+    font-size: 10px;
+   
+}
+.header{
+    background-color: rgb(197, 193, 193);
+    
+}
+.container{
+    background-color: rgb(197, 193, 193); 
+    max-width: 3000px;
+    height: 4000px;
+    /* padding: 10px; */
+    box-sizing: border-box;
+    margin: 0 auto;  
+    overflow: scroll; 
+    
+  
+
+}
+.initi_box, .player_box, .room_box, .commit_box, .danmu_box, .lucky_box, .ppt_box, .vote_box, .sign_box, .topic_box, .other_box{
+    display: inline;
+    float: left;
+    position: relative;
+    width: 32%;
+    height:10%;
+    margin: 0.5%;
+    border-style: solid; 
+    border-width: 2px;
+    overflow: scroll;
+    
+
+    
+}
+.player_box{
+    /* background-color: rgb(220, 43, 20); */
+
+   
+}
+.playboxlist{
+    overflow: scroll;
+}
+.room_box{
+    /* background-color: rgb(220, 133, 20); */
+    
+ 
+}
+.commit_box{
+    /* background-color: rgb(220, 190, 20); */
+    
+}
+.danmu_box{
+    /* background-color: rgb(110, 220, 20); */
+    
+}
+.lucky_box{
+    /* background-color: rgb(20, 220, 143); */
+  
+}
+.ppt_box{
+    /* background-color: rgb(20, 163, 220); */
+    
+}
+.vote_box{
+    /* background-color: rgb(33, 20, 220); */
+    
+}
+.sign_box{
+    /* background-color: rgb(140, 20, 220); */
+   
+}
+.topic_box{
+    /* background-color: rgb(220, 20, 220); */
+   
+}
+.other_box{
+    /* background-color: rgb(220, 20, 20); */
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
