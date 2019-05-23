@@ -27,12 +27,13 @@
     display: inline;
     float: left;
     position: relative;
-    width: 32%;
+    width: 30%;
     height:10%;
     margin: 0.5%;
     border-style: solid; 
     border-width: 2px;
     overflow: scroll;
+    padding: 0.8%;
     
 
     
@@ -53,6 +54,21 @@
 .commit_box{
     /* background-color: rgb(220, 190, 20); */
     
+}
+.getavatar{
+    position: relative;
+    width : 5%;
+    transform: scale(1);
+    -ms-transform: scale(1);
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    -o-transform: scale(1);
+}
+.msg-page{
+    position: relative;
+    height: 180px;
+    overflow: scroll;
+    background-color: aquamarine
 }
 .danmu_box{
     /* background-color: rgb(110, 220, 20); */
@@ -86,6 +102,12 @@
 .lucky_box{
     /* background-color: rgb(20, 220, 143); */
   
+}
+.ollist{
+    background-color: rgb(20, 163, 220);
+    height: 150px;
+    overflow: scroll;
+    position: relative;
 }
 .ppt_box{
     /* background-color: rgb(20, 163, 220); */

@@ -26,7 +26,7 @@
 <body>
     <div class="wrap">
         <div class="header">
-            websdk-version
+            <p class="version">WebSDK_Version:</p>
         </div>
         <div class="container ">
             <div class="initi_box">
@@ -136,13 +136,31 @@
                     <p class="commit_0_1">获取评论页数</p>
                 </div>
                 <div class="commit_1">
-                    <p class="commit_1_1">发送评论</p>
+                    <div class="commit_1_1">发送评论：</div>
+                        <textarea class="comment_area" ></textarea>
+                        <button class="comment_btn" onclick="sendCmt();clearcomment()">评 论</button>
                 </div>
                 <div class="commit_2">
-                    <p class="commit_2_1">获取评论</p>
+                    <div class="commit_2_1">获取评论:</div>
+                        <div class=" check-page">                           
+                            <div class='allpage'>
+                                <!-- 总页数：<span class="number"></span> -->
+                            </div>
+                            <div class="page">
+                                <textarea class="page_area"></textarea>
+                                <button class="page_btn" onclick="getPage();clearpage()">页 数</button>
+                            </div>
+                            <div class = 'msg-page'>
+                                <ol reversed class="check_history" ></ol>
+                            </div>      
+                        </div>
                 </div>
                 <div class="commit_3">
-                    <p class="commit_3_1">Comment.New事件</p>
+                    <p class="commit_3_1">Comment.New事件:</p>
+                    <p class="commit_3_2">观众名:</p>
+                    <p class="commit_3_3">观众头像url:</p>
+                    <p class="commit_3_4">评论内容:</p>
+                    
                 </div>
             </div>
             <div class="danmu_box">
@@ -155,11 +173,141 @@
                         <p class="danmu_1_1">Barrage.New事件</p>
                 </div>
             </div>
-            <div class="lucky_box">lucky_box</div>
-            <div class="ppt_box">ppt_box</div>
-            <div class="vote_box">vote_box</div>
-            <div class="sign_box">sign_box</div>
-            <div class="topic_box">topic_box</div>
+            <div class="lucky_box">
+                <p>lucky_box</p>
+                <div class="lucky_0">
+                    <p class="lucky_0_1">获取抽奖信息：</p>
+                    <p>奖项：<span id="lucky_award_name"></span></p>
+                    <p>截止时间：<span id="lucky_deadline"></span></p>  
+                    <p>参与类型(0 不允许任何观众,1 仅导入观众 ,2 仅报名观众,4 全部观众)：<span id="lucky_join_type"></span></p>
+                    <p>是否自动(0不自动开奖，1自动开奖)：<span id="lucky_auto_open"></span></p>
+                    <p>已报名人数：<span id="lucky_lucky_count"></span></p>
+                </div>
+                <div class="lucky_1">
+                    <div class="lucky_1_1">抽奖报名:</div>
+                        <table class='table'> 
+                            <tr><td>昵称</td><td><input class = 'uname' type="text"></td></tr>  
+                            <tr><td>手机</td><td><input class = 'phone' type="text"></td></tr> 
+                        </table>
+                        <button class="signuplucky_btn" onclick="signuplucky();clearsign()">提 交</button>
+                </div>
+                <div class="lucky_2">
+                    <button class="lucky_2_1" onclick="getluckyResult()">获取开奖结果</button>
+                    <div class='ollist'>
+                            <!-- <ol class='luckers'>
+
+                            </ol> -->
+                            </div>
+                </div>
+                <div class="lucky_3">
+                    <p class="lucky_3_1">LuckyDraw.Open事件</p>
+                </div>
+            </div>
+            <div class="ppt_box">
+                <p>ppt_box</p>
+                <div class="ppt_0">
+                    <p class="ppt_0_1">GetUrl 获取当前控制台PPT图片地址</p>
+                </div>
+                <div class="ppt_1">
+                    <button class="ppt_1_1" onclick='playVedio()'>GetName 获取ppt名称</button>
+                </div>
+                <div class="ppt_2">
+                    <button class="ppt_2_1" onclick='pauseVedio()'>GetCurrentPage 获取当前控制台ppt所在页数</button>
+                </div>
+                <div class="ppt_3">
+                    <button class="ppt_3_1" onclick='stopVedio()'>GetTotalPage 获取当前ppt总页数</button>
+                </div>
+                <div class="ppt_4">
+                    <button class="ppt_4_1" onclick='setControls()'>IsOpen 获取控制台是否开启显示PPT</button>
+                </div>
+                <div class="ppt_5">
+                    <button class="ppt_5_1" onclick='setPlayerSize()'>GetAllowTurnPage 获取控制台是否允许用户翻页</button>
+                </div>
+                <div class="ppt_6">
+                    <button class="ppt_6_1" onclick='getstate()'>GetPageImgUrl 根据页码获取相应的ppt图片地址</button>
+                </div>
+                <div class="ppt_7">
+                    <button class="ppt_7_1" onclick="loadnew()">PPT.Changed 事件</button>
+                </div>
+                <div class="ppt_8">
+                    <p class="ppt_8_1">PPT.IsOpen 事件</p>
+                </div>
+                <div class="ppt_9">
+                    <p class="ppt_9_1">PPT.AllowTurnPage 事件</p>
+                </div>
+                <div class="ppt_10">
+                    <p class="ppt_10_1">PPT.Doc.delete 事件</p>
+                </div>
+                <div class="ppt_11">
+                    <p class="ppt_11_1">PPT.trailer.changed 事件</p>
+                </div>
+            </div>
+            <div class="vote_box">
+                <p>vote_box</p>
+                <div class="vote_0">
+                    <p class="vote_0_1">获取投票信息</p>
+                </div>
+                <div class="vote_1">
+                    <p class="vote_1_1">进行投票</p>
+                </div>
+                <div class="vote_2">
+                    <p class="vote_2_1">Vote.Changed事件</p>
+                </div>
+            </div>
+            <div class="sign_box">
+                <p>sign_box</p>
+                <div class="sign_0">
+                    <p class="sign_0_1">获取报名问卷配置</p>
+                </div>
+                <div class="sign_1">
+                    <p class="sign_1_1">发送报名验证码</p>
+                </div>
+                <div class="sign_2">
+                    <p class="sign_2_1">提交报名表单</p>
+                </div>
+            </div>
+            <div class="topic_box">
+                <p>topic_box</p>
+                <div class="topic_0">
+                    <p class="topic_0_1">获取话题总页数</p>
+                </div>
+                <div class="topic_1">
+                    <button class="topic_1_1" onclick='playVedio()'>是否允许观众发表话题</button>
+                </div>
+                <div class="topic_2">
+                    <button class="topic_2_1" onclick='pauseVedio()'>是否允许观众回复话题</button>
+                </div>
+                <div class="topic_3">
+                    <button class="topic_3_1" onclick='stopVedio()'>发送内容是否需要审核</button>
+                </div>
+                <div class="topic_4">
+                    <button class="topic_4_1" onclick='setControls()'>获取话题互动</button>
+                </div>
+                <div class="topic_5">
+                    <button class="topic_5_1" onclick='setPlayerSize()'>发送话题互动</button>
+                </div>
+                <div class="topic_6">
+                    <button class="topic_6_1" onclick='getstate()'>发送话题回复</button>
+                </div>
+                <div class="topic_7">
+                    <button class="topic_7_1" onclick="loadnew()">Topic.AllowPublish事件</button>
+                </div>
+                <div class="topic_8">
+                    <p class="topic_8_1">Topic.AllowReply事件</p>
+                </div>
+                <div class="topic_9">
+                    <p class="topic_9_1">Topic.NeedsCheck事件</p>
+                </div>
+                <div class="topic_10">
+                    <p class="topic_10_1">Topic.New 事件</p>
+                </div>
+                <div class="topic_11">
+                    <p class="topic_11_1">Topic.Top 事件</p>
+                </div>
+                <div class="topic_12">
+                    <p class="topic_12_1">Topic.Reply.New事件</p>
+                </div>
+            </div>
             <div class="other_box">other_box</div>
         </div>
 

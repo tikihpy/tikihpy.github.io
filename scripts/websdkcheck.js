@@ -16,6 +16,14 @@ Mudu.Init(
       console.log('Mudu Web Sdk 初始化成功')
       document.getElementsByClassName('init_0_1')[0].innerHTML='Mudu Web Sdk 初始化成功';
 
+    // 获取当前webSDK版本，返回string， 如: 1.2.1
+    var version = Mudu.GetVersion();
+    console.log('WebSDK_Version:'+version);
+    document.getElementsByClassName('version')[0].innerHTML='WebSDK_Version:'+version;
+    
+
+
+
     // 在sdk 初始化成功后才可以获取当前的用户信息
       var userdata = Mudu.Room.User.GetUser()
       console.log(userdata);
@@ -101,229 +109,290 @@ Mudu.Init(
     window.player = player;
 // =======================================================================================================================================
 
-// 返回直播间名字，类型为string
-var roomName = Mudu.Room.GetName()
-console.log(roomName);
-document.getElementsByClassName('room_0_1')[0].innerHTML="直播间名字:"+roomName;
+    // 返回直播间名字，类型为string
+    var roomName = Mudu.Room.GetName()
+    console.log(roomName);
+    document.getElementsByClassName('room_0_1')[0].innerHTML="直播间名字:"+roomName;
 
 
-// 返回直播状态，类型为number: `1`为正在直播，`0`为不在直播
-var roomLiveStatus = Mudu.Room.GetLiveStatus()
-console.log(roomLiveStatus);
-document.getElementsByClassName('room_1_1')[0].innerHTML="直播状态:"+roomLiveStatus;
+    // 返回直播状态，类型为number: `1`为正在直播，`0`为不在直播
+    var roomLiveStatus = Mudu.Room.GetLiveStatus()
+    console.log(roomLiveStatus);
+    document.getElementsByClassName('room_1_1')[0].innerHTML="直播状态:"+roomLiveStatus;
 
 
-// 返回直播间浏览量，类型为number整数
-var roomViewNum = Mudu.Room.GetViewNum()
-console.log(roomViewNum);
-document.getElementsByClassName('room_2_1')[0].innerHTML="直播间浏览量:"+roomViewNum;
+    // 返回直播间浏览量，类型为number整数
+    var roomViewNum = Mudu.Room.GetViewNum()
+    console.log(roomViewNum);
+    document.getElementsByClassName('room_2_1')[0].innerHTML="直播间浏览量:"+roomViewNum;
 
 
-// 返回直播间视频地址，类型为string
-var roomPlayAddr = Mudu.Room.GetPlayAddr()
-console.log(roomPlayAddr);
-document.getElementsByClassName('room_3_1')[0].innerHTML="直播间视频地址:"+roomPlayAddr;
+    // 返回直播间视频地址，类型为string
+    var roomPlayAddr = Mudu.Room.GetPlayAddr()
+    console.log(roomPlayAddr);
+    document.getElementsByClassName('room_3_1')[0].innerHTML="直播间视频地址:"+roomPlayAddr;
 
 
-// 返回直播间视频地址列表，类型为array
-var roomPlayAddr = Mudu.Room.GetPlayList()
-console.log(roomPlayAddr);
-document.getElementsByClassName('room_4_1')[0].innerHTML="直播间视频地址列表如下：";
+    // 返回直播间视频地址列表，类型为array
+    var roomPlayAddr = Mudu.Room.GetPlayList()
+    console.log(roomPlayAddr);
+    document.getElementsByClassName('room_4_1')[0].innerHTML="直播间视频地址列表如下：";
 
-for(var i=0; i<roomPlayAddr.length;i++){
+    for(var i=0; i<roomPlayAddr.length;i++){
 
-    var description = document.createElement('div');
-    description.setAttribute('class','roomPlayAddrs');
-    var desctext = document.createTextNode('地址序列'+'['+ i +']'+':'+roomPlayAddr[i].address);
-    description.appendChild(desctext);
-    document.getElementsByClassName('room_4_1')[0].appendChild(description);
-}
+        var description = document.createElement('div');
+        description.setAttribute('class','roomPlayAddrs');
+        var desctext = document.createTextNode('地址序列'+'['+ i +']'+':'+roomPlayAddr[i].address);
+        description.appendChild(desctext);
+        document.getElementsByClassName('room_4_1')[0].appendChild(description);
+    }
 // =======================================================================================================================================
 
-// 返回视频回看配置
-var trailer = Mudu.Room.GetTrailer()
-console.log(trailer);
-document.getElementsByClassName('room_5_1')[0].innerHTML="视频回看配置如下：";
+    // 返回视频回看配置
+    var trailer = Mudu.Room.GetTrailer()
+    console.log(trailer);
+    document.getElementsByClassName('room_5_1')[0].innerHTML="视频回看配置如下：";
 
-    var m3u8=trailer.m3u8
-    var state=trailer.open
-    var imge =trailer.trailer_img
+        var m3u8=trailer.m3u8
+        var state=trailer.open
+        var imge =trailer.trailer_img
 
-    var description1 = document.createElement('div');
-    description1.setAttribute('class','trailer');
+        var description1 = document.createElement('div');
+        description1.setAttribute('class','trailer');
 
-    var description2= document.createElement('p');
-    description2.setAttribute('class','trailer_m3u8');
-    var desctext = document.createTextNode('1.地址序列:'+m3u8);
-    description2.appendChild(desctext);
+        var description2= document.createElement('p');
+        description2.setAttribute('class','trailer_m3u8');
+        var desctext = document.createTextNode('1.地址序列:'+m3u8);
+        description2.appendChild(desctext);
 
-    var description3= document.createElement('p');
-    description3.setAttribute('class','trailer_state');
-    var desctext = document.createTextNode('2.是否开启回看:'+state);
-    description3.appendChild(desctext);
+        var description3= document.createElement('p');
+        description3.setAttribute('class','trailer_state');
+        var desctext = document.createTextNode('2.是否开启回看:'+state);
+        description3.appendChild(desctext);
 
-    var description4= document.createElement('p');
-    description4.setAttribute('class','trailer_img');
-    var desctext = document.createTextNode('3.回看背景图:'+imge);
-    description4.appendChild(desctext);
-    
-    description1.appendChild(description2);
-    description1.appendChild(description3);
-    description1.appendChild(description4);
+        var description4= document.createElement('p');
+        description4.setAttribute('class','trailer_img');
+        var desctext = document.createTextNode('3.回看背景图:'+imge);
+        description4.appendChild(desctext);
+        
+        description1.appendChild(description2);
+        description1.appendChild(description3);
+        description1.appendChild(description4);
 
-    document.getElementsByClassName('room_5_1')[0].appendChild(description1);
+        document.getElementsByClassName('room_5_1')[0].appendChild(description1);
 // =======================================================================================================================================
 
-// 返回直播间自定义菜单, 类型为Array
-var menus = Mudu.Room.GetMenus()
-console.log(menus);
-document.getElementsByClassName('room_6_1')[0].innerHTML="自定义菜单如下，具体开F12查看菜单参数:";
+    // 返回直播间自定义菜单, 类型为Array
+    var menus = Mudu.Room.GetMenus()
+    console.log(menus);
+    document.getElementsByClassName('room_6_1')[0].innerHTML="自定义菜单如下，具体开F12查看菜单参数:";
 
-for(var i=0;i<menus.length;i++){
-    var menusdescription = document.createElement('div');
-    menusdescription.setAttribute('class','menus');
-    var desctext = document.createTextNode('菜单名称'+i+":"+menus[i].menu_name);
-    menusdescription.appendChild(desctext);
-    document.getElementsByClassName('room_6_1')[0].appendChild(menusdescription);
-
-}
-
-// =======================================================================================================================================
-
-// 返回直播间自定义广告栏, 类型为Array
-var ads = Mudu.Room.GetBanners();
-console.log(ads);
-document.getElementsByClassName('room_7_1')[0].innerHTML="自定义广告栏如下，具体开F12查看菜单参数:";
-
-    var adsdescription = document.createElement('div');
-    adsdescription.setAttribute('class','ads');
-    for(var j=0;j<ads.length;j++){
-    
-        var imgads = document.createElement('p');
-        imgads.setAttribute('class','imgads');
-        var desctext = document.createTextNode('广告栏'+j+":"+ads[j].img+ads[j].text);
-        imgads.appendChild(desctext);
-        adsdescription.appendChild(imgads);
-        document.getElementsByClassName('room_7_1')[0].appendChild(adsdescription); 
-}
-
-// =======================================================================================================================================
-
-// 返回直播间主题名称, 类型为string： 目前有两个值(default, tech)
-var activeTheme = Mudu.Room.GetActiveTheme()
-console.log(activeTheme);
-document.getElementsByClassName('room_8_1')[0].innerHTML="直播间主题名称:"+activeTheme;
-
-
-// 返回直播间主题配置，类型为Array
-var themes = Mudu.Room.GetThemes()
-console.log(themes);
-document.getElementsByClassName('room_9_1')[0].innerHTML="直播间主题配置名称如下:";
-
-var themesdiv = document.createElement('div');
-themesdiv.setAttribute('class','themes');
-for(var n=0;n<themes.length;n++){
-    var Themes = document.createElement('p');
-    Themes.setAttribute('class','theme');
-    var desctext = document.createTextNode('主题配置'+n+":"+themes[n].name);
-    Themes.appendChild(desctext);
-    themesdiv.appendChild(Themes);
-    document.getElementsByClassName('room_9_1')[0].appendChild(themesdiv); 
-}
-
-
-// Room.StreamEvent事件会在直播流状态改变时(通常是后台开始直播或者关闭直播)被触发
-
-Mudu.MsgBus.On(
-    // 事件名，值为Room.StreamEvent
-    'Room.StreamEvent',
-
-    // 事件处理函数，参数类型为object
-    function (data) {
-        data = JSON.parse(data)
-
-        var msg = data.event == 1 ? '开始直播' : '停止直播'
-        console.log(msg)
-
-        document.getElementsByClassName('room_10_1')[0].innerHTML="Room.StreamEvent事件:"+msg;
-        timer=setTimeout(function () {
-            document.getElementsByClassName('room_10_1')[0].innerHTML="Room.StreamEvent事件";
-        }, 5000); 
+    for(var i=0;i<menus.length;i++){
+        var menusdescription = document.createElement('div');
+        menusdescription.setAttribute('class','menus');
+        var desctext = document.createTextNode('菜单名称'+i+":"+menus[i].menu_name);
+        menusdescription.appendChild(desctext);
+        document.getElementsByClassName('room_6_1')[0].appendChild(menusdescription);
 
     }
-)
 
 // =======================================================================================================================================
 
-// 弹幕组件
-Mudu.MsgBus.On(
-    // 事件名，值为"Barrage.New"
-    "Barrage.New",
-    
-    // 事件处理函数，参数为弹幕对象
-    function (barrage) {
-        barrage = JSON.parse(barrage)
-        // console.log('收到新的弹幕，内容为: ', barrage.text)
-        console.log('收到新的弹幕，内容为: ', barrage)
+    // 返回直播间自定义广告栏, 类型为Array
+    var ads = Mudu.Room.GetBanners();
+    console.log(ads);
+    document.getElementsByClassName('room_7_1')[0].innerHTML="自定义广告栏如下，具体开F12查看菜单参数:";
 
-        var description = document.createElement('p');
-        description.setAttribute('class','content');
-        var desctext = document.createTextNode(barrage.text);
-        description.appendChild(desctext);
-        document.getElementsByClassName('barrage')[0].appendChild(description);
+        var adsdescription = document.createElement('div');
+        adsdescription.setAttribute('class','ads');
+        for(var j=0;j<ads.length;j++){
+        
+            var imgads = document.createElement('p');
+            imgads.setAttribute('class','imgads');
+            var desctext = document.createTextNode('广告栏'+j+":"+ads[j].img+ads[j].text);
+            imgads.appendChild(desctext);
+            adsdescription.appendChild(imgads);
+            document.getElementsByClassName('room_7_1')[0].appendChild(adsdescription); 
+    }
 
-        // 获取指定范围的随机数
-        function Random(start, end) {
-        let num = (Math.random() * (end - start) + start).toString();
-        return parseInt(num, 10);
+// =======================================================================================================================================
+
+    // 返回直播间主题名称, 类型为string： 目前有两个值(default, tech)
+    var activeTheme = Mudu.Room.GetActiveTheme()
+    console.log(activeTheme);
+    document.getElementsByClassName('room_8_1')[0].innerHTML="直播间主题名称:"+activeTheme;
+
+
+    // 返回直播间主题配置，类型为Array
+    var themes = Mudu.Room.GetThemes()
+    console.log(themes);
+    document.getElementsByClassName('room_9_1')[0].innerHTML="直播间主题配置名称如下:";
+
+    var themesdiv = document.createElement('div');
+    themesdiv.setAttribute('class','themes');
+    for(var n=0;n<themes.length;n++){
+        var Themes = document.createElement('p');
+        Themes.setAttribute('class','theme');
+        var desctext = document.createTextNode('主题配置'+n+":"+themes[n].name);
+        Themes.appendChild(desctext);
+        themesdiv.appendChild(Themes);
+        document.getElementsByClassName('room_9_1')[0].appendChild(themesdiv); 
+    }
+
+
+    // Room.StreamEvent事件会在直播流状态改变时(通常是后台开始直播或者关闭直播)被触发
+
+    Mudu.MsgBus.On(
+        // 事件名，值为Room.StreamEvent
+        'Room.StreamEvent',
+
+        // 事件处理函数，参数类型为object
+        function (data) {
+            data = JSON.parse(data)
+
+            var msg = data.event == 1 ? '开始直播' : '停止直播'
+            console.log(msg)
+
+            document.getElementsByClassName('room_10_1')[0].innerHTML="Room.StreamEvent事件:"+msg;
+            timer=setTimeout(function () {
+                document.getElementsByClassName('room_10_1')[0].innerHTML="Room.StreamEvent事件";
+            }, 5000); 
+
         }
-        // 创建弹幕从右到左面的10-15的随机秒数
-        const randomTime = Random(8, 30);
-        // 创建离上方的距离  百分比 现在是半屏
-        const randomTop = Random(0, 80);
-        description.style.top = randomTop + "%";
-        description.style.animation = "barrage " + randomTime + "s linear";
-        // 添加一个定时器 在运行完成之后删除这个DOM
-        setTimeout(() => {
-        document.getElementsByClassName('barrage')[0].removeChild(description)
-    }, randomTime * 1000);
-    } 
     )
+
+// =======================================================================================================================================
+
+    // 弹幕组件
+    Mudu.MsgBus.On(
+        // 事件名，值为"Barrage.New"
+        "Barrage.New",
+        
+        // 事件处理函数，参数为弹幕对象
+        function (barrage) {
+            barrage = JSON.parse(barrage)
+            // console.log('收到新的弹幕，内容为: ', barrage.text)
+            console.log('收到新的弹幕，内容为: ', barrage)
+
+            var description = document.createElement('p');
+            description.setAttribute('class','content');
+            var desctext = document.createTextNode(barrage.text);
+            description.appendChild(desctext);
+            document.getElementsByClassName('barrage')[0].appendChild(description);
+
+            // 获取指定范围的随机数
+            function Random(start, end) {
+            let num = (Math.random() * (end - start) + start).toString();
+            return parseInt(num, 10);
+            }
+            // 创建弹幕从右到左面的10-15的随机秒数
+            const randomTime = Random(8, 30);
+            // 创建离上方的距离  百分比 现在是半屏
+            const randomTop = Random(0, 80);
+            description.style.top = randomTop + "%";
+            description.style.animation = "barrage " + randomTime + "s linear";
+            // 添加一个定时器 在运行完成之后删除这个DOM
+            setTimeout(() => {
+            document.getElementsByClassName('barrage')[0].removeChild(description)
+        }, randomTime * 1000);
+        } 
+        )
     // Barrage.New事件会在收到新的弹幕时被触发
-Mudu.MsgBus.On(
-    // 事件名，值为"Barrage.New"
-    "Barrage.New",
-    
-    // 事件处理函数，参数为弹幕对象
-    function (barrage) {
-        barrage = JSON.parse(barrage)
-        console.log('收到新的弹幕，内容为: ', barrage.text)
-        document.getElementsByClassName('danmu_1_1')[0].innerHTML='收到新的弹幕: ';
-        timer=setTimeout(function () {
-            document.getElementsByClassName('danmu_1_1')[0].innerHTML='Barrage.New事件';   
-        }, 5000); 
+    Mudu.MsgBus.On(
+        // 事件名，值为"Barrage.New"
+        "Barrage.New",
+        
+        // 事件处理函数，参数为弹幕对象
+        function (barrage) {
+            barrage = JSON.parse(barrage)
+            console.log('收到新的弹幕，内容为: ', barrage.text)
+            document.getElementsByClassName('danmu_1_1')[0].innerHTML='收到新的弹幕: ';
+            timer=setTimeout(function () {
+                document.getElementsByClassName('danmu_1_1')[0].innerHTML='Barrage.New事件';   
+            }, 5000); 
 
 
-        var description = document.createElement('p');
-        description.setAttribute('class','barrage_text');
-        var desctext = document.createTextNode('内容：'+barrage.text);
-        description.appendChild(desctext);
-        document.getElementsByClassName('danmu_1_1')[0].appendChild(description);
+            var description = document.createElement('p');
+            description.setAttribute('class','barrage_text');
+            var desctext = document.createTextNode('内容：'+barrage.text);
+            description.appendChild(desctext);
+            document.getElementsByClassName('danmu_1_1')[0].appendChild(description);
 
-        var description = document.createElement('p');
-        description.setAttribute('class','barrage_stime');
-        var desctext = document.createTextNode('时间戳：'+barrage.stime);
-        description.appendChild(desctext);
-        document.getElementsByClassName('danmu_1_1')[0].appendChild(description);
+            var description = document.createElement('p');
+            description.setAttribute('class','barrage_stime');
+            var desctext = document.createTextNode('时间戳：'+barrage.stime);
+            description.appendChild(desctext);
+            document.getElementsByClassName('danmu_1_1')[0].appendChild(description);
 
 
     }
     )
 // =======================================================================================================================================
 
+    // 返回评论页数，类型为int
+    var commentPage = Mudu.Room.Comment.GetPage()
+    document.getElementsByClassName('commit_0_1')[0].innerHTML='评论总页数：'+commentPage; 
 
 
+    Mudu.MsgBus.On(
+        // 事件名，值为Comment.New
+        'Comment.New', 
+      
+        // 事件处理函数，参数为新的评论，类型为object
+        function (newComment) {
+          newComment = JSON.parse(newComment)
+          console.log(newComment.username + '发送了一条新评论: ' + newComment.message)
 
+          document.getElementsByClassName('commit_3_2')[0].innerHTML='观众名：'+newComment.username;
+          document.getElementsByClassName('commit_3_3')[0].innerHTML='观众头像url：'+newComment.avatar;
+          document.getElementsByClassName('commit_3_4')[0].innerHTML='评论内容：'+newComment.message;
+
+        }
+      )
+  
+// =======================================================================================================================================
+
+
+    // 抽奖组件
+    Mudu.Room.LuckyDraw.Get(
+        function (response) {
+        response = JSON.parse(response)
+        if (response.status === 'y') {
+          console.log('抽奖获取成功，数据为：', response.data);
+        }
+        if (response.status === 'n') {
+          console.log('抽奖获取失败')
+        }
+        var lucky = document.getElementById('lucky_award_name')
+        var luckytime = document.getElementById('lucky_deadline')
+        var ucky_join_type=document.getElementById('lucky_join_type')
+        var lucky_auto_open=document.getElementById('lucky_auto_open')
+        var lucky_lucy_count=document.getElementById('lucky_lucky_count')
+
+
+        lucky.innerHTML=response.data.lucky_draw.award_name;
+        luckytime.innerHTML=response.data.lucky_draw.deadline;
+        ucky_join_type.innerHTML=response.data.lucky_draw.join_type;
+        lucky_auto_open.innerHTML=response.data.lucky_draw.auto_open;
+        lucky_lucy_count.innerHTML=response.data.lucky_draw.lucky_count;
+      }   
+      )  
+
+      Mudu.MsgBus.On(
+        // 事件名，值为LuckyDraw.Open
+        "LuckyDraw.Open",
+      
+        // 事件处理函数
+        function (response) {
+          var response = JSON.parse(response)
+          console.log('开奖啦')
+          document.getElementsByClassName('lucky_3_1')[0].innerHTML='LuckyDraw.Open事件：开奖了，成功被触发！';
+          timer=setTimeout(function () {
+            document.getElementsByClassName('lucky_3_1')[0].innerHTML='LuckyDraw.Open事件';   
+        }, 10000); 
+
+
+        })
 
 
 
@@ -569,5 +638,152 @@ function loadnew(){
 
 }
 // =======================================================================================================================================
+
+ // 评论绑定事件
+ function sendCmt() {
+    var value = document.getElementsByClassName('comment_area')[0].value;
+    if (value==''){
+    alert('内容不能为空！')
+    }else{
+    Mudu.Room.Comment.Send(
+        // 要发送的评论文本，类型为string
+        value ,
+        // 发送完成的回调函数，参数为response对象
+        function (response) {
+        response = JSON.parse(response)
+        if (response.status === 'y') {
+            console.log('发送成功');
+            alert('发送成功');
+        }
+        if (response.status === 'n') {
+            console.log('发送失败，错误码为：' + response.flag+'错误提示：'+response.info)
+            alert('发送失败，错误码为：' + response.flag+'错误提示：'+response.info);
+        }
+        }
+    )
+    }
+}
+// 清空评论输入框内容
+function clearcomment(){
+    document.getElementsByClassName('comment_area')[0].value='';
+}
+
+
+// 获取指定评论页数
+function getPage(){
+    var value = document.getElementsByClassName('page_area')[0].value;
+    if (value==''){
+      alert('请输入页码！')
+    }else{
+      Mudu.Room.Comment.Get(
+        // 要获取评论的页码，类型为int
+        value,
+        // 评论获取成功的回调函数，参数为response对象
+        function (response) {
+          response = JSON.parse(response)
+          if (response.status === 'y') {
+            // console.log('获取评论成功，数据为：', response.data)
+            console.log('获取评论成功，数据为：', response)
+          } 
+          if (response.status === 'n'){
+            console.log('获取评论失败')
+          }
+    
+        // 添加自定义获取某一页聊天记录
+        for(var i=response.data.comments.length-1;0<=i;i--){
+            var pagelist = document.createElement('li');
+            pagelist.setAttribute('class','getpage');
+            var alertcmt = document.createElement("img");
+            alertcmt.setAttribute('class','getavatar');
+            alertcmt.setAttribute('src',response.data.comments[i].avatar);
+            var description = document.createElement('span');
+            description.setAttribute('class','getmsg');
+            var desctext = document.createTextNode(response.data.comments[i].message);
+            pagelist.appendChild(alertcmt);
+            pagelist.appendChild(description);
+            description.appendChild(desctext);
+            // document.getElementsByTagName('ol')[1].appendChild(pagelist);
+            var firstLi = document.getElementsByClassName('getpage')[0]
+                  if (firstLi) {
+                    document.getElementsByClassName("check_history")[0].insertBefore(pagelist, firstLi);
+                  } else {
+                    document.getElementsByClassName("check_history")[0].appendChild(pagelist);
+                  }   
+          }
+        }
+      ) 
+    } 
+  }
+// 清空页面输入框内容
+function clearpage(){
+    document.getElementsByClassName('page_area')[0].value='';
+  }
+
+// =======================================================================================================================================
+//添加抽奖报名信息
+function signuplucky(){
+    var uname = document.getElementsByClassName('uname')[0].value;
+    var voucher = document.getElementsByClassName('phone')[0].value;
+    Mudu.Room.LuckyDraw.SignUp(
+      {
+        // 观众名，类型为string
+        userName: uname,
+        // 抽奖唯一凭证，类型为string，推荐使用手机号作为唯一凭证
+        voucher: voucher,
+      },
+      // 回调函数，参数为response
+      function (response) {
+        response = JSON.parse(response)
+        if (response.status === 'y') {
+          console.log('抽奖报名成功',response);
+          alert(response.info);
+        }
+        if (response.status === 'n') {
+          console.log('抽奖报名失败',response);
+          alert(response.info);
+        } 
+      }
+    )
+  }
+// 清楚报名框内容
+  function clearsign(){
+    document.getElementsByClassName('uname')[0].value='';
+    document.getElementsByClassName('phone')[0].value='';
+  }
+// =======================================================================================================================================
+// 获取抽奖结果
+function getluckyResult(){
+    Mudu.Room.LuckyDraw.Result(
+      // 回调函数，参数为response对象
+      function (response) {
+        response = JSON.parse(response)
+        if (response.status === 'y') {
+          console.log('抽奖结果获取成功，数据为：', response.data)
+            var alllist = document.createElement('ol');
+            alllist.setAttribute('class','allluckers');
+            for(var i=0;i<response.data.luckers.length;i++){
+            var pagelist = document.createElement('li');
+            pagelist.setAttribute('class','luckers');
+            var description = document.createElement('span');
+            description.setAttribute('class','luckersphone');
+            var desctext = document.createTextNode(response.data.luckers[i].voucher);
+            alllist.appendChild(pagelist);
+            pagelist.appendChild(description);
+            description.appendChild(desctext);
+          }
+          document.getElementsByClassName('ollist')[0].appendChild(alllist);
+        }
+        if (response.status === 'n') {
+          console.log('抽奖结果获取失败')
+          alert(response.info);
+        }
+      }
+    )
+  }
+
+// =======================================================================================================================================
+//
+
+
 
 
