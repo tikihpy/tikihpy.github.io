@@ -3,27 +3,26 @@
     padding: 0;
 }
 .wrap{
-    background-color: rgb(197, 193, 193);
+    /* background-color: rgb(197, 193, 193); */
     font-size: 10px;
    
 }
 .header{
-    background-color: rgb(197, 193, 193);
+    /* background-color: rgb(197, 193, 193); */
     
 }
 .container{
-    background-color: rgb(197, 193, 193); 
+    /* background-color: rgb(197, 193, 193);  */
     max-width: 3000px;
     height: 4000px;
     /* padding: 10px; */
     box-sizing: border-box;
     margin: 0 auto;  
     overflow: scroll; 
-    
-  
+     
 
 }
-.initi_box, .player_box, .room_box, .commit_box, .danmu_box, .lucky_box, .ppt_box, .vote_box, .sign_box, .topic_box, .other_box{
+.initi_box, .player_box, .room_box, .commit_box, .danmu_box, .lucky_box, .ppt_box, .vote_box, .sign_box, .topic_box, .other_box, .other_box2{
     display: inline;
     float: left;
     position: relative;
@@ -33,8 +32,7 @@
     border-style: solid; 
     border-width: 2px;
     overflow: scroll;
-    padding: 0.8%;
-    
+    padding: 0.5%;
 
     
 }
@@ -55,7 +53,7 @@
     /* background-color: rgb(220, 190, 20); */
     
 }
-.getavatar{
+.getavatar, .gethuatiavatar, .img{
     position: relative;
     width : 5%;
     transform: scale(1);
@@ -68,14 +66,14 @@
     position: relative;
     height: 180px;
     overflow: scroll;
-    background-color: aquamarine
+    background-color: rgb(100,100,100);
 }
 .danmu_box{
     /* background-color: rgb(110, 220, 20); */
     
 }
 .barrage{
-    background-color: rgb(20, 163, 220);
+    background-color: rgb(100,100,100);
     height: 200px;
     overflow: scroll;
     position: relative;
@@ -104,7 +102,7 @@
   
 }
 .ollist{
-    background-color: rgb(20, 163, 220);
+    background-color: rgb(100,100,100);
     height: 150px;
     overflow: scroll;
     position: relative;
@@ -112,6 +110,15 @@
 .ppt_box{
     /* background-color: rgb(20, 163, 220); */
     
+}
+.ppt_img, .getppt_img, .changed_ppt_img, .sign_img{
+    position: relative;
+    width : 55%;
+    transform: scale(1);
+    -ms-transform: scale(1);
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    -o-transform: scale(1);
 }
 .vote_box{
     /* background-color: rgb(33, 20, 220); */
@@ -125,12 +132,103 @@
     /* background-color: rgb(220, 20, 220); */
    
 }
+.page-history{
+    position: relative;
+    height: 180px;
+    overflow: scroll;
+    background-color: rgb(100,100,100);
+}
+.imgsigle, .huatiimg{
+    position: relative;
+    width : 10%;
+    transform: scale(1);
+    -ms-transform: scale(1);
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    -o-transform: scale(1);
+}
+.gethuatiimgs{
+    display: inline;
+}
+.topic-page{
+    position: relative;
+    height: 180px;
+    overflow: scroll;
+    background-color:rgb(100,100,100);
+}
 .other_box{
     /* background-color: rgb(220, 20, 20); */
     
 }
 
 
+/* ================================================ */
+.version{
+
+}
+
+.init_0_1, .init_1_1, .init_2_1{
+    font-weight:bold;
+}
+
+.play_0_1, .play_1_1, .play_2_1, .play_3_1, .play_4_1, .play_5_1, .play_6_1, .play_7_1, .play_8_1, .play_9_1, .play_10_1, .play_11_1{
+    font-weight:bold;
+}
+
+
+.room_0_1, .room_1_1, .room_2_1, .room_3_1, .room_4_1, .room_5_1, .room_6_1, .room_7_1, .room_8_1, .room_9_1, .room_10_1{
+    font-weight:bold;
+}
+
+
+.commit_0_1, .commit_1_1, .commit_2_1, .commit_3_1, .commit_3_2, .commit_3_3, .commit_3_4{
+    font-weight:bold;
+}
+
+
+.danmu_0_1, .danmu_1_1{
+    font-weight:bold;
+}
+
+.lucky_0_1, .lucky_1_1, .lucky_2_1, .lucky_3_1{
+    font-weight:bold;
+}
+
+.getcurppt_url, .ppt_1_1, .ppt_2_1, .ppt_3_1, .ppt_4_1, .ppt_5_1, .ppt_6_1_0, .ppt_7_1, .ppt_8_1, .ppt_9_1, .ppt_10_1, .ppt_11_1{
+    font-weight:bold;
+}
+
+
+.vote_0_1, .vote_1_1, .vote_2_1{
+    font-weight:bold;
+}
+
+
+.sign_0_1, .sign_1_1, .sign_2_1{
+    font-weight:bold;
+}
+
+
+
+.topic_0_1, .topic_1_1, .topic_2_1, .topic_3_1, .topic_4_1, .topic_5_1, .topic_6_1, .topic_7_1, .topic_8_1, .topic_9_1, .topic_10_1, .topic_11_1, .topic_12_1{
+    font-weight:bold;
+}
+
+
+/* 顶部组件名 */
+.topline{
+    font-weight:bolder;
+    background-color: rgb(240, 218, 24);
+    /* opacity:0.5; */
+}
+
+/* 按钮 */
+
+.init_btn, .play_1_1, .play_2_1, .play_3_1, .play_4_1, .play_5_1, .play_6_1, .play_7_1, .comment_btn, .page_btn, .signuplucky_btn, .lucky_2_1, .getppt_btn, .vote_1_1, .signmsg_btn, .signsubmit_btn, .gettopic_btn, .topic_btn{
+    /* border-radius:4px;
+    border:1px solid; */
+    /* background-color: rgb(152, 158, 158); */
+}
 
 
 
