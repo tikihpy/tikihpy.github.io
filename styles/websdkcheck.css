@@ -4,12 +4,13 @@
 }
 .wrap{
     /* background-color: rgb(197, 193, 193); */
-    font-size: 10px;
+    font-size: 13px;
+    line-height:180%;
+    
    
 }
 .header{
-    /* background-color: rgb(197, 193, 193); */
-    
+    text-align:center;
 }
 .container{
     /* background-color: rgb(197, 193, 193);  */
@@ -17,7 +18,8 @@
     height: 4000px;
     /* padding: 10px; */
     box-sizing: border-box;
-    margin: 0 auto;  
+    margin: 10px;
+    margin-top: 0px;
     overflow: scroll; 
      
 
@@ -26,7 +28,7 @@
     display: inline;
     float: left;
     position: relative;
-    width: 30%;
+    width: 31%;
     height:10%;
     margin: 0.5%;
     border-style: solid; 
@@ -163,11 +165,11 @@
 
 
 /* ================================================ */
-.version{
-
+.webSDKDOC, .webDOC, .version{
+    font-weight:bolder;
 }
 
-.init_0_1, .init_1_1, .init_2_1{
+.init_0_1, .init_1_1, .init_2_1, .set_actid{
     font-weight:bold;
 }
 
@@ -219,6 +221,7 @@
 .topline{
     font-weight:bolder;
     background-color: rgb(240, 218, 24);
+    text-align:center;
     /* opacity:0.5; */
 }
 

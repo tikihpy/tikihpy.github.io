@@ -1,17 +1,48 @@
 
-// function setactid(){
-//         var act_id = document.getElementsByClassName('act_id')[0].value
-//         alert('设置成功');
-//         location.reload();
-    
-// }
+// 输入想要测试的频道ID,点击设置后重新初始化,将这个值传到url中
+function setactid(){
+    // 往url中传入参数
+    function updateQueryStringParameter(uri, key, value) {
+        if(!value) {
+            return uri;
+        }
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        }
+        else {
+            return uri + separator + key + "=" + value;
+        }
+    }
+    // 传入对应参数       
+    var newurl = updateQueryStringParameter(window.location.href, 'id', document.getElementsByClassName('act_id')[0].value);
+
+    //传入参数后刷新页面，重新初始化
+    window.location.href = newurl
+}
 
 
+
+// 从URL中获取到频道ID
+function GetQueryString(name) { 
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+    var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
+    var context = ""; 
+    if (r != null) 
+       context = r[2]; 
+    reg = null; 
+    r = null; 
+    return context == null || context == "" || context == "undefined" ? "" : context; 
+}
+
+var paramId = GetQueryString('id') || 185053;
 
 Mudu.Init(
 
     // 线上频道id
-    // 185053,
+    // 185053
+    paramId,
     // 测试服频道ID
     // 10003046,
     // 10003187,
@@ -29,8 +60,8 @@ Mudu.Init(
 
     // 获取当前webSDK版本，返回string， 如: 1.2.1
     var version = Mudu.GetVersion();
-    console.log('WebSDK_Version:'+version);
-    document.getElementsByClassName('version')[0].innerHTML='WebSDK_Version:'+version;
+    console.log('WebSDK_Version：'+version);
+    document.getElementsByClassName('version')[0].innerHTML='WebSDK_Version：'+version;
     
 
     // 在sdk 初始化成功后才可以获取当前的用户信息
@@ -40,10 +71,10 @@ Mudu.Init(
       var id=userdata.id
       var assign_id=userdata.assign_id
       var avatar=userdata.avatar
-      document.getElementsByClassName('name')[0].innerHTML='name:'+name;
-      document.getElementsByClassName('id')[0].innerHTML='id:'+id;
-      document.getElementsByClassName('assign_id')[0].innerHTML='assign_id:'+assign_id;
-      document.getElementsByClassName('avatar')[0].innerHTML='avatar:'+avatar;
+      document.getElementsByClassName('name')[0].innerHTML='name：'+name;
+      document.getElementsByClassName('id')[0].innerHTML='id：'+id;
+      document.getElementsByClassName('assign_id')[0].innerHTML='assign_id：'+assign_id;
+      document.getElementsByClassName('avatar')[0].innerHTML='avatar：'+avatar;
 
     // 情景一： 在调用sdk的init方法之前，希望设置默认的用户昵称和头像 （仅对初次进入的用户有效） 注：该观众仍为匿名观众，不能参与投票
     // 在cookie中设置muduapi_user、muduapi_avatar，这两项的值必须使用encodeURIComponent方法encode key | value ---|--- 
@@ -120,25 +151,25 @@ Mudu.Init(
     // 返回直播间名字，类型为string
     var roomName = Mudu.Room.GetName()
     console.log(roomName);
-    document.getElementsByClassName('room_0_1')[0].innerHTML="一、直播间名字:"+roomName;
+    document.getElementsByClassName('room_0_1')[0].innerHTML="一、直播间名字："+roomName;
 
 
     // 返回直播状态，类型为number: `1`为正在直播，`0`为不在直播
     var roomLiveStatus = Mudu.Room.GetLiveStatus()
     console.log(roomLiveStatus);
-    document.getElementsByClassName('room_1_1')[0].innerHTML="二、直播状态:"+roomLiveStatus;
+    document.getElementsByClassName('room_1_1')[0].innerHTML="二、直播状态："+roomLiveStatus;
 
 
     // 返回直播间浏览量，类型为number整数
     var roomViewNum = Mudu.Room.GetViewNum()
     console.log(roomViewNum);
-    document.getElementsByClassName('room_2_1')[0].innerHTML="三、直播间浏览量:"+roomViewNum;
+    document.getElementsByClassName('room_2_1')[0].innerHTML="三、直播间浏览量："+roomViewNum;
 
 
     // 返回直播间视频地址，类型为string
     var roomPlayAddr = Mudu.Room.GetPlayAddr()
     console.log(roomPlayAddr);
-    document.getElementsByClassName('room_3_1')[0].innerHTML="四、直播间视频地址:"+roomPlayAddr;
+    document.getElementsByClassName('room_3_1')[0].innerHTML="四、直播间视频地址："+roomPlayAddr;
 
 
     // 返回直播间视频地址列表，类型为array
@@ -150,7 +181,7 @@ Mudu.Init(
 
         var description = document.createElement('div');
         description.setAttribute('class','roomPlayAddrs');
-        var desctext = document.createTextNode('地址序列'+'['+ i +']'+':'+roomPlayAddr[i].address);
+        var desctext = document.createTextNode('地址序列'+'['+ i +']'+'：'+roomPlayAddr[i].address);
         description.appendChild(desctext);
         document.getElementsByClassName('room_4_1')[0].appendChild(description);
     }
@@ -170,17 +201,17 @@ Mudu.Init(
 
         var description2= document.createElement('p');
         description2.setAttribute('class','trailer_m3u8');
-        var desctext = document.createTextNode('1.地址序列:'+m3u8);
+        var desctext = document.createTextNode('1.地址序列：'+m3u8);
         description2.appendChild(desctext);
 
         var description3= document.createElement('p');
         description3.setAttribute('class','trailer_state');
-        var desctext = document.createTextNode('2.是否开启回看:'+state);
+        var desctext = document.createTextNode('2.是否开启回看：'+state);
         description3.appendChild(desctext);
 
         var description4= document.createElement('p');
         description4.setAttribute('class','trailer_img');
-        var desctext = document.createTextNode('3.回看背景图:'+imge);
+        var desctext = document.createTextNode('3.回看背景图：'+imge);
         description4.appendChild(desctext);
         
         description1.appendChild(description2);
@@ -193,12 +224,12 @@ Mudu.Init(
     // 返回直播间自定义菜单, 类型为Array
     var menus = Mudu.Room.GetMenus()
     console.log(menus);
-    document.getElementsByClassName('room_6_1')[0].innerHTML="七、自定义菜单如下，具体开F12查看菜单参数:";
+    document.getElementsByClassName('room_6_1')[0].innerHTML="七、自定义菜单如下，具体开F12查看菜单参数：";
 
     for(var i=0;i<menus.length;i++){
         var menusdescription = document.createElement('div');
         menusdescription.setAttribute('class','menus');
-        var desctext = document.createTextNode('菜单名称'+i+":"+menus[i].menu_name);
+        var desctext = document.createTextNode('菜单名称'+i+"："+menus[i].menu_name);
         menusdescription.appendChild(desctext);
         document.getElementsByClassName('room_6_1')[0].appendChild(menusdescription);
 
@@ -209,7 +240,7 @@ Mudu.Init(
     // 返回直播间自定义广告栏, 类型为Array
     var ads = Mudu.Room.GetBanners();
     console.log(ads);
-    document.getElementsByClassName('room_7_1')[0].innerHTML="八、自定义广告栏如下，具体开F12查看菜单参数:";
+    document.getElementsByClassName('room_7_1')[0].innerHTML="八、自定义广告栏如下，具体开F12查看菜单参数：";
 
         var adsdescription = document.createElement('div');
         adsdescription.setAttribute('class','ads');
@@ -217,7 +248,7 @@ Mudu.Init(
         
             var imgads = document.createElement('p');
             imgads.setAttribute('class','imgads');
-            var desctext = document.createTextNode('广告栏'+j+":"+ads[j].img+ads[j].text);
+            var desctext = document.createTextNode('广告栏'+j+"："+ads[j].img+ads[j].text);
             imgads.appendChild(desctext);
             adsdescription.appendChild(imgads);
             document.getElementsByClassName('room_7_1')[0].appendChild(adsdescription); 
@@ -228,20 +259,20 @@ Mudu.Init(
     // 返回直播间主题名称, 类型为string： 目前有两个值(default, tech)
     var activeTheme = Mudu.Room.GetActiveTheme()
     console.log(activeTheme);
-    document.getElementsByClassName('room_8_1')[0].innerHTML="九、直播间主题名称:"+activeTheme;
+    document.getElementsByClassName('room_8_1')[0].innerHTML="九、直播间主题名称："+activeTheme;
 
 
     // 返回直播间主题配置，类型为Array
     var themes = Mudu.Room.GetThemes()
     console.log(themes);
-    document.getElementsByClassName('room_9_1')[0].innerHTML="十、直播间主题配置名称如下:";
+    document.getElementsByClassName('room_9_1')[0].innerHTML="十、直播间主题配置名称如下：";
 
     var themesdiv = document.createElement('div');
     themesdiv.setAttribute('class','themes');
     for(var n=0;n<themes.length;n++){
         var Themes = document.createElement('p');
         Themes.setAttribute('class','theme');
-        var desctext = document.createTextNode('主题配置'+n+":"+themes[n].name);
+        var desctext = document.createTextNode('主题配置'+n+"："+themes[n].name);
         Themes.appendChild(desctext);
         themesdiv.appendChild(Themes);
         document.getElementsByClassName('room_9_1')[0].appendChild(themesdiv); 
@@ -261,7 +292,7 @@ Mudu.Init(
             var msg = data.event == 1 ? '开始直播' : '停止直播'
             console.log(msg)
 
-            document.getElementsByClassName('room_10_1')[0].innerHTML="十一、Room.StreamEvent事件:"+msg;
+            document.getElementsByClassName('room_10_1')[0].innerHTML="十一、Room.StreamEvent事件："+msg;
             timer=setTimeout(function () {
                 document.getElementsByClassName('room_10_1')[0].innerHTML="十一、Room.StreamEvent事件";
             }, 5000); 
@@ -313,8 +344,8 @@ Mudu.Init(
         // 事件处理函数，参数为弹幕对象
         function (barrage) {
             barrage = JSON.parse(barrage)
-            console.log('收到新的弹幕，内容为: ', barrage.text)
-            document.getElementsByClassName('danmu_1_1')[0].innerHTML='二、收到新的弹幕: ';
+            console.log('收到新的弹幕，内容为： ', barrage.text)
+            document.getElementsByClassName('danmu_1_1')[0].innerHTML='二、收到新的弹幕： ';
             timer=setTimeout(function () {
                 document.getElementsByClassName('danmu_1_1')[0].innerHTML='Barrage.New事件';   
             }, 10000); 
@@ -349,7 +380,7 @@ Mudu.Init(
         // 事件处理函数，参数为新的评论，类型为object
         function (newComment) {
           newComment = JSON.parse(newComment)
-          console.log(newComment.username + '发送了一条新评论: ' + newComment.message)
+          console.log(newComment.username + '发送了一条新评论： ' + newComment.message)
 
           document.getElementsByClassName('commit_3_2')[0].innerHTML='观众名：'+newComment.username;
           document.getElementsByClassName('commit_3_3')[0].innerHTML='观众头像url：'+newComment.avatar;
@@ -359,8 +390,6 @@ Mudu.Init(
       )
   
 // =======================================================================================================================================
-
-
     // 抽奖组件
     Mudu.Room.LuckyDraw.Get(
         function (response) {
@@ -402,8 +431,6 @@ Mudu.Init(
 
         })
 // =======================================================================================================================================
-
-
     // GetUrl 获取当前控制台PPT图片地址
     // 返回string, 如果为空字符串, 则表示控制台未选择ppt
     var url = Mudu.Room.PPT.GetUrl()
@@ -455,13 +482,13 @@ Mudu.Init(
 
         var description = document.createElement('p');
         description.setAttribute('class','changed_total_page');
-        var desctext = document.createTextNode('控制台当前ppt的总页数:'+total_page);
+        var desctext = document.createTextNode('控制台当前ppt的总页数：'+total_page);
         description.appendChild(desctext);
         document.getElementsByClassName('ppt_7_1')[0].appendChild(description);
 
         var description = document.createElement('p');
         description.setAttribute('class','changed_page');
-        var desctext = document.createTextNode('ppt当前所在页数:'+page);
+        var desctext = document.createTextNode('ppt当前所在页数：'+page);
         description.appendChild(desctext);
         document.getElementsByClassName('ppt_7_1')[0].appendChild(description);
 
@@ -486,7 +513,7 @@ Mudu.Init(
         var open = response.open
         var description = document.createElement('p');
         description.setAttribute('class','changed_open');
-        var desctext = document.createTextNode('切换后观看页是否显示【1显示, 0显示】:'+'【'+open+'】');
+        var desctext = document.createTextNode('切换后观看页是否显示【1显示, 0显示】：'+'【'+open+'】');
         description.appendChild(desctext);
         document.getElementsByClassName('ppt_8_1')[0].appendChild(description);
 
@@ -494,8 +521,6 @@ Mudu.Init(
             document.getElementsByClassName('ppt_8_1')[0].innerHTML='九、PPT.IsOpen事件';   
         }, 30000);
     })
-
-
 
     // PPT.AllowTurnPage事件会在控制台切换ppt“允许用户翻页”时被触发
 
@@ -508,7 +533,7 @@ Mudu.Init(
        var is_turn_page = response.is_turn_page
        var description = document.createElement('p');
        description.setAttribute('class','changed_open');
-       var desctext = document.createTextNode('切换后是否允许用户翻页【1允许, 0禁止】:'+'【'+is_turn_page+'】');
+       var desctext = document.createTextNode('切换后是否允许用户翻页【1允许, 0禁止】：'+'【'+is_turn_page+'】');
        description.appendChild(desctext);
        document.getElementsByClassName('ppt_9_1')[0].appendChild(description);
 
@@ -517,7 +542,6 @@ Mudu.Init(
             document.getElementsByClassName('ppt_9_1')[0].innerHTML='十、PPT.AllowTurnPage事件';   
         }, 30000);
     })
-
 
     // PPT.Doc.delete事件会在控制台删除当前ppt时被触发
 
@@ -529,8 +553,6 @@ Mudu.Init(
             document.getElementsByClassName('ppt_10_1')[0].innerHTML='十一、PPT.Doc.delete事件';   
         }, 30000);
     })
-
-
 
     // PPT.trailer.changed 事件会在播放器播放回看视频时, 当前视频节点上有ppt时被触发
 
@@ -588,30 +610,15 @@ Mudu.Init(
     // Vote.Changed事件会在投票状态改变(一般为后台关闭或开启投票)的时候被触发
     Mudu.MsgBus.On(
         // 事件名，值为Vote.Changed
-        "Vote.Changed",
-      
+        "Vote.Changed",   
         // 事件处理函数
         function (response) {
           var response = JSON.parse(response)
           console.log('投票状态改变'+response)
-
         // 是否向用户开放
         var view_enable=response.data.view_enable
-
         document.getElementsByClassName('vote_2_1')[0].innerHTML='三、Vote.Changed事件：投票状态改变，成功触发！当前状态：【'+view_enable+'】';
-
-
-
         })
-
-
-
-
-
-
-
-
-
 
 // =======================================================================================================================================
     //  报名问卷组件
@@ -885,22 +892,6 @@ Mudu.MsgBus.On(
 
 // function类
 
-
-function setactid2(){
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
 // 重新设置用户信息
 function setUser(){
 
@@ -985,13 +976,13 @@ function getstate(){
     var state = player.getState()
     console.log(state)
     if(state == 'idle'){
-        alert('idle:未开始播放')
+        alert('idle：未开始播放')
     }else if(state == 'buffering'){
-        alert('buffering:正在缓冲')
+        alert('buffering：正在缓冲')
     }else if(state == 'playing'){
-        alert('playing:正在播放')
+        alert('playing：正在播放')
     }else if(state == 'paused'){
-        alert('paused:暂停播放')
+        alert('paused：暂停播放')
     }
 }
 // 加载新的播放地址
@@ -1185,7 +1176,7 @@ var page = document.getElementsByClassName('getppt_page')[0].value;
 // GetPageImgUrl 根据页码获取相应的ppt图片地址
 // 第一个参数为页码, 第二个参数为获取后的回调函数
 Mudu.Room.PPT.GetPageImgUrl( page, function (url) {
-    console.log('图片地址为: ', url);
+    console.log('图片地址为： ', url);
     document.getElementsByClassName('getppt_pageurl')[0].innerHTML='该PPT图片地址：'+url;
     var description = document.createElement('img');
     description.setAttribute('class','getppt_img');
@@ -1199,7 +1190,7 @@ Mudu.Room.PPT.GetPageImgUrl( page, function (url) {
 })
 }
 // =======================================================================================================================================
-
+// 投票
 function vote(){
     Mudu.Room.Vote.Vote(
         // 问题及答案(数组)
@@ -1224,7 +1215,6 @@ function vote(){
         }
       )
 }
-
 // =======================================================================================================================================
 // 报名短信验证码
 function sendmsg(){
@@ -1316,20 +1306,10 @@ function gettopic(){
                         document.getElementsByClassName('page-history')[0].appendChild(pagelist);
                       }   
               }
-
-
-
-
-
-
-
         }
     )
-
-
 }
 // =======================================================================================================================================
-
 
 // 发送话题
 
@@ -1510,10 +1490,5 @@ function reply(){
 
     document.getElementsByClassName('replyin')[0].value=''
 }
-
-
-
-
-
-
 // =======================================================================================================================================
+
