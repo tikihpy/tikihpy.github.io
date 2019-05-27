@@ -36,7 +36,12 @@ function GetQueryString(name) {
     return context == null || context == "" || context == "undefined" ? "" : context; 
 }
 
-var paramId = GetQueryString('id') || 185053;
+// ！！！！！！必须是企业版的账号频道！！！！！！！！！！！！！
+// 线上
+// var paramId = GetQueryString('id') || 185053;
+
+// 5号测试服
+var paramId = GetQueryString('id') || 10003199;
 
 Mudu.Init(
 
@@ -190,6 +195,9 @@ Mudu.Init(
     // 返回视频回看配置
     var trailer = Mudu.Room.GetTrailer()
     console.log(trailer);
+
+  
+
     document.getElementsByClassName('room_5_1')[0].innerHTML="六、视频回看配置如下：";
 
         var m3u8=trailer.m3u8
@@ -219,6 +227,7 @@ Mudu.Init(
         description1.appendChild(description4);
 
         document.getElementsByClassName('room_5_1')[0].appendChild(description1);
+
 // =======================================================================================================================================
 
     // 返回直播间自定义菜单, 类型为Array

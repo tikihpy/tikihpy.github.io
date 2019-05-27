@@ -13,10 +13,11 @@
     <!-- https下请使用 <script>window.FETCHER_SERVER_URL = "wss://fetcher.mudu.tv";</script> -->
     <script src="//static.mudu.tv/fetcher/bundle.6d7aca164d2389e8bea6.js"></script>
     <!-- <script src="//static.mudu.tv/static/websdk/sdk.js"></script> -->
-    <!-- 测试服SDK -->
+    <!-- 测试服SDK（SDK域名写死，所以需要对应的测试服的账号频道） -->
     <!-- <script src= 'newscripts/2019050704sdk.js'></script> -->
+    <script src= 'newscripts/2019052701sdk.js'></script>
     <!-- 线上SDK -->
-    <script src="//static.mudu.tv/static/websdk/sdk.js"></script>
+    <!-- <script src="//static.mudu.tv/static/websdk/sdk.js"></script> -->
     <script src='scripts/websdkcheck.js'></script>
 
 
@@ -27,14 +28,13 @@
     <div class="wrap">
         <div class="header">
             <a class="webSDKDOC"  target='_blank' href="http://mudu.tv/api/v1/WEB_SDK_SUMMARY.html">WebSDK开发者文档</a>
-            <!-- <a class="webDOC"  target='_blank' href="http://mudu.tv/api/v1/WEB_SDK_SUMMARY.html">网站使用说明</a> -->
             <br>
             <a class="version">WebSDK_Version：</a>
         </div>
         <div class="container ">
             <div class="initi_box">
                 <p class="initi topline">初始化</p>
-                <p class="set_actid">输入想要测试的频道ID,点击设置后重新初始化【默认ID=185053】</p>
+                <p class="set_actid">输入想要测试的频道ID,点击设置后重新初始化【默认ID配置写死】</p>
                 <textarea class="act_id"></textarea>
                 <button class="act_id_btn" onclick="setactid()">设 置</button>
                 <div class="init_0">
@@ -122,6 +122,9 @@
                 </div>
                 <div class="room_5">
                     <p class="room_5_1">六、获取视频回看配置</p>
+                    <div class="player">
+                        <div id="J_prismPlayer" class="prism-player"></div>
+                    </div>
                 </div>
                 <div class="room_6">
                     <p class="room_6_1">七、获取直播间自定义菜单</p>
