@@ -59,10 +59,7 @@
     width: 50%;
 
 }
-.comment_part{
-    /* padding-left: 2%; */
-    
-}
+
 .showarea{
     width: 640px;
     height: 360px;
@@ -311,9 +308,6 @@
     display: none;
 
 }
-.pptshow{
-  
-}
 .pptcurshow{
     position: relative;
     width : 100%;
@@ -469,12 +463,6 @@
     left: 2%;
     height: 450px;
     overflow: auto;
-}
-
-.gethuatipage{
-    /* position: relative;
-    width: 96%;
-    left: 4%; */
 }
 .gethuatiimsg{
     position: relative;
