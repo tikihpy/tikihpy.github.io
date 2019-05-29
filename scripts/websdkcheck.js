@@ -38,10 +38,10 @@ function GetQueryString(name) {
 
 // ！！！！！！必须是企业版的账号频道！！！！！！！！！！！！！
 // 线上
-// var paramId = GetQueryString('id') || 185053;
+var paramId = GetQueryString('id') || 185053;
 
 // 5号测试服
-var paramId = GetQueryString('id') || 10003199;
+// var paramId = GetQueryString('id') || 10003199;
 
 Mudu.Init(
 
@@ -155,31 +155,31 @@ Mudu.Init(
 
     // 返回直播间名字，类型为string
     var roomName = Mudu.Room.GetName()
-    console.log(roomName);
+    console.log('直播间名字：'+roomName);
     document.getElementsByClassName('room_0_1')[0].innerHTML="一、直播间名字："+roomName;
 
 
     // 返回直播状态，类型为number: `1`为正在直播，`0`为不在直播
     var roomLiveStatus = Mudu.Room.GetLiveStatus()
-    console.log(roomLiveStatus);
+    console.log("直播状态："+roomLiveStatus);
     document.getElementsByClassName('room_1_1')[0].innerHTML="二、直播状态："+roomLiveStatus;
 
 
     // 返回直播间浏览量，类型为number整数
     var roomViewNum = Mudu.Room.GetViewNum()
-    console.log(roomViewNum);
+    console.log("直播间浏览量："+roomViewNum);
     document.getElementsByClassName('room_2_1')[0].innerHTML="三、直播间浏览量："+roomViewNum;
 
 
     // 返回直播间视频地址，类型为string
     var roomPlayAddr = Mudu.Room.GetPlayAddr()
-    console.log(roomPlayAddr);
+    console.log("直播间视频地址："+roomPlayAddr);
     document.getElementsByClassName('room_3_1')[0].innerHTML="四、直播间视频地址："+roomPlayAddr;
 
 
     // 返回直播间视频地址列表，类型为array
     var roomPlayAddr = Mudu.Room.GetPlayList()
-    console.log(roomPlayAddr);
+    console.log("直播间视频地址列表："+roomPlayAddr);
     document.getElementsByClassName('room_4_1')[0].innerHTML="五、直播间视频地址列表如下：";
 
     for(var i=0; i<roomPlayAddr.length;i++){
@@ -282,7 +282,6 @@ Mudu.Init(
             }
             
             )
-            window.player = player;
 
 // =======================================================================================================================================
 
@@ -309,31 +308,37 @@ Mudu.Init(
         document.getElementsByClassName('room_6_1')[0].appendChild(menusdescription);
 
 
-        var video_area = document.createElement('div');
-        video_area.setAttribute('class','video_area');
-        menudata.appendChild(video_area);
+       
       
         if (menus[i].menu_cate==3){
+            // 判断是视频菜单
+            var video_area = document.createElement('div');
+            video_area.setAttribute('class','video_area');
+            menudata.appendChild(video_area);
 
             for(var j=0;j<menus[i].videos.length;j++){
 
                 var videoall = document.createElement('div');
                 videoall.setAttribute('class','videoall');
 
-                var videos = document.createElement('div');
-                videos.setAttribute('class','videos');
-
                 var video = document.createElement('div');
                 var idattr = 'J_prismPlayer'+j;
                 video.setAttribute('id',idattr);
+
                 var videoname = document.createElement('p');
                 videoname.setAttribute('class','video_name_p');
-                var desctext = document.createTextNode(j+'、'+menus[i].videos[j].name);
+                var n=j+1;
+                var desctext = document.createTextNode("视频名称"+n+'：'+menus[i].videos[j].name);
                 videoname.appendChild(desctext);
-                videos.appendChild(video);
+                
+                var videourl = document.createElement('p');
+                videourl.setAttribute('class','video_url_p');
+                var desctextvideourl= document.createTextNode("视频地址"+n+'：'+menus[i].videos[j].url);
+                videourl.appendChild(desctextvideourl);
  
-                videoall.appendChild(videos);
+                videoall.appendChild(video);
                 videoall.appendChild(videoname);
+                videoall.appendChild(videourl);
 
                 video_area.appendChild(videoall);
 
@@ -392,8 +397,12 @@ Mudu.Init(
                         // }]
                     }                   
                     )
-                    window.player = player;
             }
+        }else if(menus[i].menu_cate==2){
+            // 判断是添加图文菜单
+            var imgtext = document.createElement('div')
+            imgtext.innerHTML = menus[i].act_detail
+            menudata.appendChild(imgtext)
         }
 
     }
@@ -405,17 +414,55 @@ Mudu.Init(
     console.log(ads);
     document.getElementsByClassName('room_7_1')[0].innerHTML="八、自定义广告栏如下，具体开F12查看菜单参数：";
 
-        var adsdescription = document.createElement('div');
-        adsdescription.setAttribute('class','ads');
         for(var j=0;j<ads.length;j++){
-        
-            var imgads = document.createElement('p');
-            imgads.setAttribute('class','imgads');
-            var desctext = document.createTextNode('广告栏'+j+"："+ads[j].img+ads[j].text);
-            imgads.appendChild(desctext);
-            adsdescription.appendChild(imgads);
-            document.getElementsByClassName('room_7_1')[0].appendChild(adsdescription); 
+
+            var ads_area = document.createElement('div');
+            ads_area.setAttribute('class','guanggao_area');
+
+            if(ads[j].img==''){
+                // 添加文字广告栏
+                var adsall = document.createElement('p');
+                adsall.setAttribute('class','guanggao_p');
+                var desctext = document.createTextNode('广告栏'+j+"：");
+                adsall.appendChild(desctext);
+                ads_area.appendChild(adsall);
+
+                var textads = document.createElement('span');
+                textads.setAttribute('class','textguanggao');
+                var desctext = document.createTextNode(ads[j].text);
+                textads.appendChild(desctext);
+                ads_area.appendChild(textads);
+
+
+                var ads_url = document.createElement('a');
+                ads_url.setAttribute('class','guanggao_url');
+                ads_url.setAttribute('href',ads[j].href);
+                var desctext = document.createTextNode(ads[j].href);
+                ads_url.appendChild(desctext);
+                ads_area.appendChild(ads_url);
+            }else{
+                // 添加图片广告栏
+                var adsall = document.createElement('p');
+                adsall.setAttribute('class','guanggao_p');
+                var desctext = document.createTextNode('广告栏'+j+"：");
+                adsall.appendChild(desctext);
+                ads_area.appendChild(adsall);
+               
+                var imgads = document.createElement('img');
+                imgads.setAttribute('class','imgads');
+                imgads.setAttribute('src',ads[j].img);
+                ads_area.appendChild(imgads);
+    
+                var ads_url = document.createElement('a');
+                ads_url.setAttribute('class','guanggao_url');
+                ads_url.setAttribute('href',ads[j].href);
+                var desctext = document.createTextNode(ads[j].href);
+                ads_url.appendChild(desctext);
+                ads_area.appendChild(ads_url);
+            }
+          document.getElementsByClassName('room_7_2')[0].appendChild(ads_area);            
     }
+   
 
 // =======================================================================================================================================
 
@@ -525,8 +572,6 @@ Mudu.Init(
             var desctext = document.createTextNode('时间戳：'+barrage.stime);
             description.appendChild(desctext);
             document.getElementsByClassName('danmu_1_1')[0].appendChild(description);
-
-
     }
     )
 // =======================================================================================================================================
@@ -545,9 +590,65 @@ Mudu.Init(
           newComment = JSON.parse(newComment)
           console.log(newComment.username + '发送了一条新评论： ' + newComment.message)
 
-          document.getElementsByClassName('commit_3_2')[0].innerHTML='观众名：'+newComment.username;
-          document.getElementsByClassName('commit_3_3')[0].innerHTML='观众头像url：'+newComment.avatar;
-          document.getElementsByClassName('commit_3_4')[0].innerHTML='评论内容：'+newComment.message;
+          document.getElementsByClassName('commit_3_2')[0].innerHTML='1、观众名：'+newComment.username;
+          document.getElementsByClassName('commit_3_3')[0].innerHTML='2、观众头像url：'+newComment.avatar;
+          document.getElementsByClassName('commit_3_4')[0].innerHTML='3、评论内容：'+newComment.message;
+
+          document.getElementsByClassName('commit_3_2')[0].style.color='blue';
+          document.getElementsByClassName('commit_3_3')[0].style.color='blue';
+          document.getElementsByClassName('commit_3_4')[0].style.color='blue';
+
+          timer=setTimeout(function () {
+          document.getElementsByClassName('commit_3_2')[0].innerHTML='1、观众名：';
+          document.getElementsByClassName('commit_3_3')[0].innerHTML='2、观众头像url：';
+          document.getElementsByClassName('commit_3_4')[0].innerHTML='3、评论内容：';
+
+          document.getElementsByClassName('commit_3_2')[0].style.color='';
+          document.getElementsByClassName('commit_3_3')[0].style.color='';
+          document.getElementsByClassName('commit_3_4')[0].style.color='';
+
+        }, 5000); 
+
+
+        // 添加聊天记录
+        var list = document.createElement('li');
+        list.setAttribute('class','msg_area');
+        
+        var alertcmt = document.createElement("img");
+        alertcmt.setAttribute('class','img');
+        alertcmt.setAttribute('src',newComment.avatar);
+
+
+        var comment_name = document.createElement('span');
+        comment_name.setAttribute('class','comment_name');
+        var desctext = document.createTextNode(newComment.username+'：');
+        comment_name.appendChild(desctext);
+
+        var description = document.createElement('span');
+        description.setAttribute('class','msg');
+        var desctext = document.createTextNode(newComment.message);
+        description.appendChild(desctext);
+
+        list.appendChild(alertcmt);
+        list.appendChild(comment_name);
+        list.appendChild(description);
+        
+
+        // document.getElementsByTagName('ol')[0].appendChild(list);
+        var firstLi = document.getElementsByClassName('msg_area')[0]
+        if (newComment.checked==1){
+            if (firstLi) {
+              document.getElementsByClassName('comments_history')[0].insertBefore(list, firstLi);
+
+            } else {
+              document.getElementsByClassName('comments_history')[0].appendChild(list);
+            }
+        }else{
+          alert('评论等待审核');
+        }
+
+
+
 
         }
       )
@@ -762,10 +863,81 @@ Mudu.Init(
         description.appendChild(desctext);
         document.getElementsByClassName('vote_0_1')[0].appendChild(description);
 
+        // vote_id
+        var vote_id=response.data.id
+        var description = document.createElement('p');
+        description.setAttribute('class','vote_id');
+        var desctext = document.createTextNode('vote_id：'+vote_id);
+        description.appendChild(desctext);
+        document.getElementsByClassName('vote_0_1')[0].appendChild(description);
+
+
+        // 投票选项
+        for(var i=0;i<response.data.questions.length;i++){
+            var n=i+1;
+
+            var description = document.createElement('div');
+            description.setAttribute('class','vote_content_area');
+            // 判断单选还是多选
+            if(response.data.questions[i].question_multi==1){
+
+                var vote_content_name = document.createElement('div');
+                vote_content_name.setAttribute('class','vote_content_name');
+                var desctext = document.createTextNode('选择题'+n+'：'+response.data.questions[i].question_name+'【'+'单选题'+'】');
+                vote_content_name.appendChild(desctext);
+                description.appendChild(vote_content_name);
+
+            }else if(response.data.questions[i].question_multi ==2){
+
+                var vote_content_name = document.createElement('div');
+                vote_content_name.setAttribute('class','vote_content_name');
+                var desctext = document.createTextNode('选择题'+n+'：'+response.data.questions[i].question_name+'【'+'多选题'+'】');
+                vote_content_name.appendChild(desctext);
+                description.appendChild(vote_content_name);
+
+            }
+
+            // 遍历所有选择题及其选项
+            for(var j=0;j<response.data.questions[i].items.length;j++){
+                var k=j+1;
+
+                var vote_name_imge = document.createElement('div');
+                vote_name_imge.setAttribute('class','vote_name_imge');
+    
+                // 判断是图文还是文字选择题
+                if(response.data.questions[i].items[j].image== null){
+                    var vote_content_item_name = document.createElement('div');
+                    vote_content_item_name.setAttribute('class','vote_content_item_name');
+                    var desctext = document.createTextNode('选项'+k+'：'+response.data.questions[i].items[j].item_name);
+                    vote_content_item_name.appendChild(desctext);
+                    description.appendChild(vote_content_item_name);
+
+                }else{
+                    var vote_content_item_name = document.createElement('div');
+                    vote_content_item_name.setAttribute('class','vote_content_item_name');
+                    var desctext = document.createTextNode('选项'+k+'：'+response.data.questions[i].items[j].item_name);
+                    vote_content_item_name.appendChild(desctext);
+                    var vote_content_item_image = document.createElement('img');
+                    vote_content_item_image.setAttribute('class','vote_content_item_image');
+                    vote_content_item_image.setAttribute('src',response.data.questions[i].items[j].image);
+            
+                    vote_name_imge.appendChild(vote_content_item_name);
+                    vote_name_imge.appendChild(vote_content_item_image);
+
+                    description.appendChild(vote_name_imge);
+
+                }
+            }
+           
+
+            document.getElementsByClassName('vote_0_1')[0].appendChild(description);
+
+
+        }
         }
         if (response.status === 'n') {
         console.log('投票获取失败')
-        document.getElementsByClassName('vote_0_1')[0].innerHTML='一、获取投票信息失败'
+        document.getElementsByClassName('vote_0_1')[0].innerHTML='一、获取投票信息失败，检查控制台是否开启投票功能'
 
         }
     })
@@ -788,7 +960,7 @@ Mudu.Init(
 
     // 返回null获取报名问卷配置, 类型为object
     var signupConfig = Mudu.Room.Signup.GetConfig()
-    console.log('报名问卷数据：'+signupConfig);
+    console.log('报名问卷数据：',signupConfig);
 
     var id	=signupConfig.id
     var description = document.createElement('p');
@@ -833,6 +1005,19 @@ Mudu.Init(
     description.appendChild(desctext);
     document.getElementsByClassName('sign_data')[0].appendChild(description);
 
+    // 获取昵称和手机号type名称
+    document.getElementsByClassName('sign_name_des')[0].innerHTML= signupConfig.columns[0].name;
+    document.getElementsByClassName('sign_phone_des')[0].innerHTML= signupConfig.columns[1].name;
+
+    // 判断是否有必填项
+    var A= signupConfig.columns[0].must
+    var B= signupConfig.columns[1].must
+    if(A==true){
+        document.getElementsByClassName('sign_name_des')[0].innerHTML= signupConfig.columns[0].name+'【'+'必填项'+'】';
+    }
+    if(B==true){
+        document.getElementsByClassName('sign_phone_des')[0].innerHTML= signupConfig.columns[1].name+'【'+'必填项'+'】';
+    }
 // =======================================================================================================================================
 
 // 话题互动组件
@@ -1188,7 +1373,7 @@ function loadnew(){
 }
 // =======================================================================================================================================
 
- // 评论绑定事件
+ // 发送评论
  function sendCmt() {
     var value = document.getElementsByClassName('comment_area')[0].value;
     if (value==''){
@@ -1202,7 +1387,10 @@ function loadnew(){
         response = JSON.parse(response)
         if (response.status === 'y') {
             console.log('发送成功');
-            alert('发送成功');
+            document.getElementsByClassName('comment_status')[0].innerHTML='发送成功！'
+            timer=setTimeout(function () {
+                document.getElementsByClassName('comment_status')[0].innerHTML=''
+            }, 500); 
         }
         if (response.status === 'n') {
             console.log('发送失败，错误码为：' + response.flag+'错误提示：'+response.info)
@@ -1326,8 +1514,10 @@ function getluckyResult(){
           console.log('抽奖结果获取失败')
           alert(response.info);
         }
-      }
+       
+      }    
     )
+    document.getElementsByClassName('ollist')[0].innerHTML='';
   }
 
 // =======================================================================================================================================
@@ -1356,26 +1546,46 @@ Mudu.Room.PPT.GetPageImgUrl( page, function (url) {
 // =======================================================================================================================================
 // 投票
 function vote(){
-    Mudu.Room.Vote.Vote(
-        // 问题及答案(数组)
-        [
-          {
-            // 4265为vote_id
-            // "1|1" 表示第一个问题，用户的答案是第一个选项
-            "11078":"1|1"
-          }    
-        ],     
+    
+        var vote_id = document.getElementsByClassName('get_vote_id')[0].value;
+        var option = {}, options = []
+        option[vote_id] = '1|1'
+        options.push(option)
+
+    Mudu.Room.Vote.Vote(   
+        // //  问题及答案(数组)
+        // [
+        //     {
+        //     // 4265为vote_id
+        //     // "1|1" 表示第一个问题，用户的答案是第一个选项
+        //     "8896":"1|1"
+        //     }
+        //     // ,
+        //     // {
+        //     //   // 4265为vote_id
+        //     //   // "2|2,3" 表示第二个问题，用户的答案是第二个选项和第三个选项
+        //     //   "4265":"2|2,3"
+        //     // }
+
+        // ],  
+
+        options, 
         // 回调函数，参数为response
         function (response) {
           response = JSON.parse(response)
+          console.log(response);
           if (response.status === 'y') {
             console.log('投票成功');
             alert('投票成功');
           }
           if (response.status === 'n') {
             console.log('投票失败');
-            alert('投票失败');
+            alert('投票失败：'+response.info);
           }
+          if(response.voted==1){
+            console.log('投票失败');
+            alert('投票失败：'+response.info);
+         }
         }
       )
 }
@@ -1400,19 +1610,145 @@ function sendmsg(){
 }
 
 function signsubmit(){
-    // 第一个参数为一个对象, code为短信验证码(可不填), columns为question及其答案数组.
-    Mudu.Room.Signup.Submit(
-        {columns: [
-            {type: 'phone', 'name': '手机号', text: '18099998888'},
-            {type: 'nickname', 'name': '姓名', text: '目睹君'},
-        ]},
-        function (response) {
-            response = JSON.parse(response)
-            console.log(response);
-            alert(response.info);
+
+
+    // 返回null获取报名问卷配置, 类型为object
+    var signupConfig = Mudu.Room.Signup.GetConfig()
+    // console.log(signupConfig.columns[0].type)
+    // console.log(signupConfig.columns[0].name)
+    // console.log(signupConfig.columns[1].type)
+    // console.log(signupConfig.columns[1].name)
+
+
+    var signname =document.getElementsByClassName('signname')[0].value;
+    console.log(signupConfig.columns[0].name+'：'+signname)
+    var signphone =document.getElementsByClassName('sign_phone')[0].value;
+    console.log(signupConfig.columns[1].name+'：'+signphone)
+
+    var A= signupConfig.columns[0].must
+    var B= signupConfig.columns[1].must
+ // 判断A是否必填
+    if(A==true){
+        if(signname==''){
+            alert(signupConfig.columns[0].name+'不能为空！')
+            return false;
+        }else if(signname!==''){
+            // 判断B是否必填
+            if(B==true){
+                if(signphone==''){
+                    alert(signupConfig.columns[1].name+'不能为空！')
+                    return false;
+                }else if(signphone!==''){
+                    var  options = []
+                    var option1 = {
+                        type: signupConfig.columns[0].type,
+                        'name': signupConfig.columns[0].name,
+                        text: signname
+                    } 
+                    var option2 = {
+                        type: signupConfig.columns[1].type,
+                        'name':signupConfig.columns[1].name,
+                        text: signphone
+                    }
+                    options.push(option1,option2)
+                    // 第一个参数为一个对象, code为短信验证码(可不填), columns为question及其答案数组.
+                    Mudu.Room.Signup.Submit(
+                        {columns: options },
+                        function (response) {
+                            response = JSON.parse(response)
+                            console.log(response);
+                            alert(response.info);
+                        }
+                    )
+                    var signname =document.getElementsByClassName('signname')[0].value='';
+                    var signphone =document.getElementsByClassName('sign_phone')[0].value='';
+                }
+            }else if(B==false){
+                var  options = []
+                var option1 = {
+                    type: signupConfig.columns[0].type,
+                    'name': signupConfig.columns[0].name,
+                    text: signname
+                } 
+                var option2 = {
+                    type: signupConfig.columns[1].type,
+                    'name':signupConfig.columns[1].name,
+                    text: signphone
+                }
+                options.push(option1,option2)
+                // 第一个参数为一个对象, code为短信验证码(可不填), columns为question及其答案数组.
+                Mudu.Room.Signup.Submit(
+                    {columns: options },
+                    function (response) {
+                        response = JSON.parse(response)
+                        console.log(response);
+                        alert(response.info);
+                    }
+                )
+                var signname =document.getElementsByClassName('signname')[0].value='';
+                var signphone =document.getElementsByClassName('sign_phone')[0].value='';           
+            }
         }
-    )
+    }else if(A==false){
+         // 判断B是否必填
+        if(B==true){
+            if(signphone==''){
+                alert(signupConfig.columns[1].name+'不能为空！')
+                return false;
+            }else if(signphone!==''){
+                var  options = []
+                var option1 = {
+                    type: signupConfig.columns[0].type,
+                    'name': signupConfig.columns[0].name,
+                    text: signname
+                } 
+                var option2 = {
+                    type: signupConfig.columns[1].type,
+                    'name':signupConfig.columns[1].name,
+                    text: signphone
+                }
+                options.push(option1,option2)
+                // 第一个参数为一个对象, code为短信验证码(可不填), columns为question及其答案数组.
+                Mudu.Room.Signup.Submit(
+                    {columns: options },
+                    function (response) {
+                        response = JSON.parse(response)
+                        console.log(response);
+                        alert(response.info);
+                    }
+                )
+                var signname =document.getElementsByClassName('signname')[0].value='';
+                var signphone =document.getElementsByClassName('sign_phone')[0].value='';
+            }
+        }else if(B==false){
+            var  options = []
+            var option1 = {
+                type: signupConfig.columns[0].type,
+                'name': signupConfig.columns[0].name,
+                text: signname
+            } 
+            var option2 = {
+                type: signupConfig.columns[1].type,
+                'name':signupConfig.columns[1].name,
+                text: signphone
+            }
+            options.push(option1,option2)
+            // 第一个参数为一个对象, code为短信验证码(可不填), columns为question及其答案数组.
+            Mudu.Room.Signup.Submit(
+                {columns: options },
+                function (response) {
+                    response = JSON.parse(response)
+                    console.log(response);
+                    alert(response.info);
+                }
+            )
+            var signname =document.getElementsByClassName('signname')[0].value='';
+            var signphone =document.getElementsByClassName('sign_phone')[0].value='';      
+        }  
+    }
 }
+
+
 
 // =======================================================================================================================================
 // 话题互动
@@ -1434,19 +1770,28 @@ function gettopic(){
         
                 var pagelist = document.createElement('li');
                 pagelist.setAttribute('class','gethuatipage');
+                // 发送者头像
                 var alertcmt = document.createElement("img");
                 alertcmt.setAttribute('class','gethuatiavatar');
                 alertcmt.setAttribute('src',response.topics[i].avatar);
+                // 发送者昵称
+                var topic_username = document.createElement('span');
+                topic_username.setAttribute('class','topic_username');
+                var desctext = document.createTextNode(response.topics[i].username+'：');
+                topic_username.appendChild(desctext);
+                // 话题内容
                 var description = document.createElement('span');
                 description.setAttribute('class','gethuatimsg');
                 var desctext = document.createTextNode(response.topics[i].message);
-                pagelist.appendChild(alertcmt);
-                pagelist.appendChild(description);
                 description.appendChild(desctext);
-        
+
+                pagelist.appendChild(alertcmt);
+                pagelist.appendChild(topic_username);
+                pagelist.appendChild(description);
+                // 换行
                 var br = document.createElement('br');
                 pagelist.appendChild(br);
-        
+                // 遍历所有图片
                 for(var j=0;j<response.topics[i].images.length;j++){
         
                 var alertimgdiv = document.createElement("div");
@@ -1458,9 +1803,39 @@ function gettopic(){
         
                 alertimgdiv.appendChild(alertimg);
                 pagelist.appendChild(alertimgdiv);
-        
-        
+
                 }
+                // 添加回复内容模块
+                var reply_content = document.createElement("div");
+                reply_content.setAttribute('class','reply_content');
+
+                var reply_content_des= document.createElement("div");
+                reply_content_des.setAttribute('class','reply_content_des');
+                var desctext = document.createTextNode("回复内容如下：");
+                reply_content_des.appendChild(desctext);
+                reply_content.appendChild(reply_content_des);
+                // 遍历所有回复内容
+                for (var k=0;k<response.topics[i].replies.length;k++){
+
+                    var reply_content_all = document.createElement("div");
+                    reply_content_all.setAttribute('class','reply_content_all');
+                    var username=response.topics[i].replies[k].username
+                    var message=response.topics[i].replies[k].message
+                    var desctext = document.createTextNode(username+'：'+message);
+                    reply_content_all.appendChild(desctext);
+                    reply_content.appendChild(reply_content_all);
+
+                    pagelist.appendChild(reply_content);
+
+                }
+
+                // 获取话题topic_id
+                var huati_id = document.createElement("div");
+                huati_id.setAttribute('class','huati_id');
+                huati_id.setAttribute('style','color: rgb(12, 26, 224);');
+                var desctext = document.createTextNode("topic_id："+response.topics[i].id);
+                huati_id.appendChild(desctext);
+                pagelist.appendChild(huati_id);
         
                 // document.getElementsByTagName('ol')[1].appendChild(pagelist);
                 var firstLi = document.getElementsByClassName('gethuatipage')[0]
@@ -1499,7 +1874,11 @@ function sendtopic(){
       function (response) {
           response = JSON.parse(response)
           console.log(response);
-          alert(response.info);
+          document.getElementsByClassName('topic_5_1_status')[0].innerHTML=response.info;
+          timer=setTimeout(function () {
+            document.getElementsByClassName('topic_5_1_status')[0].innerHTML='';
+        }, 1000);    
+
     
             // 添加话题记录
             var huatidata = document.createElement('li');
@@ -1517,7 +1896,7 @@ function sendtopic(){
             description.appendChild(desctext);
             list.appendChild(alertcmt);
             list.appendChild(description);
-    
+            // 添加一行三张图片
             var alertimgs = document.createElement("div");
             alertimgs.setAttribute('class','allimgs');
     
@@ -1536,7 +1915,7 @@ function sendtopic(){
             alertimgs.appendChild(alertimg2);
             alertimgs.appendChild(alertimg3);
     
-    
+            // 添加一行三张图片 
             var alertimgs2 = document.createElement("div");
             alertimgs2.setAttribute('class','allimgs');
     
@@ -1556,7 +1935,7 @@ function sendtopic(){
             alertimgs2.appendChild(alertimg3);
     
     
-    
+            // 添加一行三张图片
             var alertimgs3 = document.createElement("div");
             alertimgs3.setAttribute('class','allimgs');
     
@@ -1617,8 +1996,16 @@ function reply(){
 
       // 回复显示
 
-      var replyout = document.createElement('div');
+      var replyout = document.createElement('li');
       replyout.setAttribute('class','replyout');
+
+
+      var rep_topic_id = document.createElement('p');
+      rep_topic_id.setAttribute('class','rep_topic_id');
+      var text = document.getElementsByClassName('topic_reply_idin')[0].value;
+      var rep_topic_id_desctext = document.createTextNode("topic_id："+text);
+      rep_topic_id.appendChild(rep_topic_id_desctext);
+      replyout.appendChild(rep_topic_id);
       
       var alertcmt = document.createElement("img");
       alertcmt.setAttribute('class','img');
@@ -1655,5 +2042,4 @@ function reply(){
     )
  
 }
-// =======================================================================================================================================
-
+// ======================================================================================================================================

@@ -14,10 +14,12 @@
     <script src="//static.mudu.tv/fetcher/bundle.6d7aca164d2389e8bea6.js"></script>
     <!-- <script src="//static.mudu.tv/static/websdk/sdk.js"></script> -->
     <!-- 测试服SDK（SDK域名写死，所以需要对应的测试服的账号频道） -->
-    <!-- <script src= 'newscripts/2019050704sdk.js'></script> -->
-    <script src= 'newscripts/2019052701sdk.js'></script>
+    <!-- <script src= 'newscripts/2019052901sdk.js'></script> -->
+    <!-- 灰度SDK，直接用线上频道测试 -->
+    <script src= 'newscripts/H2019052901sdk.js'></script>
     <!-- 线上SDK -->
     <!-- <script src="//static.mudu.tv/static/websdk/sdk.js"></script> -->
+    <!-- webSDK检测demo脚本 -->
     <script src='scripts/websdkcheck.js'></script>
 
 
@@ -32,7 +34,7 @@
             <a class="version">WebSDK_Version：</a>
         </div>
         <div class="container ">
-            <div class="initi_box">
+            <div class="initi_box tool-box">
                 <p class="initi topline">初始化</p>
                 <p class="set_actid">输入想要测试的频道ID,点击设置后重新初始化【默认ID配置写死】</p>
                 <textarea class="act_id"></textarea>
@@ -60,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="player_box">
+            <div class="player_box tool-box">
                 <p class="topline">播放器组件</p>
                 <!-- 播放器窗口 -->
                 <div class="player">
@@ -103,47 +105,48 @@
                     <p class="play_11_1">十二、Player.Waiting事件</p>
                 </div>
             </div>
-            <div class="room_box">
+            <div class="room_box tool-box">
                     <p class="topline">直播间组件</p>
                 <div class="room_0">
                     <p class="room_0_1">一、获取直播间名字</p>
-                </div>
+                </div><br>
                 <div class="room_1">
                     <p class="room_1_1">二、获取直播状态</p>
-                </div>
+                </div><br>
                 <div class="room_2">
                     <p class="room_2_1">三、获取直播间浏览量</p>
-                </div>
+                </div><br>
                 <div class="room_3">
                     <p class="room_3_1">四、获取直播间视频地址</p>
-                </div>
+                </div><br>
                 <div class="room_4">
                     <p class="room_4_1">五、获取直播间视频地址列表</p>
-                </div>
+                </div><br>
                 <div class="room_5">
                     <p class="room_5_1">六、获取视频回看配置</p>
                     <div class="player">
                         <div id="yugaoplayer" class="yugaoplayer"></div>
                     </div>
-                </div>
+                </div><br>
                 <div class="room_6">
                     <p class="room_6_1">七、获取直播间自定义菜单</p>
-                </div>
+                </div><br>
                 <div class="room_7">
                     <p class="room_7_1">八、获取直播间自定义广告栏</p>
-                </div>
+                    <div class="room_7_2"></div>
+                </div><br>
                 <div class="room_8">
                     <p class="room_8_1">九、获取直播间主题名称</p>
-                </div>
+                </div><br>
                 <div class="room_9">
                     <p class="room_9_1">十、获取直播间主题配置</p>
-                </div>
+                </div><br>
                 <div class="room_10">
                     <p class="room_10_1">十一、Room.StreamEvent 事件</p>
-                </div>
+                </div><br>
 
             </div>
-            <div class="commit_box">
+            <div class="commit_box tool-box">
                 <p class="topline">评论组件</p>
                 <div class="commit_0">
                     <p class="commit_0_1">一、获取评论页数</p>
@@ -152,6 +155,12 @@
                     <div class="commit_1_1">二、发送评论：</div>
                         <textarea class="comment_area" ></textarea>
                         <button class="comment_btn" onclick="sendCmt();clearcomment()">评 论</button>
+                        <p class="comment_status">
+                            <!-- 发送状态动态提示 -->
+                        </p>
+                        <div class = 'comment-page'>
+                                <ol reversed class="comments_history" ></ol>
+                        </div>    
                 </div>
                 <div class="commit_2">
                     <div class="commit_2_1">三、获取评论:</div>
@@ -169,14 +178,14 @@
                         </div>
                 </div>
                 <div class="commit_3">
-                    <p class="commit_3_1">四、Comment.New事件:</p>
-                    <p class="commit_3_2">五、观众名:</p>
-                    <p class="commit_3_3">六、观众头像url:</p>
-                    <p class="commit_3_4">七、评论内容:</p>
+                    <p class="commit_3_1">四、Comment.New事件，具体返回内容如下：</p>
+                    <p class="commit_3_2">1、观众名：</p>
+                    <p class="commit_3_3">2、观众头像url：</p>
+                    <p class="commit_3_4">3、评论内容：</p>
                     
                 </div>
             </div>
-            <div class="danmu_box">
+            <div class="danmu_box tool-box">
                 <p class="topline">弹幕组件</p>
                 <div class="danmu_0">
                     <div class="danmu_0_1">一、弹幕窗口</div>
@@ -186,7 +195,7 @@
                         <p class="danmu_1_1">二、Barrage.New事件</p>
                 </div>
             </div>
-            <div class="lucky_box">
+            <div class="lucky_box tool-box">
                 <p class="topline">抽奖组件</p>
                 <div class="lucky_0">
                     <p class="lucky_0_1">一、获取抽奖信息：</p>
@@ -216,7 +225,7 @@
                     <p class="lucky_3_1">四、LuckyDraw.Open事件</p>
                 </div>
             </div>
-            <div class="ppt_box">
+            <div class="ppt_box tool-box">
                 <p class="topline">PPT组件</p>
                 <div class="ppt_0">
                     <div class="ppt_0_1">
@@ -266,35 +275,45 @@
                     <p class="ppt_11_1">十二、PPT.trailer.changed 事件</p>
                 </div>
             </div>
-            <div class="vote_box">
+            <div class="vote_box tool-box">
                 <p class="topline">投票组件</p>
                 <div class="vote_0">
                     <p class="vote_0_1">一、获取投票信息</p>
                 </div>
                 <div class="vote_1">
-                    <button class="vote_1_1" onclick="vote()">二、进行投票</button>
+                    <p class="vote_1_1">二、进行投票</p>
+                    <p class="get_vote_id_des">输入本次投票的vote_id：</p>
+                    <textarea class="get_vote_id"></textarea>
+                    <button class="getppt_btn" onclick="vote()">投 票</button>
+                    <p class="get_vote_id_ps">PS：配置写死只能提交第一项投票的第一个答案</p>
                 </div>
                 <div class="vote_2">
                     <p class="vote_2_1">三、Vote.Changed事件</p>
                 </div>
             </div>
-            <div class="sign_box">
+            <div class="sign_box tool-box">
                 <p class="topline">报名组件</p>
                 <div class="sign_0">
                     <p class="sign_0_1">一、获取报名问卷配置：</p>
                     <div class="sign_data"></div>
                 </div>
                 <div class="sign_1">
-                    <p class="sign_1_1">二、输入手机号，发送报名验证码:</p>
+                    <p class="sign_1_1">二、输入手机号，发送报名验证码：</p>
                     <textarea class="sign_msg" ></textarea>
                     <button class="signmsg_btn" onclick="sendmsg()">发 送</button>
                 </div>
                 <div class="sign_2">
-                    <div class="sign_2_1">三、提交报名表单,内容写死，只有昵称和姓名提交成功：</div>
-                    <button class="signsubmit_btn" onclick="signsubmit()">提 交</button>
+                    <div class="sign_2_1">三、提交报名表单,仅开启昵称和手机号报名，才能提交成功：</div>
+                    <div class="sign_data">
+                        <p class="sign_name_des">昵称：</p>
+                        <textarea class="signname"></textarea>
+                        <p class="sign_phone_des">手机号：</p>
+                        <textarea class="sign_phone"></textarea>
+                        <button class="signsubmit_btn" onclick="signsubmit()">提 交</button>
+                    </div>                  
                 </div>
             </div>
-            <div class="topic_box">
+            <div class="topic_box tool-box">
                 <p class="topline">话题互动组件</p>
                 <div class="topic_0">
                     <p class="topic_0_1">一、获取话题总页数</p>
@@ -308,27 +327,30 @@
                 <div class="topic_3">
                     <p class="topic_3_1">四、发送内容是否需要审核</p>
                 </div>
-                <div class="topic_4">
-                    <p class="topic_4_1">五、获取话题互动:</p>
-                    <textarea class="gettopic_msg" ></textarea>
-                    <button class="gettopic_btn" onclick="gettopic()">获 取</button>
-                    <ol reversed class="page-history"></ol>
-                </div>
+                <!-- 为了布局调整4-5位置 -->
                 <div class="topic_5">
                     <p class="topic_5_1">六、发送话题:</p>
+                    <p class="topic_5_1_ps">PS：默认配置发送9宫格图片</p>
                     <textarea class="topic_area"></textarea>
                     <button class="topic_btn"  onclick="sendtopic()">话 题</button>
+                    <p class="topic_5_1_status"></p>
                     <div class = 'topic-page'>
                         <ol reversed class="topic_history" ></ol>
                     </div>
                 </div>
+                <div class="topic_4">
+                    <p class="topic_4_1">五、获取指定页话题互动:</p>
+                    <textarea class="gettopic_msg" ></textarea>
+                    <button class="gettopic_btn" onclick="gettopic()">获 取</button>
+                    <ol reversed class="page-history"></ol>
+                </div>
                 <div class="topic_6">
-                    <p class="topic_6_1">七、回复话题</p>
-                    <p class="topic_reply_id">回复话题ID：</p>
+                    <p class="topic_6_1">七、回复指定ID的话题</p>
+                    <p class="topic_reply_id">回复话题topic_id：</p>
                     <textarea class="topic_reply_idin"></textarea>
                     <p class="topic_reply_text">回复话题内容：</p>
                     <textarea class="topic_reply_textin"></textarea>
-                    <button class="topic_reply_btn"  onclick="reply()">话 题</button>
+                    <button class="topic_reply_btn"  onclick="reply()">回 复</button>
                     <div class = 'topic_reply_page'>
                         <ol reversed class="topic_reply_history" ></ol>
                     </div>
@@ -352,10 +374,10 @@
                     <p class="topic_12_1">十三、Topic.Reply.New事件</p>
                 </div>
             </div>
-            <div class="other_box" >
+            <div class="other_box tool-box" >
                 <p class="topline">other_box</p>
             </div>
-            <div class="other_box2">
+            <div class="other_box2 tool-box">
                 <p class="topline">other_box</p>
             </div>
         </div>
