@@ -5,7 +5,7 @@
 }
 .websdk-version{
     max-width: 1440px;
-    background-color: rgb(219, 226, 226);
+    background-color: rgb(132, 255, 249);
     box-sizing: border-box;
     padding-left: 40px;
     margin: 0 auto;
@@ -18,10 +18,10 @@
     padding-top: 10px;
     box-sizing: border-box;
     margin: 0 auto;   
-    background-color: rgb(238, 238, 238);
+    background-color: rgb(132, 255, 249);
 }
 .app_header {
-    background: rgb(219, 226, 226);
+    /* background: rgb(219, 226, 226); */
     min-height: 120px;
     text-align: left;
     line-height:18px;
@@ -76,7 +76,7 @@
 .switch_btn, .play_btn, .pause_btn, .stop_btn, .state_btn, .live_btn{
     width: 70px;
     height: 25px;
-    background-color: rgb(219, 226, 226);
+    /* background-color: rgb(219, 226, 226); */
     border:2px solid;
     border-radius:25px;
     display: inline-block;
@@ -84,7 +84,7 @@
 .barrage{
     width: 640px;
     height: 139px;
-    background-color: rgb(219, 226, 226);
+    /* background-color: rgb(219, 226, 226); */
     margin-top: 10px;
     border:2px solid;
     overflow: scroll;
@@ -93,7 +93,7 @@
 
 .content {
     /* top: 200px; */
-    background: rgba(0, 0, 0, 0.4);
+    /* background: rgba(0, 0, 0, 0.4); */
     border-radius: 20px;
     display: inline-block;
     padding: 4px 18px;
@@ -125,7 +125,7 @@
 .comments_history, .check_history{
     width: 281.5px;
     height: 335px;
-    background-color: rgb(219, 226, 226);
+    /* background-color: rgb(219, 226, 226); */
     overflow: auto;
     -webkit-box-direction: reverse;
     padding-left: 40px;
@@ -135,31 +135,31 @@
 }
 .comments{
     height: 60px;
-    background-color: rgb(219, 226, 226);
+    /* background-color: rgb(219, 226, 226); */
     
 }
 .page{
     height: 40px;
-    background-color: rgb(219, 226, 226);
+    /* background-color: rgb(219, 226, 226); */
     
 }
 .allpage{
-    background-color: rgb(219, 226, 226);
+    /* background-color: rgb(219, 226, 226); */
     height: 20px;
 }
 .page_area{
-    background-color: rgb(219, 226, 226);
+    /* background-color: rgb(219, 226, 226); */
     height: 30px;
     width: 260px;
 }
 .img{
     width: 20px;
     height: 20px;
-    background-color: rgb(219, 226, 226);
+    /* background-color: rgb(219, 226, 226); */
     margin-top: 5px;
 }
 .comment_area{
-    background-color: rgb(219, 226, 226);
+    /* background-color: rgb(219, 226, 226); */
     height: 50px;
     width: 260px;
 }
@@ -177,14 +177,12 @@
 .ppt_wrap, .luckyDrawWrap{
     margin-right: 10px;
     padding: 10px;
-    background-color: rgb(219, 226, 226);
     border:2px solid;
 }
 .SignUpWrap, .vote{
     padding: 10px;
     margin-left: 5px;
     margin-right: 3px;
-    background-color: rgb(219, 226, 226);
     border:2px solid;
 }
 #uname, #voucher{
@@ -216,7 +214,7 @@
     top:10%;           
     width:250px;           
     height:150px;           
-    background-color:rgb(219, 226, 226);          
+    background-color:rgb(251, 255, 0);
     text-align: center;           
 }         
 .lucky_close_btn{
@@ -241,7 +239,7 @@
     left:10%;           
     top:10%;           
     width:250px;           
-    background-color:rgb(219, 226, 226);          
+    background-color:rgb(251, 255, 0); 
     text-align: left;           
 }
 .allluckers{
@@ -262,28 +260,27 @@
     margin-top: 8px;
 }
 .signup-all{
-    background-color: rgb(219, 226, 226);
+    background-color: rgb(251, 255, 0);
     position: relative;
     left: -220%;
     top: 55%;
-    width: 600px;
+    width: 500px;
     /* height: 800px; */
     z-index:99999;
     display: none;
 }
 .signup-column-box{
     position: relative;
-    left: 5%;
     padding: 10px;
     line-height: 90px;
+    background-color: rgb(251, 255, 0);
 }
 .listdiv{
     position: relative;
-    /* left: 1%; */
     margin: 10px;
     width: 90%;
     line-height: 20px;
-    background-color: rgb(219, 226, 226);
+    background-color: rgb(251, 255, 0);
 
 }
 .signup-close{
@@ -304,7 +301,7 @@
     width: 70px;
 }
 .ppt-box{
-    background-color: rgb(161, 167, 167);
+    background-color: rgb(251, 255, 0);
     position: relative;
     left: -180%;
     top: 55%;
@@ -329,7 +326,7 @@
 
 
 .vote-box{
-    background-color: rgb(161, 167, 167);
+    background-color: rgb(251, 255, 0);
     position: relative;
     left: -200%;
     top: 55%;
@@ -393,7 +390,7 @@
     float: left;
     width: 49%;
     border:2px solid;
-    background-color: rgb(219, 226, 226)
+    /* background-color: rgb(219, 226, 226) */
 }
 
 .alltopic-history{
@@ -402,13 +399,13 @@
     font-size: 15px;
     margin-left: 1%;
     position: relative;
-    background-color: rgb(219, 226, 226);
+    /* background-color: rgb(219, 226, 226); */
     
 }
 .topiccur{
     float: left;
     height: 500px;
-    background-color: rgb(219, 226, 226);
+    /* background-color: rgb(219, 226, 226); */
   
 }
 .topic-page{
