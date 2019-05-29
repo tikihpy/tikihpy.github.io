@@ -123,7 +123,7 @@
                 <div class="room_5">
                     <p class="room_5_1">六、获取视频回看配置</p>
                     <div class="player">
-                        <div id="J_prismPlayer" class="prism-player"></div>
+                        <div id="yugaoplayer" class="yugaoplayer"></div>
                     </div>
                 </div>
                 <div class="room_6">
@@ -315,7 +315,7 @@
                     <ol reversed class="page-history"></ol>
                 </div>
                 <div class="topic_5">
-                    <p class="topic_5_1">六、发送话题及回复互动:</p>
+                    <p class="topic_5_1">六、发送话题:</p>
                     <textarea class="topic_area"></textarea>
                     <button class="topic_btn"  onclick="sendtopic()">话 题</button>
                     <div class = 'topic-page'>
@@ -323,7 +323,15 @@
                     </div>
                 </div>
                 <div class="topic_6">
-                    <p class="topic_6_1">七、PS:回复在话题内容里</p>
+                    <p class="topic_6_1">七、回复话题</p>
+                    <p class="topic_reply_id">回复话题ID：</p>
+                    <textarea class="topic_reply_idin"></textarea>
+                    <p class="topic_reply_text">回复话题内容：</p>
+                    <textarea class="topic_reply_textin"></textarea>
+                    <button class="topic_reply_btn"  onclick="reply()">话 题</button>
+                    <div class = 'topic_reply_page'>
+                        <ol reversed class="topic_reply_history" ></ol>
+                    </div>
                 </div>
                 <div class="topic_7">
                     <P class="topic_7_1">八、Topic.AllowPublish事件</P>

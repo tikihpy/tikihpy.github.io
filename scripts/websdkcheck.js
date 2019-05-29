@@ -228,6 +228,62 @@ Mudu.Init(
 
         document.getElementsByClassName('room_5_1')[0].appendChild(description1);
 
+        // 回看视频窗口
+        var player = new Mudu.Player(
+            {
+                // 必须，播放器容器ID，播放器会被添加到该DOM元素中
+                containerId: 'yugaoplayer',
+        
+                // 非必需 boolean 控制播放器的ui展示, 默认为false; 根据播放视频的实际情况填写
+                isLive: state,
+        
+                // 必须，播放器视频播放地址
+                src: m3u8,
+        
+                // 非必须，播放器海报图 string
+                image: imge,
+        
+                // 播放器背景图全屏显示，视频的拉伸和背景图的拉伸属性不是分开的，默认配置都是contain，这里是自己手动添加的配置，开发文档里没有这个配置
+                stretching: 'cover',
+        
+        
+                // 已废弃该参数，请勿使用
+                type: 'live',
+        
+                // 非必须，播放器是否自动播放，默认false
+                autoplay: false,
+        
+                // 非必须，播放器是否显示控制条，默认true
+                controls: true,
+        
+                // 非必须，播放器是否循环播放, 默认false
+                repeat: false,
+        
+                // 非必须，播放器宽度，单位为像素，默认为480
+                width: 320,
+        
+                // 非必须，播放器高度，单位为像素，默认为270
+                height: 180,
+        
+                // 以下x5Layer和x5Inline两个参数用于解决安卓微信、QQ、QQ浏览器的只能全屏播放的问题。参数仅对安装过tbs(腾讯浏览服务，一般安装过QQ浏览器后手机上会存在)手机生效(由于tbs的api限制，部分低版本的微信、QQ、QQ浏览器可能不会生效)，未安装tbs的安卓手机不会有只能全屏播放的问题。
+                // x5Layer和x5Inline只能有一个被设置为true
+        
+                // 非必须，播放器在安卓微信、QQ、QQ浏览器中是否同层播放, 默认false  （注：同层播放时，页面document无法滚动(内部的dom元素可以)，如果播放器宽度小于浏览器宽度，两边将出现黑边）
+                x5Layer: false,
+        
+                // 非必须，播放器在安卓微信、QQ、QQ浏览器中是否inline播放，默认false  （注：inline播放时，播放器始终处于z-index的最上层，因此无法在播放器上叠加元素）
+                x5Inline: false,
+        
+                // 非必须 isLive为false时展示在时间进度条上的高亮点，hover时可展示text字段内容 （视频为回看视频时，会默认添加高亮信息，设置为[]可覆盖）
+                // highlights: [{
+                // time: 1, // int,
+                // text: '大会开始' // string
+                // }]
+            }
+            
+            )
+            window.player = player;
+
 // =======================================================================================================================================
 
     // 返回直播间自定义菜单, 类型为Array
@@ -236,11 +292,109 @@ Mudu.Init(
     document.getElementsByClassName('room_6_1')[0].innerHTML="七、自定义菜单如下，具体开F12查看菜单参数：";
 
     for(var i=0;i<menus.length;i++){
+
+
         var menusdescription = document.createElement('div');
         menusdescription.setAttribute('class','menus');
+
+        var menudata = document.createElement('div');
+        menudata.setAttribute('class','menudata');
+
+        var menudataname = document.createElement('p');
+        menudataname.setAttribute('class','menudataname');
         var desctext = document.createTextNode('菜单名称'+i+"："+menus[i].menu_name);
-        menusdescription.appendChild(desctext);
+        menudataname.appendChild(desctext);
+        menudata.appendChild(menudataname);
+        menusdescription.appendChild(menudata);
         document.getElementsByClassName('room_6_1')[0].appendChild(menusdescription);
+
+
+        var video_area = document.createElement('div');
+        video_area.setAttribute('class','video_area');
+        menudata.appendChild(video_area);
+      
+        if (menus[i].menu_cate==3){
+
+            for(var j=0;j<menus[i].videos.length;j++){
+
+                var videoall = document.createElement('div');
+                videoall.setAttribute('class','videoall');
+
+                var videos = document.createElement('div');
+                videos.setAttribute('class','videos');
+
+                var video = document.createElement('div');
+                var idattr = 'J_prismPlayer'+j;
+                video.setAttribute('id',idattr);
+                var videoname = document.createElement('p');
+                videoname.setAttribute('class','video_name_p');
+                var desctext = document.createTextNode(j+'、'+menus[i].videos[j].name);
+                videoname.appendChild(desctext);
+                videos.appendChild(video);
+ 
+                videoall.appendChild(videos);
+                videoall.appendChild(videoname);
+
+                video_area.appendChild(videoall);
+
+                var playadr = menus[i].videos[j].url;
+                var playimg = menus[i].videos[j].thumb_url
+
+                var player = new Mudu.Player(
+                    {
+                        // 必须，播放器容器ID，播放器会被添加到该DOM元素中
+                        containerId: idattr,
+                
+                        // 非必需 boolean 控制播放器的ui展示, 默认为false; 根据播放视频的实际情况填写
+                        // isLive: state,
+                
+                        // 必须，播放器视频播放地址
+                        src: playadr,
+                
+                        // 非必须，播放器海报图 string
+                        image: playimg,
+                
+                        // 播放器背景图全屏显示，视频的拉伸和背景图的拉伸属性不是分开的，默认配置都是contain，这里是自己手动添加的配置，开发文档里没有这个配置
+                        stretching: 'cover',
+                
+                
+                        // 已废弃该参数，请勿使用
+                        type: 'live',
+                
+                        // 非必须，播放器是否自动播放，默认false
+                        autoplay: false,
+                
+                        // 非必须，播放器是否显示控制条，默认true
+                        controls: true,
+                
+                        // 非必须，播放器是否循环播放, 默认false
+                        repeat: false,
+                
+                        // 非必须，播放器宽度，单位为像素，默认为480
+                        width: 160,
+                
+                        // 非必须，播放器高度，单位为像素，默认为270
+                        height: 90,
+                
+                        // 以下x5Layer和x5Inline两个参数用于解决安卓微信、QQ、QQ浏览器的只能全屏播放的问题。参数仅对安装过tbs(腾讯浏览服务，一般安装过QQ浏览器后手机上会存在)手机生效(由于tbs的api限制，部分低版本的微信、QQ、QQ浏览器可能不会生效)，未安装tbs的安卓手机不会有只能全屏播放的问题。
+                        // x5Layer和x5Inline只能有一个被设置为true
+                
+                        // 非必须，播放器在安卓微信、QQ、QQ浏览器中是否同层播放, 默认false  （注：同层播放时，页面document无法滚动(内部的dom元素可以)，如果播放器宽度小于浏览器宽度，两边将出现黑边）
+                        x5Layer: false,
+                
+                        // 非必须，播放器在安卓微信、QQ、QQ浏览器中是否inline播放，默认false  （注：inline播放时，播放器始终处于z-index的最上层，因此无法在播放器上叠加元素）
+                        x5Inline: false,
+                
+                        // 非必须 isLive为false时展示在时间进度条上的高亮点，hover时可展示text字段内容 （视频为回看视频时，会默认添加高亮信息，设置为[]可覆盖）
+                        // highlights: [{
+                        // time: 1, // int,
+                        // text: '大会开始' // string
+                        // }]
+                    }                   
+                    )
+                    window.player = player;
+            }
+        }
 
     }
 
@@ -706,6 +860,7 @@ Mudu.Init(
     // 返回boolean, true为需要审核, false为不需要审核
     var isNeedsCheck = Mudu.Room.Topic.GetNeedsCheck()
     document.getElementsByClassName('topic_3_1')[0].innerHTML='四、发送内容是否需要审核：'+isNeedsCheck;
+
 
 // =======================================================================================================================================
 // 话题互动事件
@@ -1425,26 +1580,9 @@ function sendtopic(){
             list.appendChild(alertimgs2);
             list.appendChild(alertimgs);
     
-    
-            // 添加回复
-            var reply = document.createElement("div");
-            reply.setAttribute('class','reply');
-           
-            var replyin = document.createElement('textarea');
-            replyin.setAttribute('class','replyin');
-    
-            var replybtn = document.createElement('button');
-            replybtn.setAttribute('class','reply-btn');
-            replybtn.setAttribute('onclick','reply()');
-            var desctext = document.createTextNode('回复');
-            replybtn.appendChild(desctext);
-    
-            reply.appendChild(replyin);
-            reply.appendChild(replybtn);
-            list.appendChild(reply);
-    
             huatidata.appendChild(list);
             // document.getElementsByClassName('topic-page')[0].appendChild(huatidata);
+
             // 返回boolean, true为允许, false为不允许
             var isAllowReply = Mudu.Room.Topic.GetAllowReply()
             if(isAllowReply==false){
@@ -1476,28 +1614,46 @@ function sendtopic(){
 
 // 回复话题
 function reply(){
-    // 回复显示
-    var replyout = document.createElement('div');
-    replyout.setAttribute('class','replyout');
-    
-    var alertcmt = document.createElement("img");
-    alertcmt.setAttribute('class','img');
-    alertcmt.setAttribute('src','https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2866492045,1432640156&fm=26&gp=0.jpg');
-    var description = document.createElement('span');
-    description.setAttribute('class','huatimsg');
 
-    var text = document.getElementsByClassName('replyin')[0].value;
-    var desctext = document.createTextNode(text);
+      // 回复显示
 
-    description.appendChild(desctext);
-    replyout.appendChild(alertcmt);
-    replyout.appendChild(description);
+      var replyout = document.createElement('div');
+      replyout.setAttribute('class','replyout');
+      
+      var alertcmt = document.createElement("img");
+      alertcmt.setAttribute('class','img');
+      alertcmt.setAttribute('src','https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2866492045,1432640156&fm=26&gp=0.jpg');
+      var description = document.createElement('span');
+      description.setAttribute('class','huatimsg');
 
-    var firstLi = document.getElementsByClassName('reply')[0]
+      var text = document.getElementsByClassName('topic_reply_textin')[0].value;
+      var desctext = document.createTextNode(text);
 
-    document.getElementsByClassName("huatimsg_area")[0].insertBefore(replyout, firstLi);
+      description.appendChild(desctext);
+      replyout.appendChild(alertcmt);
+      replyout.appendChild(description);
+      
+      var topic_reply_history = document.getElementsByClassName('topic_reply_history')[0];
+      topic_reply_history.appendChild(replyout);
 
-    document.getElementsByClassName('replyin')[0].value=''
+      var topicId =document.getElementsByClassName('topic_reply_idin')[0].value;
+
+       //   注: 发送话题回复前观众需要进行登录，否则发送不成功。
+      // 第一个参数类型为object, 其中topicId为需要回复的话题id, msg为观众的回复内容
+      Mudu.Room.Topic.SendReply(
+        {
+            topicId: topicId,
+            msg: text
+        },
+        function (response) {
+            response = JSON.parse(response)
+            console.log(response)
+
+            document.getElementsByClassName('topic_reply_idin')[0].value='';
+            document.getElementsByClassName('topic_reply_textin')[0].value='';
+        }       
+    )
+ 
 }
 // =======================================================================================================================================
 

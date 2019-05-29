@@ -48,8 +48,15 @@
 }
 .room_box{
     /* background-color: rgb(220, 133, 20); */
-    
+   
  
+}
+.videoall{
+    position: relative;
+    width: 48%;
+    float: left;
+    padding: 1%;
+    
 }
 .commit_box{
     /* background-color: rgb(220, 190, 20); */
@@ -152,7 +159,7 @@
 .gethuatiimgs{
     display: inline;
 }
-.topic-page{
+.topic-page, .topic_reply_page{
     position: relative;
     height: 180px;
     overflow: scroll;
