@@ -93,7 +93,7 @@
 
 .content {
     /* top: 200px; */
-    /* background: rgba(0, 0, 0, 0.4); */
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 20px;
     display: inline-block;
     padding: 4px 18px;
