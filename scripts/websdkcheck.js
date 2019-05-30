@@ -1430,15 +1430,25 @@ function getPage(){
         for(var i=response.data.comments.length-1;0<=i;i--){
             var pagelist = document.createElement('li');
             pagelist.setAttribute('class','getpage');
+
             var alertcmt = document.createElement("img");
             alertcmt.setAttribute('class','getavatar');
             alertcmt.setAttribute('src',response.data.comments[i].avatar);
+
+            var comment_name = document.createElement('span');
+            comment_name.setAttribute('class','comment_name');
+            var desctext = document.createTextNode(response.data.comments[i].username+'：');
+            comment_name.appendChild(desctext);
+
             var description = document.createElement('span');
             description.setAttribute('class','getmsg');
             var desctext = document.createTextNode(response.data.comments[i].message);
-            pagelist.appendChild(alertcmt);
-            pagelist.appendChild(description);
             description.appendChild(desctext);
+
+            pagelist.appendChild(alertcmt);
+            pagelist.appendChild(comment_name);
+            pagelist.appendChild(description);
+            
             // document.getElementsByTagName('ol')[1].appendChild(pagelist);
             var firstLi = document.getElementsByClassName('getpage')[0]
                   if (firstLi) {
