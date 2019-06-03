@@ -235,7 +235,7 @@ Mudu.Init(
                 containerId: 'yugaoplayer',
         
                 // 非必需 boolean 控制播放器的ui展示, 默认为false; 根据播放视频的实际情况填写
-                isLive: state,
+                // isLive: state,
         
                 // 必须，播放器视频播放地址
                 src: m3u8,
